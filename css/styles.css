@@ -2,7 +2,7 @@
 /* CSS Document */
 
 body{
-	font:normal 12px "Courier New", Courier;
+	font:normal 12px monospace;
 	background-color:#000;
 	margin:10px;
 }
