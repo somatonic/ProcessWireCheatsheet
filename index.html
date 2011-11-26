@@ -91,7 +91,7 @@ jQuery.fn.liveUpdate = function(list) {
 	<col width="33%"/>
 	<thead>
 		<tr>
-			<th colspan="3"><form><input placeholder="filter" name="filter" type="search" id="filter"></form></td>
+			<th colspan="3"><form><input size="25" placeholder="filter" name="filter" type="search" id="filter"></form></td>
 		</tr>
 	</thead>
 	<tbody>
@@ -475,18 +475,17 @@ jQuery.fn.liveUpdate = function(list) {
 		<p>$wire->pages->get("/about/contact/"); </p>
 		<p>wire('pages')->get("/about/contact/"); </p>
 		<h3>Page Status</h3>
-		<p>Page::statusOn</p>
-		<p>Page::statusHidden</p>
-		<p>Page::statusUnpublished</p>
-		<p>Page::statusLocked</p>
-		<p>Page::statusMax</p>
-		<p>Page::statusUnsearchable</p>
-		<p>Page::statusTrash</p>
-		<p>Page::statusDeleted</p>
-		<p>Page::statusSystemOverride</p>
-		<p>Page::statusCorrupted</p>
-		<p>Page::statusSystem</p>
-		<p>Page::statusSystemID</p></td>
+		<p>Page::statusOn (1)<span class="descr"> base status for all pages</span></p>
+		<p>Page::statusLocked (4) <span class="descr">page locked for changes. Not enforced by the core, but checked by Process modules.</span></p>
+		<p>Page::statusSystemID (8)<span class="descr"> page is for the system and may not be deleted or have it's id changed (everything else, okay)</span></p>
+		<p>Page::statusSystem (16) <span class="descr">page is for the system and may not be deleted or have it's id, name, template or parent changed</span></p>
+		<p>Page::statusHidden (1024)<span class="descr"> page is excluded selector methods like $pages-&gt;find() and $page-&gt;children() unless status is specified, like &quot;status&amp;1&quot;</span></p>
+		<p>Page::statusUnpublished (2048)<span class="descr"> page is not published and is not renderable.</span></p>
+		<p>Page::statusTrash (8192)<span class="descr"> page is in the trash</span></p>
+		<p>Page::statusDeleted (16384)<span class="descr"> page is deleted (runtime only)</span></p>
+		<p>Page::statusSystemOverride (32768)<span class="descr"> page is in a state where system flags may be overridden</span></p>
+		<p>Page::statusCorrupted (131072)<span class="descr"> page was corrupted at runtime and is NOT saveable: see setFieldValue() and $outputFormatting. (runtime)</span></p>
+		<p>Page::statusMax (9999999)<span class="descr"> number to use for max status comparisons, runtime only</span></p></td>
 	</tr>
 	</tbody>
 	<tfoot>
