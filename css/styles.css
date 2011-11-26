@@ -1,0 +1,102 @@
+@charset "UTF-8";
+/* CSS Document */
+
+body{
+	font:normal 11px Courier, monospace;
+	background-color:#000;
+	margin:10px;
+}
+
+	caption{
+		padding:5px 10px;
+		font-size:20px;
+		text-align:left;
+		background-color:#223135;
+		color:#fff;
+		border-radius:5px 5px 0 0;
+		-webkit-border-radius:5px 5px 0 0;
+		-moz-border-radius:5px 5px 0 0;
+		-ms-border-radius:5px 5px 0 0;
+		-o-border-radius:5px 5px 0 0;
+	}
+	.col_api{
+		background-color:#CCC;	
+	}
+	table{
+		border-collapse: collapse;
+		margin:0 0 5em 0;
+		
+	}
+	table td{
+		vertical-align:top;
+		color:#333;
+		background-color:#fff;
+		/*border:1px solid #ddd;*/
+		border-collapse: collapse;
+		padding:1px 10px 10px 10px;
+	}
+	table th{
+		vertical-align:top;
+		color:#333;
+		background-color:#eee;
+		border-bottom:1px solid #ddd;
+		border-collapse: collapse;
+		padding:2px 10px;
+	}
+	p{
+		margin:0 0 1px 0;
+		padding:3px 4px 3px 8px;
+		background-color:#eee;
+		color:#555;
+		position:relative;
+		border-radius:5px;
+		-webkit-border-radius:5px;
+		-moz-border-radius:5px;
+		-ms-border-radius:5px;
+		-o-border-radius:5px;
+
+	}
+	p:hover{
+		background-color: #FFC;
+	}
+	span.descr{
+		font:normal 12px Georgia, "Times New Roman", Times, serif;
+		line-height:16px;
+		color:#fff;
+		padding:10px 15px;
+		position:absolute; width:80%; left:0; top:0; z-index:99;
+		display:none;
+		cursor: pointer;
+		background-color:#333;
+		border-radius:5px;
+		-webkit-border-radius:5px;
+		-moz-border-radius:5px;
+		-ms-border-radius:5px;
+		-o-border-radius:5px;
+	}
+	
+
+	p.hasdescr{
+		background-color: #EEEDE3;
+		cursor: help;
+	}
+	p.hasdescr:hover{
+		background-color: #FFC;
+	}
+	
+	h2{
+		font-size: 16px;
+		margin: 1em 0 0.5em 0;
+	}
+	h3{
+		font-size: 12px;
+		margin: 1em 0 0.5em 0;
+		color: #069;
+	}
+	
+	.right{ float:right; }
+	
+	.footer{ padding:10px; border-top:1px solid #ddd;}
+	
+	form{ margin: 5px 0; text-align:right; }
+	form input {}
