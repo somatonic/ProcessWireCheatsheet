@@ -2,16 +2,16 @@
 /* CSS Document */
 
 body{
-	font:normal 12px monospace; 
+	font:normal 12px "Courier New", Courier;
 	background-color:#000;
 	margin:10px;
 }
 
 body.courier{
-	font-family: "Courier New", Courier;
+	font-family: courier;
 }
 body.monospace{
-	font-family: monospace!important;
+	font-family: monospace;
 }
 body.lucida{
 	font-family: "Lucida Console", "Lucida", Lucida Grande; 

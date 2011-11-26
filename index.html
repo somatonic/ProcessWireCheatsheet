@@ -11,7 +11,7 @@
 <!-- Grab Google CDN's jQuery, with a protocol relative URL; fall back to local if offline -->
 <script src="//ajax.googleapis.com/ajax/libs/jquery/1.7.0/jquery.min.js"></script>
 <script>window.jQuery || document.write('<script src="js/jquery.js"><\/script>')</script>
-
+<script src="js/jquery.cookie.js"></script>
 <script>
 $(function() {
 		   
@@ -31,7 +31,7 @@ $(function() {
 		
 	});
 	
-	/*$('input[name="font"]').change(function(){
+	$('input[name="font"]').change(function(){
 		
 		$('body').removeAttr("class");
 		
@@ -46,7 +46,7 @@ $(function() {
 		$('body').removeAttr("class");
 		$('body').addClass(val);
 		$('input[value="'+val+'"]').attr({checked:'checked'});
-	}*/
+	}
 	
 });
 
@@ -83,7 +83,7 @@ jQuery.fn.liveUpdate = function(list) {
 
       cache.each(function(i){
         var score = this.score(term);
-        if (score > 0.3) { scores.push([score, i]); }
+        if (score > 0.6) { scores.push([score, i]); }
       });
 
       $.each( scores.sort( function(a, b){ return b[0] - a[0]; }), function(){
@@ -110,10 +110,10 @@ jQuery.fn.liveUpdate = function(list) {
 		<tr>
 			<th colspan="3">
 				<form>
-					<!--label for="lucida"><input type="radio" name="font" id="lucida" value="lucida" checked="checked">lucida</label>
-					<label for="monaco"><input type="radio" name="font" id="monaco" value="monaco">monaco</label>
-					<label for="courier"><input type="radio" name="font" id="courier" value="courier">courier</label>
-					<label for="monospace"><input type="radio" name="font" id="monospace" value="monospace">monospace</label-->
+					<label for="courier"><input type="radio" name="font" id="courier" value="courier" checked="checked"> courier</label>
+					<label for="monaco"><input type="radio" name="font" id="monaco" value="monaco"> monaco</label>
+					<label for="lucida"><input type="radio" name="font" id="lucida" value="lucida"> lucida</label>
+					<label for="monospace"><input type="radio" name="font" id="monospace" value="monospace"> monospace</label>
 					
 					<input size="25" placeholder="filter" name="filter" type="search" id="filter">
 				</form>
