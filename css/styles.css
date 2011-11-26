@@ -7,9 +7,17 @@ body{
 	margin:10px;
 }
 
+a:visited,
+a{
+	color:#C30;
+}
+a:hover{
+	color:#F00;	
+}
+
 	caption{
 		padding:5px 10px;
-		font-size:20px;
+		font-size:16px;
 		text-align:left;
 		background-color:#223135;
 		color:#fff;
