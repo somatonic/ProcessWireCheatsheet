@@ -2,9 +2,22 @@
 /* CSS Document */
 
 body{
-	font:normal 11px Courier, monospace;
+	font:normal 12px "Courier New", Courier;
 	background-color:#000;
 	margin:10px;
+}
+
+body.courier{
+	font-family: courier;
+}
+body.monospace{
+	font-family: monospace;
+}
+body.lucida{
+	font-family: "Lucida Console", "Lucida", Lucida Grande; 
+}
+body.monaco{
+	font-family: Monaco	;
 }
 
 a:visited,
