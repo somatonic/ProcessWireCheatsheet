@@ -65,7 +65,7 @@ jQuery.fn.liveUpdate = function(list) {
 
       cache.each(function(i){
         var score = this.score(term);
-        if (score > 0.4) { scores.push([score, i]); }
+        if (score > 0.3) { scores.push([score, i]); }
       });
 
       $.each( scores.sort( function(a, b){ return b[0] - a[0]; }), function(){
@@ -152,7 +152,7 @@ jQuery.fn.liveUpdate = function(list) {
 		<p>$page->sortable()	<span class="descr">Is the page sortable (within the same parent) by the current user? Returns true or false.</span></p>
 		<p>$page->deleteable()	<span class="descr">Is the page deleteable by the current user? Returns true or false.</span></p>
 		
-		<p>$page-&gt;addStatus(Page::statusHidden) <span class="descr">Add a status to a page.</span></p>
+		<p>$page->addStatus(Page::statusHidden) <span class="descr">Add a status to a page.</span></p>
 		<h2>$pages</h2>
 		<p>$pages->find(&quot;selector&quot;)	<span class="descr">Find and return all pages matching the given selector string. Returns a PageArray.</span></p>
 		<p>$pages->get(&quot;selector&quot;)	<span class="descr">Get the page matching the given selector string. Returns a Page, or a NullPage if not found.</span></p>
@@ -471,8 +471,8 @@ jQuery.fn.liveUpdate = function(list) {
 		<p>$config->permissionTemplateID	<span class="descr">Template ID of the system 'permission' template.</span></p>
 		<h2> Bootstrap / System</h2>
 		<h3>Global Namespace Wire</h3>
-		<p>$wire-&gt;pages-&gt;get("/about/contact/"); </p>
-		<p>wire('pages')-&gt;get("/about/contact/"); </p>
+		<p>$wire->pages->get("/about/contact/"); </p>
+		<p>wire('pages')->get("/about/contact/"); </p>
 		<h3>Page Status</h3>
 		<p>Page::statusOn</p>
 		<p>Page::statusHidden</p>
