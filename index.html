@@ -97,74 +97,75 @@ jQuery.fn.liveUpdate = function(list) {
 	<tr>
 		<td><h2>$page</h2>
 			<h3>Built-in Fields Reference</h3>
-			<p>$page-&gt;id	<span class="descr">The numbered ID of the current page</span></p>
-			<p>$page-&gt;name	<span class="descr">The name assigned to the page, as it appears in the URL</span></p>
-			<p>$page-&gt;title <span class="descr">The page's title (headline) text</span></p>
-			<p>$page-&gt;path	<span class="descr">The page's URL path from the homepage (i.e. /about/staff/ryan/)</span></p>
-			<p>$page-&gt;url	<span class="descr">The page's URL path from the server's document root (may be the same as the $page-&gt;path)</span></p>
-			<p>$page-&gt;httpUrl	<span class="descr">Same as $page-&gt;url, except includes protocol (http or https) and hostname.</span></p>
-			<p>$page-&gt;parent	<span class="descr">The parent Page object or a NullPage if there is no parent.</span></p>
-			<p>$page-&gt;parent_id <span class="descr">The numbered ID of the parent page or 0 if none.</span></p>
-			<p>$page-&gt;parents	<span class="descr">All the parent pages down to the root (homepage). Returns a PageArray.</span></p>
-			<p>$page-&gt;rootParent <span class="descr">The parent page closest to the homepage (typically used for identifying a section)</span></p>
-			<p>$page-&gt;template	<span class="descr">The Template object this page is using</span></p>
-			<p>$page-&gt;fields	<span class="descr">All the Fields assigned to this page (via it's template, same as $page-&gt;template-&gt;fields). Returns a FieldsArray. </span></p>
-			<p>$page-&gt;numChildren	<span class="descr">The number of children (subpages) this page has. </span></p>
-			<p>$page-&gt;children	<span class="descr">All the children (subpages) of this page.* Returns a PageArray. See also $page-&gt;children($selector). </span></p>
-			<p>$page-&gt;child	<span class="descr">The first child of this page. Returns a Page. See also $page-&gt;child($selector).</span></p>
-			<p>$page-&gt;siblings <span class="descr">All the sibling pages of this page.† Returns a PageArray. See also $page-&gt;siblings($selector). </span></p>
-			<p>$page-&gt;next	<span class="descr">This page's next sibling page, or NullPage if it is the last sibling.† See also $page-&gt;next($pageArray). </span></p>
-			<p>$page-&gt;prev	<span class="descr">This page's previous sibling page, or NullPage if it is the first sibling.† See also $page-&gt;prev($pageArray). </span></p>
-			<p>$page-&gt;pageNum	<span class="descr">The current page number (1 or greater), only used if the page's template allows pagination. Deprecated, see $input-&gt;pageNum instead.</span></p>
-			<p>$page-&gt;created	<span class="descr">Unix timestamp of when the page was created</span></p>
-			<p>$page-&gt;modified	<span class="descr">Unix timestamp of when the page was last modified</span></p>
-			<p>$page-&gt;createdUser	<span class="descr">The user that created this page. Returns a User or a NullUser.</span></p>
-			<p>$page-&gt;modifiedUser	<span class="descr">The user that last modified this page. Returns a User or a NullUser.</span></p>
+			<p>$page->id	<span class="descr">The numbered ID of the current page</span></p>
+			<p>$page->name	<span class="descr">The name assigned to the page, as it appears in the URL</span></p>
+			<p>$page->title <span class="descr">The page's title (headline) text</span></p>
+			<p>$page->path	<span class="descr">The page's URL path from the homepage (i.e. /about/staff/ryan/)</span></p>
+			<p>$page->url	<span class="descr">The page's URL path from the server's document root (may be the same as the $page->path)</span></p>
+			<p>$page->httpUrl	<span class="descr">Same as $page->url, except includes protocol (http or https) and hostname.</span></p>
+			<p>$page->parent	<span class="descr">The parent Page object or a NullPage if there is no parent.</span></p>
+			<p>$page->parent_id <span class="descr">The numbered ID of the parent page or 0 if none.</span></p>
+			<p>$page->parents	<span class="descr">All the parent pages down to the root (homepage). Returns a PageArray.</span></p>
+			<p>$page->rootParent <span class="descr">The parent page closest to the homepage (typically used for identifying a section)</span></p>
+			<p>$page->template	<span class="descr">The Template object this page is using</span></p>
+			<p>$page->fields	<span class="descr">All the Fields assigned to this page (via it's template, same as $page->template->fields). Returns a FieldsArray. </span></p>
+			<p>$page->numChildren	<span class="descr">The number of children (subpages) this page has. </span></p>
+			<p>$page->children	<span class="descr">All the children (subpages) of this page.* Returns a PageArray. See also $page->children($selector). </span></p>
+			<p>$page->child	<span class="descr">The first child of this page. Returns a Page. See also $page->child($selector).</span></p>
+			<p>$page->siblings <span class="descr">All the sibling pages of this page.† Returns a PageArray. See also $page->siblings($selector). </span></p>
+			<p>$page->next	<span class="descr">This page's next sibling page, or NullPage if it is the last sibling.† See also $page->next($pageArray). </span></p>
+			<p>$page->prev	<span class="descr">This page's previous sibling page, or NullPage if it is the first sibling.† See also $page->prev($pageArray). </span></p>
+			<p>$page->pageNum	<span class="descr">The current page number (1 or greater), only used if the page's template allows pagination. Deprecated, see $input->pageNum instead.</span></p>
+			<p>$page->created	<span class="descr">Unix timestamp of when the page was created</span></p>
+			<p>$page->modified	<span class="descr">Unix timestamp of when the page was last modified</span></p>
+			<p>$page->createdUser	<span class="descr">The user that created this page. Returns a User or a NullUser.</span></p>
+			<p>$page->modifiedUser	<span class="descr">The user that last modified this page. Returns a User or a NullUser.</span></p>
 			<h3>Built-in Functions/Methods Reference</h3>
-		<p>$page-&gt;find($selector) <span class="descr">Find pages matching the selector anywhere below this page (children, grandchildren, etc.). Returns a PageArray.</span></p>
-		<p>$page-&gt;children($selector)	<span class="descr">All the children (subpages) of this page,  filtered by a selector.* Returns a PageArray. </span></p>
-		<p>$page-&gt;child($selector)	<span class="descr">The first matching child (subpage) that matches the given selector. Returns a Page, or a NullPage if no match. </span></p>
-		<p>$page-&gt;siblings($selector)	<span class="descr">All the sibling pages of this page, filtered by a selector.† Returns a PageArray.</span></p>
-		<p>$page-&gt;next($pageArray)	<span class="descr">Given a PageArray which includes the current page (among others), return the next page after the current.† Returns a NullPage if it is the last page in the provided PageArray. If called without a PageArray, it assumes the current page's siblings (same as $page-&gt;next).</span></p>
-		<p>$page-&gt;prev($pageArray)	<span class="descr">Given a PageArray which includes the current page (among others), return the previous page before the current.† Returns a NullPage if it is the first page in the provided PageArray. If called without a PageArray, it assumes the current page's siblings (same as $page-&gt;prev).</span></p>
-		<p>$page-&gt;save()	<span class="descr">Save this Page</span></p>
-		<p>$page-&gt;save($field)	<span class="descr">Save just the field given by the provided field name (string) or object (Field)</span></p>
-		<p>$page-&gt;delete()	<span class="descr">Delete this page</span></p>
-		<p>$page-&gt;is($name)	<span class="descr">Returns true if this page matches the given template name, page status, or selector. </span></p>
-		<p>$page-&gt;isChanged()	<span class="descr">Has the $page changed since it was loaded? Returns true or false.</span></p>
-		<p>$page-&gt;isChanged(&quot;field&quot;)	<span class="descr">Has the given field on $page changed since it was loaded? Returns true or false.</span></p>
-		<p>$page-&gt;matches(&quot;selector&quot;)	<span class="descr">Returns true if this page matches the given selector string. </span></p>
-		<p>$page-&gt;set(&quot;field&quot;, $value)	<span class="descr">Set the given custom field name to have the provided value<br>
-			Same as $page-&gt;$field = $value;</span></p>
-		<p>$page-&gt;get(&quot;field&quot;)	<span class="descr">Get the value for the specified field or null if the field isn't part of this page <br>
-			Same as $page-&gt;$field</span></p>
-		<p>$page-&gt;get(&quot;field1|f2|f3&quot;)	<span class="descr">Get the first matching non-empty field by specified by a string of pipe &quot;|&quot; separated field names</span></p>
-		<p>$page-&gt;getUnformatted(&quot;field&quot;)	<span class="descr">Get the unformatted value of the given field name. May also be used with &quot;|&quot; separated field names (mentioned above). </span></p>
-		<p>$page-&gt;setOutputFormatting(true|false)	<span class="descr">By default, output will be formatted according filters you may have defined with the field.  If you are modifying the values of a page's custom fields, you will need to call</span></p>
-		<p>$page-&gt;setOutputFormatting(false) <span class="descr">before doing so. This turns off output formatting, which ensures that saved values don't already have runtime formatters applied to them. ProcessWire will throw an error if you attempt to save formatted fields.</span></p>
-		<p>$page-&gt;editable()	<span class="descr">Is the page is editable by the current user? Returns true or false.</span></p>
-		<p>$page-&gt;editable('field')	<span class="descr">Is the given field name is editable on the page by the current user? Returns true or false.</span></p>
-		<p>$page-&gt;viewable()	<span class="descr">Is the page viewable by the current user? Returns true or false. Note that this is only useful on pages other than the current page being viewed, as ProcessWire won't let the user load a page (by URL) that they don't have access to view.</span></p>
-		<p>$page-&gt;addable()	<span class="descr">Is the current user allowed to create pages below this page? Returns true or false.</span></p>
-		<p>$page-&gt;addable($addPage)	<span class="descr">Is the current user allowed to add the given page ($addPage) as a child of $page? Returns true or false.</span></p>
-		<p>$page-&gt;moveable()	<span class="descr">Is the page allowed to be moved by the current user? Returns true or false.</span></p>
-		<p>$page-&gt;moveable($parent)	<span class="descr">Is the current user allowed to move $page to $parent? Returns true or false.</span></p>
-		<p>$page-&gt;sortable()	<span class="descr">Is the page sortable (within the same parent) by the current user? Returns true or false.</span></p>
-		<p>$page-&gt;deleteable()	<span class="descr">Is the page deleteable by the current user? Returns true or false.</span></p>
+		<p>$page->find($selector) <span class="descr">Find pages matching the selector anywhere below this page (children, grandchildren, etc.). Returns a PageArray.</span></p>
+		<p>$page->children($selector)	<span class="descr">All the children (subpages) of this page,  filtered by a selector.* Returns a PageArray. </span></p>
+		<p>$page->child($selector)	<span class="descr">The first matching child (subpage) that matches the given selector. Returns a Page, or a NullPage if no match. </span></p>
+		<p>$page->siblings($selector)	<span class="descr">All the sibling pages of this page, filtered by a selector.† Returns a PageArray.</span></p>
+		<p>$page->next($pageArray)	<span class="descr">Given a PageArray which includes the current page (among others), return the next page after the current.† Returns a NullPage if it is the last page in the provided PageArray. If called without a PageArray, it assumes the current page's siblings (same as $page->next).</span></p>
+		<p>$page->prev($pageArray)	<span class="descr">Given a PageArray which includes the current page (among others), return the previous page before the current.† Returns a NullPage if it is the first page in the provided PageArray. If called without a PageArray, it assumes the current page's siblings (same as $page->prev).</span></p>
+		<p>$page->save()	<span class="descr">Save this Page</span></p>
+		<p>$page->save($field)	<span class="descr">Save just the field given by the provided field name (string) or object (Field)</span></p>
+		<p>$page->delete()	<span class="descr">Delete this page</span></p>
+		<p>$page->is($name)	<span class="descr">Returns true if this page matches the given template name, page status, or selector. </span></p>
+		<p>$page->isChanged()	<span class="descr">Has the $page changed since it was loaded? Returns true or false.</span></p>
+		<p>$page->isChanged(&quot;field&quot;)	<span class="descr">Has the given field on $page changed since it was loaded? Returns true or false.</span></p>
+		<p>$page->matches(&quot;selector&quot;)	<span class="descr">Returns true if this page matches the given selector string. </span></p>
+		<p>$page->set(&quot;field&quot;, $value)	<span class="descr">Set the given custom field name to have the provided value<br>
+			Same as $page->$field = $value;</span></p>
+		<p>$page->get(&quot;field&quot;)	<span class="descr">Get the value for the specified field or null if the field isn't part of this page <br>
+			Same as $page->$field</span></p>
+		<p>$page->get(&quot;field1|f2|f3&quot;)	<span class="descr">Get the first matching non-empty field by specified by a string of pipe &quot;|&quot; separated field names</span></p>
+		<p>$page->getUnformatted(&quot;field&quot;)	<span class="descr">Get the unformatted value of the given field name. May also be used with &quot;|&quot; separated field names (mentioned above). </span></p>
+		<p>$page->setOutputFormatting(true|false)	<span class="descr">By default, output will be formatted according filters you may have defined with the field.  If you are modifying the values of a page's custom fields, you will need to call</span></p>
+		<p>$page->setOutputFormatting(false) <span class="descr">before doing so. This turns off output formatting, which ensures that saved values don't already have runtime formatters applied to them. ProcessWire will throw an error if you attempt to save formatted fields.</span></p>
+		<p>$page->editable()	<span class="descr">Is the page is editable by the current user? Returns true or false.</span></p>
+		<p>$page->editable('field')	<span class="descr">Is the given field name is editable on the page by the current user? Returns true or false.</span></p>
+		<p>$page->viewable()	<span class="descr">Is the page viewable by the current user? Returns true or false. Note that this is only useful on pages other than the current page being viewed, as ProcessWire won't let the user load a page (by URL) that they don't have access to view.</span></p>
+		<p>$page->addable()	<span class="descr">Is the current user allowed to create pages below this page? Returns true or false.</span></p>
+		<p>$page->addable($addPage)	<span class="descr">Is the current user allowed to add the given page ($addPage) as a child of $page? Returns true or false.</span></p>
+		<p>$page->moveable()	<span class="descr">Is the page allowed to be moved by the current user? Returns true or false.</span></p>
+		<p>$page->moveable($parent)	<span class="descr">Is the current user allowed to move $page to $parent? Returns true or false.</span></p>
+		<p>$page->sortable()	<span class="descr">Is the page sortable (within the same parent) by the current user? Returns true or false.</span></p>
+		<p>$page->deleteable()	<span class="descr">Is the page deleteable by the current user? Returns true or false.</span></p>
 		
+		<p>$page-&gt;addStatus(Page::statusHidden) <span class="descr">Add a status to a page.</span></p>
 		<h2>$pages</h2>
-		<p>$pages-&gt;find(&quot;selector&quot;)	<span class="descr">Find and return all pages matching the given selector string. Returns a PageArray.</span></p>
-		<p>$pages-&gt;get(&quot;selector&quot;)	<span class="descr">Get the page matching the given selector string. Returns a Page, or a NullPage if not found.</span></p>
-		<p>$pages-&gt;get(123)	<span class="descr">Get the page matching the given numeric ID. Returns a Page, or a NullPage if not found.</span></p>
-		<p>$pages-&gt;get(&quot;/path/to/page/&quot;)	<span class="descr">Get the page matching the given path or URL. Returns a Page, or a NullPage if not found.</span></p>
-		<p>$pages-&gt;save($page)	<span class="descr">Save any changes made to the given $page. Same as: $page-&gt;save()</span></p>
-		<p>$pages-&gt;saveField($page, 'field')	<span class="descr">Save just the named field from $page. (v2.1+) Same as: $page-&gt;save('field')</span></p>
-		<p>$pages-&gt;trash($page)	<span class="descr">Move the given page to the Trash.</span></p>
-		<p>$pages-&gt;delete($page) <span class="descr">Permanently delete the given page and any attached media. Throws error when $page has children.</span></p>
-		<p>$pages-&gt;delete($page, true)	<span class="descr">Recursively delete $page and all it's children and attached media, permanently.</span></p>
-		<p>$pages-&gt;clone($page)	<span class="descr">Creates a brand new cloned copy of the given page (and any children) and returns it.  (v2.1+)</span></p>
-		<p>$pages-&gt;clone($page, $parent)	<span class="descr">Like the above, but with a new $parent page specified. (v2.1+)</span></p>
-		<p>$pages-&gt;clone($page, $parent, false)	<span class="descr">Like the above, but only the given page will be cloned (and not any children). (v2.1+)</span></p>
+		<p>$pages->find(&quot;selector&quot;)	<span class="descr">Find and return all pages matching the given selector string. Returns a PageArray.</span></p>
+		<p>$pages->get(&quot;selector&quot;)	<span class="descr">Get the page matching the given selector string. Returns a Page, or a NullPage if not found.</span></p>
+		<p>$pages->get(123)	<span class="descr">Get the page matching the given numeric ID. Returns a Page, or a NullPage if not found.</span></p>
+		<p>$pages->get(&quot;/path/to/page/&quot;)	<span class="descr">Get the page matching the given path or URL. Returns a Page, or a NullPage if not found.</span></p>
+		<p>$pages->save($page)	<span class="descr">Save any changes made to the given $page. Same as: $page->save()</span></p>
+		<p>$pages->saveField($page, 'field')	<span class="descr">Save just the named field from $page. (v2.1+) Same as: $page->save('field')</span></p>
+		<p>$pages->trash($page)	<span class="descr">Move the given page to the Trash.</span></p>
+		<p>$pages->delete($page) <span class="descr">Permanently delete the given page and any attached media. Throws error when $page has children.</span></p>
+		<p>$pages->delete($page, true)	<span class="descr">Recursively delete $page and all it's children and attached media, permanently.</span></p>
+		<p>$pages->clone($page)	<span class="descr">Creates a brand new cloned copy of the given page (and any children) and returns it.  (v2.1+)</span></p>
+		<p>$pages->clone($page, $parent)	<span class="descr">Like the above, but with a new $parent page specified. (v2.1+)</span></p>
+		<p>$pages->clone($page, $parent, false)	<span class="descr">Like the above, but only the given page will be cloned (and not any children). (v2.1+)</span></p>
 		<h2>WireArray Reference</h2>
 		<h3>Getting Items</h3>
 		<p>$a[$key] <span class="descr">Returns the value of the item at the given $key, or null if not set.</span></p>
@@ -234,27 +235,27 @@ jQuery.fn.liveUpdate = function(list) {
 		<td>
 		<h2>$fields</h2>
 		<h3>Fields properties and functions</h3>
-		<p>$fields-&gt;get(&quot;name&quot;)	<span class="descr">Get the field specified by the given field name</span></p>
-		<p>$fields-&gt;get(123)	<span class="descr">Get the field specified by the given field ID (integer)</span></p>
-		<p>$fields-&gt;get(&quot;selector&quot;)	<span class="descr">Get the first matching field specified by the given selector</span></p>
-		<p>$fields-&gt;find(&quot;selector&quot;)	<span class="descr">Find all fields matching the given selector</span></p>
-		<p>$fields-&gt;save($field)	<span class="descr">Save the given Field object</span></p>
-		<p>$fields-&gt;delete($field)	<span class="descr">Delete the given Field object</span></p>
+		<p>$fields->get(&quot;name&quot;)	<span class="descr">Get the field specified by the given field name</span></p>
+		<p>$fields->get(123)	<span class="descr">Get the field specified by the given field ID (integer)</span></p>
+		<p>$fields->get(&quot;selector&quot;)	<span class="descr">Get the first matching field specified by the given selector</span></p>
+		<p>$fields->find(&quot;selector&quot;)	<span class="descr">Find all fields matching the given selector</span></p>
+		<p>$fields->save($field)	<span class="descr">Save the given Field object</span></p>
+		<p>$fields->delete($field)	<span class="descr">Delete the given Field object</span></p>
 		<h3>Field properties and functions</h3>
-		<p>$field-&gt;id <span class="descr">Numeric ID of this field</span></p>
-<p>$field-&gt;name	<span class="descr">Name of this field (name string)</span></p>
-		<p>$field-&gt;label	<span class="descr">Text label for this field, appears as the &lt;label&gt; element in the editor</span></p>
-		<p>$field-&gt;type	<span class="descr">The type of field, refers to a Fieldtype plugin module</span></p>
-		<p>$field-&gt;flags	<span class="descr">Bitwise flags of the field: if($field-&gt;flags &amp; Field::flagAutojoin) // field has the &quot;autojoin&quot; flag set if($field-&gt;flags &amp; Field::flagGlobal) // field has the &quot;global&quot; flag set.</span></p>
-		<p>$field-&gt;get($key)	<span class="descr">Get a field property (the properties above, or a custom property)<br>
-			Same as $field-&gt;$key</span></p>
-		<p>$field-&gt;set($key, $value)	<span class="descr">Set a field property. Can be any one of the above or something else for a custom setting.<br>
-			Same as $field-&gt;$key = $value</span></p>
-		<p>$field-&gt;save()	<span class="descr">Save this field. Same as $fields-&gt;save($field)</span></p>
-		<p>$field-&gt;numFieldgroups()	<span class="descr">Returns the number of fieldgroups that use this field</span></p>
-		<p>$field-&gt;getFieldgroups()	<span class="descr">Returns an array of fieldgroups that use this field</span></p>
-		<p>$field-&gt;getTable()	<span class="descr">Returns the name of the database table created by this field</span></p>
-		<p>$field-&gt;getInputfield($page)	<span class="descr">Returns an Inputfield object associated with this field for use on $page</span></p>
+		<p>$field->id <span class="descr">Numeric ID of this field</span></p>
+<p>$field->name	<span class="descr">Name of this field (name string)</span></p>
+		<p>$field->label	<span class="descr">Text label for this field, appears as the &lt;label> element in the editor</span></p>
+		<p>$field->type	<span class="descr">The type of field, refers to a Fieldtype plugin module</span></p>
+		<p>$field->flags	<span class="descr">Bitwise flags of the field: if($field->flags &amp; Field::flagAutojoin) // field has the &quot;autojoin&quot; flag set if($field->flags &amp; Field::flagGlobal) // field has the &quot;global&quot; flag set.</span></p>
+		<p>$field->get($key)	<span class="descr">Get a field property (the properties above, or a custom property)<br>
+			Same as $field->$key</span></p>
+		<p>$field->set($key, $value)	<span class="descr">Set a field property. Can be any one of the above or something else for a custom setting.<br>
+			Same as $field->$key = $value</span></p>
+		<p>$field->save()	<span class="descr">Save this field. Same as $fields->save($field)</span></p>
+		<p>$field->numFieldgroups()	<span class="descr">Returns the number of fieldgroups that use this field</span></p>
+		<p>$field->getFieldgroups()	<span class="descr">Returns an array of fieldgroups that use this field</span></p>
+		<p>$field->getTable()	<span class="descr">Returns the name of the database table created by this field</span></p>
+		<p>$field->getInputfield($page)	<span class="descr">Returns an Inputfield object associated with this field for use on $page</span></p>
 		<p>(string) $field <span class="descr">Casting a Field as a string returns the field's name</span></p>
 		<h2>$user</h2>
 <p>$user->id <span class="descr">Numeric ID of this user</span></p>
@@ -265,8 +266,8 @@ jQuery.fn.liveUpdate = function(list) {
 <p>$user->isSuperuser() <span class="descr">Is this the Superuser? Returns true or false.</span></p>
 <p>$user->isLoggedin() <span class="descr">Is this user logged in? Returns true or false.</span></p>
 <p>$user->save() <span class="descr">Save user to the database.</span></p>
-		<p>$user->get($property) <span class="descr">Get a property value from the user. Same as $user-&gt;[property].</span></p>
-		<p>$user->set($property, $value) <span class="descr">Set a property value. Same as $user-&gt;[property] = $value;</span></p>
+		<p>$user->get($property) <span class="descr">Get a property value from the user. Same as $user->[property].</span></p>
+		<p>$user->set($property, $value) <span class="descr">Set a property value. Same as $user->[property] = $value;</span></p>
 		<p>$user->hasRole($role) <span class="descr">Does the user have the given role? Returns true or false.</span></p>
 		<p>$user->addRole($role) <span class="descr">Add the given Role to this user.</span></p>
 		<p>$user->removeRole($role) <span class="descr">Remove a given Role from this user.</span></p>
@@ -277,9 +278,9 @@ jQuery.fn.liveUpdate = function(list) {
 		<p>$template->name <span class="descr">Get or set the template's name.</span></p>
 		<p>$template->filename <span class="descr">Get or set a template's filename, including path (this is auto-generated from the name, though you may modify it at runtime if it suits your need).</span></p>
 		<p>$template->fieldgroup <span class="descr">Get or set a template's Fieldgroup. Can also be used to iterate a template's fields.</span></p>
-		<p>$template->fields <span class="descr">Syntactical alias for $template-&gt;fieldgroup. Use whatever makes more sense for your code readability.</span></p>
-		<p>$template->get($property) <span class="descr">Get the value of a template's property (same as $template-&gt;$property)</span></p>
-		<p>$template->set($property, $value) <span class="descr">Set the value of a template's property (same as $template-&gt;$property = $value).</span></p>
+		<p>$template->fields <span class="descr">Syntactical alias for $template->fieldgroup. Use whatever makes more sense for your code readability.</span></p>
+		<p>$template->get($property) <span class="descr">Get the value of a template's property (same as $template->$property)</span></p>
+		<p>$template->set($property, $value) <span class="descr">Set the value of a template's property (same as $template->$property = $value).</span></p>
 		<p>$template->getNumPages() <span class="descr">Return the number of pages using this template.</span></p>
 		<p>$template->save() <span class="descr">Save this template to the database.</span></p>
 <p>$templates->get(&quot;name&quot;) <span class="descr">Return the template with the given name</span></p>
@@ -294,9 +295,9 @@ jQuery.fn.liveUpdate = function(list) {
 		<p>$template->redirectLogin <span class="descr">Get or set what should happen when a user attempts access to a page using this template, and they don't have access to. Set to 0 to show the 404 page, or 1 to redirect to the login page. Default is 0.</span></p>
 		<p>$template->protocol <span class="descr">Get or set what protocol is required to access pages using this template. If the user attempts access from the wrong protocol, it will be redirected to the right protocol. Set to 0 to allow either HTTP or HTTPS. Set to 1 to allow HTTPS only. Set to -1 to allow HTTP only. Default is 0.</span></p>
 		<h2>$input</h2>
-		<p>$input-&gt;get <span class="descr">provides access to your GET variables</span></p>
-		<p>$input-&gt;post <span class="descr">provides access to your POST variables</span></p>
-		<p>$input-&gt;cookie <span class="descr">provides access to your COOKIE variables</span></p>
+		<p>$input->get <span class="descr">provides access to your GET variables</span></p>
+		<p>$input->post <span class="descr">provides access to your POST variables</span></p>
+		<p>$input->cookie <span class="descr">provides access to your COOKIE variables</span></p>
 		<p>$input->get->name</p>
 		<p>$input->get['name']</p>
 		<p>$input->get('name')</p>
@@ -308,38 +309,38 @@ jQuery.fn.liveUpdate = function(list) {
 		<p>$input->urlSegment3 <span class="descr">Retrieve the third: /path/to/page/aaa/bbb/<strong>ccc</strong>/</span></p>
 		<p>$input->pageNum <span class="descr">Returns the current page number from the URL (1–999)</span></p>
 		<h2>$sanitizer</h2>
-		<p>$sanitizer-&gt;email($value)	<span class="descr">Sanitizes a value for an email address, then filters it. If not valid after sanitization, this function returns a blank string.</span></p>
-		<p>$sanitizer-&gt;fieldName($value)	<span class="descr">Sanitizes a value for a Field name. Same as the name() filter, except that it doesn't allow dashes.</span></p>
-		<p>$sanitizer-&gt;name($value)	<span class="descr">Sanitizes a value for a ProcessWire name, meaning all characters except for these ASCII characters: &quot;a-zA-Z0-9_.&quot; (not including the quotes) are removed. It also truncates the length to 128 characters.</span></p>
-		<p>$sanitizer-&gt;pageName($value)	<span class="descr">Sanitizes a value for a URL friendly Page name. Same as the name() filter, except that it converts uppercase to lowercase, and it attempts UTF-8 to ASCII conversion.</span></p>
-		<p>$sanitizer-&gt;pageName($value, true)	<span class="descr">Sanitizes a value for a URL friendly Page name and cleans out leading or trailing dashes, and converts double dashes to single dashes. Use this if you are passing in a headline to convert to a page name (for example).</span></p>
-		<p>$sanitizer-&gt;selectorField($value) <span class="descr">Sanitizes a field name as used in a selector value. This function is only necessary if you are dealing with user submitted field names. This is rarely the case in the author's experience, but provided here for consistency with selectorValue()</span></p>
-		<p>$sanitizer-&gt;selectorValue($value)	<span class="descr">Sanitizes a string that needs to appear in a selector value. Replaces disallowed characters with spaces. If value is not already quoted, it will add quotes if it determines they are necessary (like if it contains commas). It limits the length to 100 characters (multibyte safe).</span></p>
-		<p>$sanitizer-&gt;text($value)	<span class="descr">Sanitize a single line of input text. Removes tags, removes newline characters, and truncates length to 1024 characters. This is multibyte safe if your PHP has multibyte support.</span></p>
-		<p>$sanitizer-&gt;text($value, $options)	<span class="descr">Same as the above, except you may provide an $options array to change the behavior. You may specify one or more options in the $options array.  See the reference of $options later in this page.</span></p>
-		<p>$sanitizer-&gt;textarea($value)	<span class="descr">Same as the text() function above, except that multiple lines are allowed and maxLength is 16k.</span></p>
-		<p>$sanitizer-&gt;textarea($value, $options)	<span class="descr">Same as textarea() except that you may modify the options documented later in this page, noting that multiLine is already true, and maxLength is already 16384.</span></p>
-		<p>$sanitizer-&gt;url($value)	<span class="descr">Filters a URL value. Returns a valid URL or blank if it can't be made valid. If URL contains a domain and is valid but missing a protocol (like http://) it will add it. It won't add a protocol to local/relative URLs.</span></p>
-		<p>$sanitizer-&gt;username($value)	<span class="descr">Sanitizes a value for a User name, meaning all characters except for these ASCII characters &quot;a-zA-Z0-9-_.@&quot; (not including the quotes) are removed. It also truncates the length to 50 characters.</span></p>
+		<p>$sanitizer->email($value)	<span class="descr">Sanitizes a value for an email address, then filters it. If not valid after sanitization, this function returns a blank string.</span></p>
+		<p>$sanitizer->fieldName($value)	<span class="descr">Sanitizes a value for a Field name. Same as the name() filter, except that it doesn't allow dashes.</span></p>
+		<p>$sanitizer->name($value)	<span class="descr">Sanitizes a value for a ProcessWire name, meaning all characters except for these ASCII characters: &quot;a-zA-Z0-9_.&quot; (not including the quotes) are removed. It also truncates the length to 128 characters.</span></p>
+		<p>$sanitizer->pageName($value)	<span class="descr">Sanitizes a value for a URL friendly Page name. Same as the name() filter, except that it converts uppercase to lowercase, and it attempts UTF-8 to ASCII conversion.</span></p>
+		<p>$sanitizer->pageName($value, true)	<span class="descr">Sanitizes a value for a URL friendly Page name and cleans out leading or trailing dashes, and converts double dashes to single dashes. Use this if you are passing in a headline to convert to a page name (for example).</span></p>
+		<p>$sanitizer->selectorField($value) <span class="descr">Sanitizes a field name as used in a selector value. This function is only necessary if you are dealing with user submitted field names. This is rarely the case in the author's experience, but provided here for consistency with selectorValue()</span></p>
+		<p>$sanitizer->selectorValue($value)	<span class="descr">Sanitizes a string that needs to appear in a selector value. Replaces disallowed characters with spaces. If value is not already quoted, it will add quotes if it determines they are necessary (like if it contains commas). It limits the length to 100 characters (multibyte safe).</span></p>
+		<p>$sanitizer->text($value)	<span class="descr">Sanitize a single line of input text. Removes tags, removes newline characters, and truncates length to 1024 characters. This is multibyte safe if your PHP has multibyte support.</span></p>
+		<p>$sanitizer->text($value, $options)	<span class="descr">Same as the above, except you may provide an $options array to change the behavior. You may specify one or more options in the $options array.  See the reference of $options later in this page.</span></p>
+		<p>$sanitizer->textarea($value)	<span class="descr">Same as the text() function above, except that multiple lines are allowed and maxLength is 16k.</span></p>
+		<p>$sanitizer->textarea($value, $options)	<span class="descr">Same as textarea() except that you may modify the options documented later in this page, noting that multiLine is already true, and maxLength is already 16384.</span></p>
+		<p>$sanitizer->url($value)	<span class="descr">Filters a URL value. Returns a valid URL or blank if it can't be made valid. If URL contains a domain and is valid but missing a protocol (like http://) it will add it. It won't add a protocol to local/relative URLs.</span></p>
+		<p>$sanitizer->username($value)	<span class="descr">Sanitizes a value for a User name, meaning all characters except for these ASCII characters &quot;a-zA-Z0-9-_.@&quot; (not including the quotes) are removed. It also truncates the length to 50 characters.</span></p>
 		<h2>$session</h2>
-		<p>$session-&gt;set($name, $value)	<span class="descr">Set the session variable $name to have the value $value</span></p>
-		<p>$session-&gt;get($name)	<span class="descr">Get the session variable identified by the string $name</span></p>
-		<p>$session-&gt;$name = $value	<span class="descr">Alternate syntax for $session-&gt;set($name, $value)</span></p>
-		<p>$value = $session-&gt;$name	<span class="descr">Alternate syntax for $session-&gt;get($name)</span></p>
-		<p>$session-&gt;getAll()	<span class="descr">Return all set session variables in an array</span></p>
-		<p>$session-&gt;remove($name)	<span class="descr">Remove/unset the session variable identified by the string $name</span></p>
-		<p>$session-&gt;login($name, $pass)	<span class="descr">Login the user identified by $name and authenticated by $pass. Returns boolean true on successful login or false on failure. </span></p>
-		<p>$session-&gt;logout()	<span class="descr">Logout the current user session</span></p>
-		<p>$session-&gt;redirect($url)	<span class="descr">Send an HTTP 301 (permanent) redirect to the specified URL</span></p>
-		<p>$session-&gt;redirect($url, false)	<span class="descr">Send an HTTP 302 (temporary) redirect to the specified URL</span></p>
+		<p>$session->set($name, $value)	<span class="descr">Set the session variable $name to have the value $value</span></p>
+		<p>$session->get($name)	<span class="descr">Get the session variable identified by the string $name</span></p>
+		<p>$session->$name = $value	<span class="descr">Alternate syntax for $session->set($name, $value)</span></p>
+		<p>$value = $session->$name	<span class="descr">Alternate syntax for $session->get($name)</span></p>
+		<p>$session->getAll()	<span class="descr">Return all set session variables in an array</span></p>
+		<p>$session->remove($name)	<span class="descr">Remove/unset the session variable identified by the string $name</span></p>
+		<p>$session->login($name, $pass)	<span class="descr">Login the user identified by $name and authenticated by $pass. Returns boolean true on successful login or false on failure. </span></p>
+		<p>$session->logout()	<span class="descr">Logout the current user session</span></p>
+		<p>$session->redirect($url)	<span class="descr">Send an HTTP 301 (permanent) redirect to the specified URL</span></p>
+		<p>$session->redirect($url, false)	<span class="descr">Send an HTTP 302 (temporary) redirect to the specified URL</span></p>
 		<h2>Selectors</h2>
 		<h3>Selector operators</h3>
 		<p>= <span class="descr">Equal to </span></p>
 		<p>!= <span class="descr">Not equal to </span></p>
 		<p>&lt; <span class="descr">Less than </span></p>
-		<p>&gt; <span class="descr">Greater than </span></p>
+		<p>> <span class="descr">Greater than </span></p>
 		<p>&lt;= <span class="descr">Less than or equal to</span></p>
-		<p>&gt;= <span class="descr">Greater than or equal to </span></p>
+		<p>>= <span class="descr">Greater than or equal to </span></p>
 		<p>*= <span class="descr">Contains the exact word or phrase </span></p>
 		<p>~= <span class="descr">Contains all the words </span></p>
 		<p>%= <span class="descr">Contains the exact word or phrase (using slower SQL LIKE) [v2.1] </span></p>
@@ -405,7 +406,7 @@ jQuery.fn.liveUpdate = function(list) {
 		<p>$config->paths->tmp	<span class="descr">Path to ProcessWire's temporary storage directory.</span><br>
 			</p>
 		<p>$config->paths->sessions	<span class="descr">Path to ProcessWire's session storage directory.les directory, where page-specific files are kept in page ID numbered directories.</span></p>
-		<h2>Static Configuration		</h2>
+		<h3>Static Configuration		</h3>
 		<h3>Date and Time</h3>
 		<p>$config->dateFormat	<span class="descr">Default system date format as used by ProcessWire admin. Preferably in a format that is string sortable. This should be a PHP date() string. Default value is 'Y-m-d H:i:s'.</span><br>
 		</p>
@@ -467,7 +468,24 @@ jQuery.fn.liveUpdate = function(list) {
 		<p>$config->superUserRolePageID	<span class="descr">Page ID of the superuser role.</span></p>
 		<p>$config->userTemplateID	<span class="descr">Template ID of the system 'user' template.</span></p>
 		<p>$config->roleTemplateID	<span class="descr">Template ID of the system 'role' template.</span></p>
-		<p>$config->permissionTemplateID	<span class="descr">Template ID of the system 'permission' template.</span></p></td>
+		<p>$config->permissionTemplateID	<span class="descr">Template ID of the system 'permission' template.</span></p>
+		<h2> Bootstrap / System</h2>
+		<h3>Global Namespace Wire</h3>
+		<p>$wire-&gt;pages-&gt;get("/about/contact/"); </p>
+		<p>wire('pages')-&gt;get("/about/contact/"); </p>
+		<h3>Page Status</h3>
+		<p>Page::statusOn</p>
+		<p>Page::statusHidden</p>
+		<p>Page::statusUnpublished</p>
+		<p>Page::statusLocked</p>
+		<p>Page::statusMax</p>
+		<p>Page::statusUnsearchable</p>
+		<p>Page::statusTrash</p>
+		<p>Page::statusDeleted</p>
+		<p>Page::statusSystemOverride</p>
+		<p>Page::statusCorrupted</p>
+		<p>Page::statusSystem</p>
+		<p>Page::statusSystemID</p></td>
 	</tr>
 	</tbody>
 	<tfoot>
@@ -479,5 +497,8 @@ jQuery.fn.liveUpdate = function(list) {
 	</tr>
 	</tfoot>
 </table>
+
+
+
 </body>
 </html>

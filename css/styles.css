@@ -39,7 +39,7 @@ a:hover{
 		vertical-align:top;
 		color:#333;
 		background-color:#fff;
-		/*border:1px solid #ddd;*/
+		border:1px solid #eee;
 		border-collapse: collapse;
 		padding:1px 10px 10px 10px;
 	}
