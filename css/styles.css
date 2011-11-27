@@ -28,6 +28,25 @@ a:hover{
 	color:#F00;	
 }
 
+#index a{
+	text-decoration:none;
+	margin:0 0 0 0;
+	padding:3px 4px 3px 8px;
+	background-color:#eee;
+	
+	position:relative;
+	border:1px solid #fff;
+	border-radius:5px;
+	-webkit-border-radius:5px;
+	-moz-border-radius:5px;
+	-ms-border-radius:5px;
+	-o-border-radius:5px;
+}
+
+#index a.active{
+	color:#000;	
+}
+
 	caption{
 		padding:5px 10px;
 		font-size:16px;
