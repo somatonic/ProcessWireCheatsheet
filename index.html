@@ -165,7 +165,7 @@ jQuery.fn.liveUpdate = function(list) {
 					<a href="#config">$config</a>
 					
 					<h3>Others</h3>
-					<a href="#wirearray">WireArray</a>
+					<a href="#wirearray">WireArray / PageArray</a>
 					<a href="#selectors">Selectors</a>
 					<a href="#pager">Markup Pager</a>
 					<a href="#renderpagefields">Markup Page Fields</a>
@@ -184,7 +184,7 @@ jQuery.fn.liveUpdate = function(list) {
 				<h2>$page</h2>
 				
 				<div class="cat">
-					<h3>Fields Reference</h3>
+					<h3>Built-in Fields Reference</h3>
 					<p>$page-&gt;id <span class="descr">The numbered ID of the current page</span></p>
 					<p>$page-&gt;name <span class="descr">The name assigned to the page, as it appears in the URL</span></p>
 					<p>$page-&gt;title <span class="descr">The page's title (headline) text</span></p>
@@ -203,14 +203,14 @@ jQuery.fn.liveUpdate = function(list) {
 					<p>$page-&gt;siblings <span class="descr">All the sibling pages of this page.† Returns a PageArray. See also $page-&gt;siblings($selector). </span></p>
 					<p>$page-&gt;next <span class="descr">This page's next sibling page, or NullPage if it is the last sibling.† See also $page-&gt;next($pageArray). </span></p>
 					<p>$page-&gt;prev <span class="descr">This page's previous sibling page, or NullPage if it is the first sibling.† See also $page-&gt;prev($pageArray). </span></p>
-					<p>$page-&gt;pageNum <span class="descr">The current page number (1 or greater), only used if the page's template allows pagination. Deprecated, see $input-&gt;pageNum instead.</span></p>
 					<p>$page-&gt;created <span class="descr">Unix timestamp of when the page was created</span></p>
 					<p>$page-&gt;modified <span class="descr">Unix timestamp of when the page was last modified</span></p>
 					<p>$page-&gt;createdUser <span class="descr">The user that created this page. Returns a User or a NullUser.</span></p>
 					<p>$page-&gt;modifiedUser <span class="descr">The user that last modified this page. Returns a User or a NullUser.</span></p>
 				</div>
 				<div class="cat">
-					<h3>Methods Reference</h3>
+					<h3>Built-in Methods Reference</h3>
+					<p>$page-&gt;render() <span class="descr">Returns rendered page markup. echo $page-&gt;render();</span></p>
 					<p>$page-&gt;find($selector) <span class="descr">Find pages matching the selector anywhere below this page (children, grandchildren, etc.). Returns a PageArray.</span></p>
 					<p>$page-&gt;children($selector) <span class="descr">All the children (subpages) of this page,  filtered by a selector.* Returns a PageArray. </span></p>
 					<p>$page-&gt;child($selector) <span class="descr">The first matching child (subpage) that matches the given selector. Returns a Page, or a NullPage if no match. </span></p>
@@ -239,13 +239,15 @@ jQuery.fn.liveUpdate = function(list) {
 					<p>$page-&gt;moveable($parent) <span class="descr">Is the current user allowed to move $page to $parent? Returns true or false.</span></p>
 					<p>$page-&gt;sortable() <span class="descr">Is the page sortable (within the same parent) by the current user? Returns true or false.</span></p>
 					<p>$page-&gt;deleteable() <span class="descr">Is the page deleteable by the current user? Returns true or false.</span></p>
-					<p>$page-&gt;addStatus(Page::statusHidden) <span class="descr">Add a status to a page.</span></p>
+					<p>$page-&gt;isHidden() <span class="descr">Returns true if page has status hidden.</span></p>
+					<p>$page-&gt;addStatus(Page::statusHidden) <span class="descr">Add a status to this page.</span></p>
+					<p>$page-&gt;removeStatus(Page::statusHidden) <span class="descr">Removes a status from this page.</span></p>
 				</div>
 			</div>
 			<div class="section" id="pages">
 				<h2>$pages</h2>
 				<div class="cat">
-					<h3>Methods Reference</h3>
+					<h3>Built-in Methods Reference</h3>
 					<p>$pages-&gt;find(&quot;selector&quot;) <span class="descr">Find and return all pages matching the given selector string. Returns a PageArray.</span></p>
 					<p>$pages-&gt;get(&quot;selector&quot;) <span class="descr">Get the page matching the given selector string. Returns a Page, or a NullPage if not found.</span></p>
 					<p>$pages-&gt;get(123) <span class="descr">Get the page matching the given numeric ID. Returns a Page, or a NullPage if not found.</span></p>
@@ -261,7 +263,7 @@ jQuery.fn.liveUpdate = function(list) {
 				</div>
 			</div>
 			<div class="section" id="wirearray">
-				<h2>WireArray Reference</h2>
+				<h2>WireArray/PageArray</h2>
 				<div class="cat">
 					<h3>Getting Items</h3>
 					<p>$a[$key] <span class="descr">Returns the value of the item at the given $key, or null if not set.</span></p>
@@ -295,6 +297,8 @@ jQuery.fn.liveUpdate = function(list) {
 					<p>$a-&gt;import($items) <span class="descr">Given an array or WireArray of items, add them all. </span></p>
 					<p>$a-&gt;prepend($item) <span class="descr">Prepend the given item to the beginning of the WireArray.</span></p>
 					<p>$a-&gt;append($item) <span class="descr">Append the given item to the end of the WireArray.</span></p>
+					<p>$a-&gt;insertBefore($object)	</p>
+					<p>$a-&gt;insertAfter($object) </p>
 					<p>$a-&gt;unshift($item) <span class="descr">Prepend the given item to the beginning of the WireArray (same as prepend)</span></p>
 					<p>$a-&gt;shift() <span class="descr">Remove (shift) the first $item from the WireArray and return it.</span></p>
 					<p>$a-&gt;push($item) <span class="descr">Push the given item onto the end of the WireArray.</span></p>
@@ -309,6 +313,7 @@ jQuery.fn.liveUpdate = function(list) {
 					<p>count($a) <span class="descr">Returns the number of items in this WireArray.</span></p>
 					<p>$a-&gt;has($key) <span class="descr">Is the given key part of this WireArray?</span></p>
 					<p>$a-&gt;has(&quot;selector&quot;) <span class="descr">Does the given selector match any items in this WireArray?</span></p>
+					<p>$a-&gt;has($object)</p>
 					<p>isset($a[$key]) <span class="descr">Returns true if the given $key is set with an item.</span></p>
 					<p>$a-&gt;isValidItem($item) <span class="descr">Is the given item a valid type for this WireArray?</span></p>
 					<p>$a-&gt;isValidKey($key) <span class="descr">Is the given $key valid to use for this WireArray?</span></p>
@@ -338,6 +343,13 @@ jQuery.fn.liveUpdate = function(list) {
 					<h3>Miscellaneous</h3>
 					<p>$a-&gt;makeBlankItem() <span class="descr">Make a new blank item suitable for storage in this WireArray.</span></p>
 					<p>$a-&gt;makeNew() <span class="descr">Make a new blank WireArray of the same type as $a.</span></p>
+				</div>
+				<div class="cat">
+					<h3>PageArray only</h3>
+					<p>$p-&gt;getTotal()	<span class="descr">Get the total number of pages that were found from a $pages-&gt;find(&quot;selectors, limit=n&quot;) operation that led to this PageArray. The number returned may be greater than the number of pages actually in this PageArray instance, and is used for calculating pagination. Whereas $p-&gt;count() will always return the number of pages actually in this PageArray instance.</span></p>
+					<p>$p-&gt;getLimit()	<span class="descr">Get the number (n) from a &quot;limit=n&quot; portion of a selector that resulted in this PageArray. In pagination, this value represents the max items to display per page. If there was no limit applied, this will return 0.</span></p>
+					<p>$p-&gt;getStart()	<span class="descr">Get the number of the starting result that led to this PageArray in pagination. Returns 0 if in the first page of results. </span></p>
+					<p>$p-&gt;getSelectors()	<span class="descr">Return the Selectors that led to this PageArray, or null if not set/applicable. Returns an instance of Selectors (WireArray) containing one or more Selector objects.</span></p>
 				</div>
 			</div>
 			</td>
@@ -502,49 +514,52 @@ jQuery.fn.liveUpdate = function(list) {
 				
 				<div class="cat">
 					<h3>Selector Operators</h3>
-					<p>= <span class="descr">Equal to </span></p>
-					<p>!= <span class="descr">Not equal to </span></p>
-					<p>&lt; <span class="descr">Less than </span></p>
-					<p>> <span class="descr">Greater than </span></p>
-					<p>&lt;= <span class="descr">Less than or equal to</span></p>
-					<p>>= <span class="descr">Greater than or equal to </span></p>
-					<p>*= <span class="descr">Contains the exact word or phrase </span></p>
-					<p>~= <span class="descr">Contains all the words </span></p>
-					<p>%= <span class="descr">Contains the exact word or phrase (using slower SQL LIKE) [v2.1] </span></p>
-					<p>^= <span class="descr">Contains the exact word or phrase at the beginning of the field [v2.1] </span></p>
-					<p>$= <span class="descr">Contains the exact word or phrase at the end of the field [v2.1]</span></p>
+					<p>= <span class="descr">Equal to <br>
+						any_field=any_value<br>
+					</span></p>
+					<p>!= <span class="descr">Not equal to <br>
+						any_field!=any_value<br>
+					</span></p>
+					<p>&lt; <span class="descr">Less than <br>
+						any_field&lt;any_value<br>
+					</span></p>
+					<p>> <span class="descr">Greater than <br>
+						any_field&gt;any_value					</span></p>
+					<p>&lt;= <span class="descr">Less than or equal to<br>
+						any_field&lt;=any_value					</span></p>
+					<p>>= <span class="descr">Greater than or equal to<br>
+						any_field&gt;=any_value					</span></p>
+					<p>*= <span class="descr">Contains the exact word or phrase <br>
+						any_field*=any_value					</span></p>
+					<p>~= <span class="descr">Contains all the words <br>
+						any_field~=any_value					</span></p>
+					<p>%= <span class="descr">Contains the exact word or phrase (using slower SQL LIKE) [v2.1] <br>
+						any_field%=any_value					</span></p>
+					<p>^= <span class="descr">Contains the exact word or phrase at the beginning of the field [v2.1] <br>
+						any_field^=any_value					</span></p>
+					<p>$= <span class="descr">Contains the exact word or phrase at the end of the field [v2.1]<br>
+						any_field$=any_value					</span></p>
 				</div>
 				<div class="cat">
-					<h3>Selector Attributes</h3>
-					<p>id</p>
-					<p>sort</p>
-					<p>numChildren</p>
-					<p>num_children</p>
-					<p>status</p>
-					<p>name</p>
-					<p>parent</p>
-					<p>parent_id</p>
-					<p>template</p>
-					<p>template_id</p>
-					<p>created</p>
-					<p>modified</p>
-					<p>created_users_id</p>
-					<p>modified_users_id</p>
-					<p>createdUser</p>
-					<p>modifiedUser</p>
-					<p>sortfield</p>
-					<p>isLoaded</p>
-					<p>pageNum</p>
-					<p>instanceID</p>
-					<p>include</p>
-					<h3>Selector Status Attributes</h3>
-					<p>status=hidden</p>
-					<p>status=unpublished</p>
-					<p>status=locked</p>
-					<p>status=max</p>
-					<p>include=hidden</p>
-					<p>include=all</p>
-					<p>check_access=1</p>
+					<h3>Built-In Page Selector Properties</h3>
+					<p>limit=n <span class="descr">Limit the results to n Number</span></p>
+					<p>start=n <span class="descr">Set start offset</span></p>
+					<p>end=n	<span class="descr">Set end offset</span></p>
+					<p>sort=field <span class="descr">Sort by a field. This may any field. Use &quot;-&quot; prefix to reverse sorting. sort=-field</span></p>
+					<p>include=all <span class="descr">Include all hidden and unpublished pages</span></p>
+					<p>include=hidden <span class="descr">Include hidden pages in queries.</span></p>
+					<p>check_access=0 <span class="descr">Check if page can be accessed, usefull when using site searches and outclude pages.</span></p>
+					<p>children.count=n <span class="descr">Pages with a certain count of childrens</span></p>
+					<p>parent=id <span class="descr">Page parent using ID</span></p>
+					<p>parent=$page <span class="descr">Page parent using an page object</span></p>
+					<p>parent=/path/to/page/ <span class="descr">Page parent using path</span></p>
+					<p>path=/path/to/page/ <span class="descr">Get Page with the path specified</span></p>
+					<p>template=name <span class="descr">Limit to a certain template. Use &quot;|&quot;  to have multiple OR's. tempalte=name|name</span></p>
+					<p>template=$template <span class="descr">You can also use a template object to compare</span></p>
+					<p>created=timestamp <span class="descr">Usually used with &lt; &gt; to compare timestamps</span></p>
+					<p>modified=timestamp <span class="descr">Usually used with &lt; &gt; to compare timestamps</span></p>
+					<p>created_users_id=int <span class="descr">Pages created with specified user id.</span></p>
+					<p>modified_users_id=int <span class="descr">Pages modified with specified user id.</span></p>
 				</div>
 			</div>
 			
