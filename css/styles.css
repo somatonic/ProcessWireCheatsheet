@@ -5,6 +5,7 @@ body{
 	font:normal 12px monospace; 
 	background-color:#000;
 	margin:10px;
+	overflow-y:scroll;
 }
 
 body.courier{
