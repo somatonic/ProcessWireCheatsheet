@@ -65,6 +65,11 @@ a:hover{
 		border-collapse: collapse;
 		padding:2px 10px;
 	}
+	
+	.section{}
+	.cat{}
+	.section a { display:block;}
+	
 	p{
 		margin:0 0 0 0;
 		padding:3px 4px 3px 8px;
@@ -98,7 +103,6 @@ a:hover{
 		-ms-border-radius:5px;
 		-o-border-radius:5px;
 	}
-	
 
 	p.hasdescr{
 		background-color: #EEEDE3;
@@ -116,11 +120,12 @@ a:hover{
 		font-size: 12px;
 		margin: 1em 0 0.5em 0;
 		color: #069;
+		cursor:pointer;
 	}
 	
 	.right{ float:right; }
 	
-	.footer{ padding:10px; border-top:1px solid #ddd;}
+	.footer{ font-size:10px; padding:10px; line-height:1.6em; border-top:1px solid #ddd;}
 	
 	form{ margin: 5px 0; text-align:right; }
 	form input {}
