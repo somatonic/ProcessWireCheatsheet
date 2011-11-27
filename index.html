@@ -223,6 +223,9 @@ jQuery.fn.liveUpdate = function(list) {
 					<p>$page-&gt;is($name) <span class="descr">Returns true if this page matches the given template name, page status, or selector. </span></p>
 					<p>$page-&gt;isChanged() <span class="descr">Has the $page changed since it was loaded? Returns true or false.</span></p>
 					<p>$page-&gt;isChanged(&quot;field&quot;) <span class="descr">Has the given field on $page changed since it was loaded? Returns true or false.</span></p>
+					<p>$page-&gt;isNew() <span class="descr">Is this Page new? (i.e. doesn't yet exist in DB)</span></p>
+					<p>$page-&gt;isHidden() <span class="descr">Returns true if page has status hidden.</span></p>
+					<p>$page-&gt;isTrash() <span class="descr">Returns true if page is in trash.</span></p>
 					<p>$page-&gt;matches(&quot;selector&quot;) <span class="descr">Returns true if this page matches the given selector string. </span></p>
 					<p>$page-&gt;set(&quot;field&quot;, $value) <span class="descr">Set the given custom field name to have the provided value. Same as $page-&gt;$field = $value;</span></p>
 					<p>$page-&gt;get(&quot;field&quot;) <span class="descr">Get the value for the specified field or null if the field isn't part of this page. Same as $page-&gt;$field</span></p>
@@ -239,7 +242,6 @@ jQuery.fn.liveUpdate = function(list) {
 					<p>$page-&gt;moveable($parent) <span class="descr">Is the current user allowed to move $page to $parent? Returns true or false.</span></p>
 					<p>$page-&gt;sortable() <span class="descr">Is the page sortable (within the same parent) by the current user? Returns true or false.</span></p>
 					<p>$page-&gt;deleteable() <span class="descr">Is the page deleteable by the current user? Returns true or false.</span></p>
-					<p>$page-&gt;isHidden() <span class="descr">Returns true if page has status hidden.</span></p>
 					<p>$page-&gt;addStatus(Page::statusHidden) <span class="descr">Add a status to this page.</span></p>
 					<p>$page-&gt;removeStatus(Page::statusHidden) <span class="descr">Removes a status from this page.</span></p>
 				</div>
@@ -297,8 +299,8 @@ jQuery.fn.liveUpdate = function(list) {
 					<p>$a-&gt;import($items) <span class="descr">Given an array or WireArray of items, add them all. </span></p>
 					<p>$a-&gt;prepend($item) <span class="descr">Prepend the given item to the beginning of the WireArray.</span></p>
 					<p>$a-&gt;append($item) <span class="descr">Append the given item to the end of the WireArray.</span></p>
-					<p>$a-&gt;insertBefore($object)	</p>
-					<p>$a-&gt;insertAfter($object) </p>
+					<p>$a-&gt;insertBefore($item, $existingItem)	<span class="descr">Insert an item (int|string|array|object) before an existing item (int|string|array|object)</span></p>
+					<p>$a-&gt;insertAfter($item, $existingItem) <span class="descr">Insert an item (int|string|array|object) after an existing item (int|string|array|object)</span></p>
 					<p>$a-&gt;unshift($item) <span class="descr">Prepend the given item to the beginning of the WireArray (same as prepend)</span></p>
 					<p>$a-&gt;shift() <span class="descr">Remove (shift) the first $item from the WireArray and return it.</span></p>
 					<p>$a-&gt;push($item) <span class="descr">Push the given item onto the end of the WireArray.</span></p>
@@ -313,7 +315,7 @@ jQuery.fn.liveUpdate = function(list) {
 					<p>count($a) <span class="descr">Returns the number of items in this WireArray.</span></p>
 					<p>$a-&gt;has($key) <span class="descr">Is the given key part of this WireArray?</span></p>
 					<p>$a-&gt;has(&quot;selector&quot;) <span class="descr">Does the given selector match any items in this WireArray?</span></p>
-					<p>$a-&gt;has($object)</p>
+					<p>$a-&gt;has($object) <span class="descr">Is $object in the WireArray? $object must be an valid type of the WireArray.</span></p>
 					<p>isset($a[$key]) <span class="descr">Returns true if the given $key is set with an item.</span></p>
 					<p>$a-&gt;isValidItem($item) <span class="descr">Is the given item a valid type for this WireArray?</span></p>
 					<p>$a-&gt;isValidKey($key) <span class="descr">Is the given $key valid to use for this WireArray?</span></p>
@@ -346,10 +348,10 @@ jQuery.fn.liveUpdate = function(list) {
 				</div>
 				<div class="cat">
 					<h3>PageArray only</h3>
-					<p>$p-&gt;getTotal()	<span class="descr">Get the total number of pages that were found from a $pages-&gt;find(&quot;selectors, limit=n&quot;) operation that led to this PageArray. The number returned may be greater than the number of pages actually in this PageArray instance, and is used for calculating pagination. Whereas $p-&gt;count() will always return the number of pages actually in this PageArray instance.</span></p>
-					<p>$p-&gt;getLimit()	<span class="descr">Get the number (n) from a &quot;limit=n&quot; portion of a selector that resulted in this PageArray. In pagination, this value represents the max items to display per page. If there was no limit applied, this will return 0.</span></p>
-					<p>$p-&gt;getStart()	<span class="descr">Get the number of the starting result that led to this PageArray in pagination. Returns 0 if in the first page of results. </span></p>
-					<p>$p-&gt;getSelectors()	<span class="descr">Return the Selectors that led to this PageArray, or null if not set/applicable. Returns an instance of Selectors (WireArray) containing one or more Selector objects.</span></p>
+					<p>$a-&gt;getTotal()	<span class="descr">Get the total number of pages that were found from a $pages-&gt;find(&quot;selectors, limit=n&quot;) operation that led to this PageArray. The number returned may be greater than the number of pages actually in this PageArray instance, and is used for calculating pagination. Whereas $p-&gt;count() will always return the number of pages actually in this PageArray instance.</span></p>
+					<p>$a-&gt;getLimit()	<span class="descr">Get the number (n) from a &quot;limit=n&quot; portion of a selector that resulted in this PageArray. In pagination, this value represents the max items to display per page. If there was no limit applied, this will return 0.</span></p>
+					<p>$a-&gt;getStart()	<span class="descr">Get the number of the starting result that led to this PageArray in pagination. Returns 0 if in the first page of results. </span></p>
+					<p>$a-&gt;getSelectors()	<span class="descr">Return the Selectors that led to this PageArray, or null if not set/applicable. Returns an instance of Selectors (WireArray) containing one or more Selector objects.</span></p>
 				</div>
 			</div>
 			</td>
@@ -369,22 +371,22 @@ jQuery.fn.liveUpdate = function(list) {
 				</div>
 				<div class="cat">
 					<h3>Field Properties</h3>
-					<p>$field-&gt;id <span class="descr">Numeric ID of this field</span></p>
-					<p>$field-&gt;name <span class="descr">Name of this field (name string)</span></p>
-					<p>$field-&gt;label <span class="descr">Text label for this field, appears as the &lt;label> element in the editor</span></p>
-					<p>$field-&gt;type <span class="descr">The type of field, refers to a Fieldtype plugin module</span></p>
-					<p>$field-&gt;flags <span class="descr">Bitwise flags of the field: if($field-&gt;flags &amp; Field::flagAutojoin) // field has the &quot;autojoin&quot; flag set if($field-&gt;flags &amp; Field::flagGlobal) // field has the &quot;global&quot; flag set.</span></p>
-					<p>(string) $field <span class="descr">Casting a Field as a string returns the field's name</span></p>
+					<p>$any_field-&gt;id <span class="descr">Numeric ID of this field</span></p>
+					<p>$any_field-&gt;name <span class="descr">Name of this field (name string)</span></p>
+					<p>$any_field-&gt;label <span class="descr">Text label for this field, appears as the &lt;label> element in the editor</span></p>
+					<p>$any_field-&gt;type <span class="descr">The type of field, refers to a Fieldtype plugin module</span></p>
+					<p>$any_field-&gt;flags <span class="descr">Bitwise flags of the field: if($field-&gt;flags &amp; Field::flagAutojoin) // field has the &quot;autojoin&quot; flag set if($field-&gt;flags &amp; Field::flagGlobal) // field has the &quot;global&quot; flag set.</span></p>
+					<p>(string) $any_field <span class="descr">Casting a Field as a string returns the field's name</span></p>
 				</div>
 				<div class="cat">
 					<h3>Field Methods</h3>
-					<p>$field-&gt;get($key) <span class="descr">Get a field property (the properties above, or a custom property) Same as $field-&gt;$key</span></p>
-					<p>$field-&gt;set($key, $value) <span class="descr">Set a field property. Can be any one of the above or something else for a custom setting. Same as $field-&gt;$key = $value</span></p>
-					<p>$field-&gt;save() <span class="descr">Save this field. Same as $fields-&gt;save($field)</span></p>
-					<p>$field-&gt;numFieldgroups() <span class="descr">Returns the number of fieldgroups that use this field</span></p>
-					<p>$field-&gt;getFieldgroups() <span class="descr">Returns an array of fieldgroups that use this field</span></p>
-					<p>$field-&gt;getTable() <span class="descr">Returns the name of the database table created by this field</span></p>
-					<p>$field-&gt;getInputfield($page) <span class="descr">Returns an Inputfield object associated with this field for use on $page</span></p>
+					<p>$any_field-&gt;get($key) <span class="descr">Get a field property (the properties above, or a custom property) Same as $field-&gt;$key</span></p>
+					<p>$any_field-&gt;set($key, $value) <span class="descr">Set a field property. Can be any one of the above or something else for a custom setting. Same as $field-&gt;$key = $value</span></p>
+					<p>$any_field-&gt;save() <span class="descr">Save this field. Same as $fields-&gt;save($field)</span></p>
+					<p>$any_field-&gt;numFieldgroups() <span class="descr">Returns the number of fieldgroups that use this field</span></p>
+					<p>$any_field-&gt;getFieldgroups() <span class="descr">Returns an array of fieldgroups that use this field</span></p>
+					<p>$any_field-&gt;getTable() <span class="descr">Returns the name of the database table created by this field</span></p>
+					<p>$any_field-&gt;getInputfield($page) <span class="descr">Returns an Inputfield object associated with this field for use on $page</span></p>
 				</div>
 			</div>
 			
@@ -397,26 +399,26 @@ jQuery.fn.liveUpdate = function(list) {
 					<p>$templates-&gt;delete($template) <span class="descr">Delete the given template instance. Note that this will throw a fatal error if the template is in use by any pages.</span></p>
 				</div>
 				<div class="cat">
-					<h3>Properties </h3>
-					<p>$template-&gt;id <span class="descr">Get or set the template's numbered database ID.</span></p>
-					<p>$template-&gt;name <span class="descr">Get or set the template's name.</span></p>
-					<p>$template-&gt;filename <span class="descr">Get or set a template's filename, including path (this is auto-generated from the name, though you may modify it at runtime if it suits your need).</span></p>
-					<p>$template-&gt;fieldgroup <span class="descr">Get or set a template's Fieldgroup. Can also be used to iterate a template's fields.</span></p>
-					<p>$template-&gt;fields <span class="descr">Syntactical alias for $template-&gt;fieldgroup. Use whatever makes more sense for your code readability.</span></p>
-					<p>$template-&gt;cache_time <span class="descr">Get or set the number of seconds this template's output should be cached (default is 0). In newer API versions you can also use cacheTime (camelCase for better consistency).</span> </p>
-					<p>$template-&gt;childrenTemplatesID <span class="descr">Get or set the template database ID that children of pages using this template default to. 0 is the default and indicates no selection. Set to -1 to disallow pages using this template from having children.</span> </p>
-					<p>$template-&gt;allowPageNum <span class="descr">Get or set whether pages using this template can have URL-based page numbers. Set to 1 for yes or 0 for no. Default is 0.</span></p>
-					<p>$template-&gt;urlSegments <span class="descr">Get or set whether pages using this template can make use of URL segments. Set to 1 for yes or 0 for no. Default is 0.</span></p>
-					<p>$template-&gt;slashUrls <span class="descr">Get or set whether pages using this template should have URLs that end with a slash. Set to 1 for yes or 0 for no. Default is 1.</span></p>
-					<p>$template-&gt;redirectLogin <span class="descr">Get or set what should happen when a user attempts access to a page using this template, and they don't have access to. Set to 0 to show the 404 page, or 1 to redirect to the login page. Default is 0.</span></p>
-					<p>$template-&gt;protocol <span class="descr">Get or set what protocol is required to access pages using this template. If the user attempts access from the wrong protocol, it will be redirected to the right protocol. Set to 0 to allow either HTTP or HTTPS. Set to 1 to allow HTTPS only. Set to -1 to allow HTTP only. Default is 0.</span></p>
+					<h3>Template Properties </h3>
+					<p>$any_template-&gt;id <span class="descr">Get or set the template's numbered database ID.</span></p>
+					<p>$any_template-&gt;name <span class="descr">Get or set the template's name.</span></p>
+					<p>$any_template-&gt;filename <span class="descr">Get or set a template's filename, including path (this is auto-generated from the name, though you may modify it at runtime if it suits your need).</span></p>
+					<p>$any_template-&gt;fieldgroup <span class="descr">Get or set a template's Fieldgroup. Can also be used to iterate a template's fields.</span></p>
+					<p>$any_template-&gt;fields <span class="descr">Syntactical alias for $template-&gt;fieldgroup. Use whatever makes more sense for your code readability.</span></p>
+					<p>$any_template-&gt;cache_time <span class="descr">Get or set the number of seconds this template's output should be cached (default is 0). In newer API versions you can also use cacheTime (camelCase for better consistency).</span> </p>
+					<p>$any_template-&gt;childrenTemplatesID <span class="descr">Get or set the template database ID that children of pages using this template default to. 0 is the default and indicates no selection. Set to -1 to disallow pages using this template from having children.</span> </p>
+					<p>$any_template-&gt;allowPageNum <span class="descr">Get or set whether pages using this template can have URL-based page numbers. Set to 1 for yes or 0 for no. Default is 0.</span></p>
+					<p>$any_template-&gt;urlSegments <span class="descr">Get or set whether pages using this template can make use of URL segments. Set to 1 for yes or 0 for no. Default is 0.</span></p>
+					<p>$any_template-&gt;slashUrls <span class="descr">Get or set whether pages using this template should have URLs that end with a slash. Set to 1 for yes or 0 for no. Default is 1.</span></p>
+					<p>$any_template-&gt;redirectLogin <span class="descr">Get or set what should happen when a user attempts access to a page using this template, and they don't have access to. Set to 0 to show the 404 page, or 1 to redirect to the login page. Default is 0.</span></p>
+					<p>$any_template-&gt;protocol <span class="descr">Get or set what protocol is required to access pages using this template. If the user attempts access from the wrong protocol, it will be redirected to the right protocol. Set to 0 to allow either HTTP or HTTPS. Set to 1 to allow HTTPS only. Set to -1 to allow HTTP only. Default is 0.</span></p>
 				</div>
 				<div class="cat">
 					<h3>Template Methods </h3>
-					<p>$template-&gt;get($property) <span class="descr">Get the value of a template's property (same as $template-&gt;$property)</span></p>
-					<p>$template-&gt;set($property, $value) <span class="descr">Set the value of a template's property (same as $template-&gt;$property = $value).</span></p>
-					<p>$template-&gt;getNumPages() <span class="descr">Return the number of pages using this template.</span></p>
-					<p>$template-&gt;save() <span class="descr">Save this template to the database.</span></p>
+					<p>$any_template-&gt;get($property) <span class="descr">Get the value of a template's property (same as $template-&gt;$property)</span></p>
+					<p>$any_template-&gt;set($property, $value) <span class="descr">Set the value of a template's property (same as $template-&gt;$property = $value).</span></p>
+					<p>$any_template-&gt;getNumPages() <span class="descr">Return the number of pages using this template.</span></p>
+					<p>$any_template-&gt;save() <span class="descr">Save this template to the database.</span></p>
 				</div>
 					
 			</div>
@@ -511,35 +513,6 @@ jQuery.fn.liveUpdate = function(list) {
 			<div class="section" id="selectors">
 				
 				<h2>Selectors</h2>
-				
-				<div class="cat">
-					<h3>Selector Operators</h3>
-					<p>= <span class="descr">Equal to <br>
-						any_field=any_value<br>
-					</span></p>
-					<p>!= <span class="descr">Not equal to <br>
-						any_field!=any_value<br>
-					</span></p>
-					<p>&lt; <span class="descr">Less than <br>
-						any_field&lt;any_value<br>
-					</span></p>
-					<p>> <span class="descr">Greater than <br>
-						any_field&gt;any_value					</span></p>
-					<p>&lt;= <span class="descr">Less than or equal to<br>
-						any_field&lt;=any_value					</span></p>
-					<p>>= <span class="descr">Greater than or equal to<br>
-						any_field&gt;=any_value					</span></p>
-					<p>*= <span class="descr">Contains the exact word or phrase <br>
-						any_field*=any_value					</span></p>
-					<p>~= <span class="descr">Contains all the words <br>
-						any_field~=any_value					</span></p>
-					<p>%= <span class="descr">Contains the exact word or phrase (using slower SQL LIKE) [v2.1] <br>
-						any_field%=any_value					</span></p>
-					<p>^= <span class="descr">Contains the exact word or phrase at the beginning of the field [v2.1] <br>
-						any_field^=any_value					</span></p>
-					<p>$= <span class="descr">Contains the exact word or phrase at the end of the field [v2.1]<br>
-						any_field$=any_value					</span></p>
-				</div>
 				<div class="cat">
 					<h3>Built-In Page Selector Properties</h3>
 					<p>limit=n <span class="descr">Limit the results to n Number</span></p>
@@ -560,6 +533,34 @@ jQuery.fn.liveUpdate = function(list) {
 					<p>modified=timestamp <span class="descr">Usually used with &lt; &gt; to compare timestamps</span></p>
 					<p>created_users_id=int <span class="descr">Pages created with specified user id.</span></p>
 					<p>modified_users_id=int <span class="descr">Pages modified with specified user id.</span></p>
+					<div class="cat">
+						<h3>Selector Operators</h3>
+						<p>= <span class="descr">Equal to <br>
+							any_field=any_value<br>
+						</span></p>
+						<p>!= <span class="descr">Not equal to <br>
+							any_field!=any_value<br>
+						</span></p>
+						<p>&lt; <span class="descr">Less than <br>
+							any_field&lt;any_value<br>
+						</span></p>
+						<p>> <span class="descr">Greater than <br>
+							any_field&gt;any_value </span></p>
+						<p>&lt;= <span class="descr">Less than or equal to<br>
+							any_field&lt;=any_value </span></p>
+						<p>>= <span class="descr">Greater than or equal to<br>
+							any_field&gt;=any_value </span></p>
+						<p>*= <span class="descr">Contains the exact word or phrase <br>
+							any_field*=any_value </span></p>
+						<p>~= <span class="descr">Contains all the words <br>
+							any_field~=any_value </span></p>
+						<p>%= <span class="descr">Contains the exact word or phrase (using slower SQL LIKE) [v2.1] <br>
+							any_field%=any_value </span></p>
+						<p>^= <span class="descr">Contains the exact word or phrase at the beginning of the field [v2.1] <br>
+							any_field^=any_value </span></p>
+						<p>$= <span class="descr">Contains the exact word or phrase at the end of the field [v2.1]<br>
+							any_field$=any_value </span></p>
+					</div>
 				</div>
 			</div>
 			
@@ -609,7 +610,7 @@ jQuery.fn.liveUpdate = function(list) {
 					<p>$config-&gt;paths-&gt;sessions <span class="descr">Path to ProcessWire's session storage directory.les directory, where page-specific files are kept in page ID numbered directories.</span></p>
 				</div>
 				
-				<h3>Static Configuration</h3>
+				<h2>Static Configuration</h2>
 				
 				<div class="cat">
 					<h3>Date and Time</h3>
@@ -725,8 +726,9 @@ jQuery.fn.liveUpdate = function(list) {
 				
 				<div class="cat">
 					<h3>Global Namespace Wire</h3>
-					<p>$wire-&gt;pages-&gt;get("/about/contact/"); </p>
-					<p>wire('pages')-&gt;get("/about/contact/"); </p>
+					<p>$wire-&gt;pages-&gt;get("/about/contact/") <span class="descr">$wire provides access to the ProcesswWire API from boostraped index.php. Any of the API vars can be used like $pages, $templates, $fields ... <br>
+						i.e. $wire-&gt;templates-&gt;get(&quot;basic-page&quot;);</span></p>
+					<p>wire('pages')-&gt;get("/about/contact/") <span class="descr">wire() function  provides access to all of ProcessWire's API variables, like $page, $pages, $templates and others... i.e. wire('pages')-&gt;find('selector'); </span></p>
 				</div>
 				<div class="cat">
 					<h3>Page Status</h3>

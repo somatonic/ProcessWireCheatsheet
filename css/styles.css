@@ -113,7 +113,7 @@ a:hover{
 		color:#fff;
 		margin:0.4em 0 0.3em 0;
 		padding:10px 15px;
-		position:relative; width:90%; left:0; top:0; z-index:99;
+		width:90%;
 		display:block;
 		cursor: pointer;
 		background-color:#333;
