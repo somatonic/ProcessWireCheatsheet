@@ -18,18 +18,24 @@ var advanced = false;
 
 $(function() {
 	
+	$('table td div.section:has(".advanced"):not("#index")').each(function() {				 
+		$inline_advanced = $('<a href="#" class="toggle_advanced" title="show advanced">+</a>')
+			.click(function(){ $(this).text( function(){ return $(this).text() == '+' ? '-' : '+'} ).parent(".section").find('.advanced').slideToggle(); return false; });
+			
+		$(this).append($inline_advanced);
+	});
+
 	if($.cookie("mode")){
 		if($.cookie("mode") == 'advanced'){
 			$('input[name="mode"]').attr({checked:'checked'});
 			advanced = true;
 			resetSheet();
+			$('.toggle_advanced').hide();
 		}
 	}
-	
-	
+
 	
 	$('table td p').has('.descr').addClass('hasdescr');
-	
 	$('table .descr').hide();
 	
 	$('table td p').click(function(){
@@ -37,10 +43,9 @@ $(function() {
 		$(this).find('.descr').slideToggle(100).click(function(){ $(this).slideUp(100); return false; });
 		return false;
 	});
-	
 
 	
-	$("body").live('click',function(e){
+	$("body").live('click',function(e) {
 		node = $(e.target);
 		if( node.closest('.section').length == 0 && node.closest('input').length == 0 ){
 			$('input#filter').attr({'value':''});
@@ -49,18 +54,20 @@ $(function() {
 	});
 	
 	
-	$('input[name="mode"]').live("change",function(){
-		
+	$('input[name="mode"]').live("change",function() {
 		if($(this).is(":checked")){
 			$.cookie("mode", 'advanced',{expires:3600});
 			advanced = true;
 			resetSheet();
+			$('.toggle_advanced').hide();
 			$('input#filter').attr({'value':''});
 			$('input#filter').liveUpdate('table');
 		} else {
 			$.cookie("mode", 'simple',{expires:3600});
 			advanced = false;
 			resetSheet();
+			$('.toggle_advanced').show();
+			
 			$('#filter').attr({'value':''});
 			$('#filter').liveUpdate('table');
 		}
@@ -117,7 +124,29 @@ $(function() {
 	$('#filter').liveUpdate('table');
 	
 	
+	// fire event function on window scroll
+	var navtop = $('.navigation').offset().top;
+	var navwidth = $('.navigation').width();
 	
+	$(window).scroll(function(){
+							  
+		if($('.navigation').length == 0) return;
+
+		posy = $('.navigation').offset().top;
+		wtop = $(window).scrollTop();
+		
+		
+		console.log(posy);
+		if(wtop >= posy){
+			$('.navigation').css({ position:"fixed", top:0, width: navwidth});
+		}
+		if(posy < navtop){
+			console.log("inline\n");
+			$('.navigation').css({ position:"inherit" });
+		}			
+			
+								
+	});
 	
 });
 
@@ -221,7 +250,7 @@ $.fn.liveUpdate = function(list) {
 	<tbody>
 		<tr>
 			<td>
-				<div class="section" id="index">
+				<div class="section navigation" id="index">
 					
 					<h2>Sections</h2>
 					
@@ -305,8 +334,8 @@ $.fn.liveUpdate = function(list) {
 					<p>$page-&gt;children <span class="descr">All the children (subpages) of this page.* Returns a PageArray. See also $page-&gt;children($selector). </span></p>
 					<p>$page-&gt;child <span class="descr">The first child of this page. Returns a Page. See also $page-&gt;child($selector).</span></p>
 					<p>$page-&gt;siblings <span class="descr">All the sibling pages of this page.† Returns a PageArray. See also $page-&gt;siblings($selector). </span></p>
-					<p>$page-&gt;next <span class="descr">This page's next sibling page, or NullPage if it is the last sibling.† See also $page-&gt;next($pageArray). </span></p>
-					<p>$page-&gt;prev <span class="descr">This page's previous sibling page, or NullPage if it is the first sibling.† See also $page-&gt;prev($pageArray). </span></p>
+					<p class="advanced">$page-&gt;next <span class="descr">This page's next sibling page, or NullPage if it is the last sibling.† See also $page-&gt;next($pageArray). </span></p>
+					<p class="advanced">$page-&gt;prev <span class="descr">This page's previous sibling page, or NullPage if it is the first sibling.† See also $page-&gt;prev($pageArray). </span></p>
 					<p class="advanced">$page-&gt;created <span class="descr">Unix timestamp of when the page was created</span></p>
 					<p class="advanced">$page-&gt;modified <span class="descr">Unix timestamp of when the page was last modified</span></p>
 					<p class="advanced">$page-&gt;createdUser <span class="descr">The user that created this page. Returns a User or a NullUser.</span></p>
@@ -314,16 +343,16 @@ $.fn.liveUpdate = function(list) {
 				</div>
 				<div class="cat">
 					<h3>Built-in Methods Reference</h3>
+					<p>$page-&gt;find($selector) <span class="descr">Find pages matching the selector anywhere below this page (children, grandchildren, etc.). Returns a PageArray.</span></p>
 					<p>$page-&gt;get(&quot;field&quot;) <span class="descr">Get the value for the specified field or null if the field isn't part of this page. Same as $page-&gt;$field</span></p>
 					<p>$page-&gt;get(&quot;field1|f2|f3&quot;) <span class="descr">Get the first matching non-empty field by specified by a string of pipe &quot;|&quot; separated field names</span></p>
 					<p>$page-&gt;getUnformatted(&quot;field&quot;) <span class="descr">Get the unformatted value of the given field name. May also be used with &quot;|&quot; separated field names (mentioned above). </span></p>
 					<p>$page-&gt;setOutputFormatting(true|false) <span class="descr">By default, output will be formatted according filters you may have defined with the field.  If you are modifying the values of a page's custom fields, you will need to call $page-&gt;setOutputFormatting(false) before doing so. This turns off output formatting, which ensures that saved values don't already have runtime formatters applied to them. ProcessWire will throw an error if you attempt to save formatted fields.</span></p>
-					<p>$page-&gt;find($selector) <span class="descr">Find pages matching the selector anywhere below this page (children, grandchildren, etc.). Returns a PageArray.</span></p>
 					<p>$page-&gt;children($selector) <span class="descr">All the children (subpages) of this page,  filtered by a selector.* Returns a PageArray. </span></p>
 					<p>$page-&gt;child($selector) <span class="descr">The first matching child (subpage) that matches the given selector. Returns a Page, or a NullPage if no match. </span></p>
 					<p>$page-&gt;siblings($selector) <span class="descr">All the sibling pages of this page, filtered by a selector.† Returns a PageArray.</span></p>
-					<p>$page-&gt;next($pageArray) <span class="descr">Given a PageArray which includes the current page (among others), return the next page after the current.† Returns a NullPage if it is the last page in the provided PageArray. If called without a PageArray, it assumes the current page's siblings (same as $page-&gt;next).</span></p>
-					<p>$page-&gt;prev($pageArray) <span class="descr">Given a PageArray which includes the current page (among others), return the previous page before the current.† Returns a NullPage if it is the first page in the provided PageArray. If called without a PageArray, it assumes the current page's siblings (same as $page-&gt;prev).</span></p>
+					<p class="advanced">$page-&gt;next($pageArray) <span class="descr">Given a PageArray which includes the current page (among others), return the next page after the current.† Returns a NullPage if it is the last page in the provided PageArray. If called without a PageArray, it assumes the current page's siblings (same as $page-&gt;next).</span></p>
+					<p class="advanced">$page-&gt;prev($pageArray) <span class="descr">Given a PageArray which includes the current page (among others), return the previous page before the current.† Returns a NullPage if it is the first page in the provided PageArray. If called without a PageArray, it assumes the current page's siblings (same as $page-&gt;prev).</span></p>
 					<p class="advanced">$page-&gt;save() <span class="descr">Save this Page</span></p>
 					<p class="advanced">$page-&gt;save($field) <span class="descr">Save just the field given by the provided field name (string) or object (Field)</span></p>
 					<p class="advanced">$page-&gt;delete() <span class="descr">Delete this page</span></p>
@@ -375,11 +404,11 @@ $.fn.liveUpdate = function(list) {
 					<p>$a[$key] <span class="descr">Returns the value of the item at the given $key, or null if not set.</span></p>
 					<p>$a-&gt;$key <span class="descr">Return the item indexed by $key or null if not found.</span></p>
 					<p>$a-&gt;get($key) <span class="descr">Returns the value of the item at the given $key, or null if not set.</span></p>
-					<p>$a-&gt;get(&quot;selector&quot;) <span class="descr">Return the first item that matches the given selector, or null if not found.</span></p>
 					<p>$a-&gt;find(&quot;selector&quot;) <span class="descr">Return all items that match the given selector, or a blank WireArray if none found.</span></p>
-					<p>$a-&gt;getArray() <span class="descr">Returns a regular PHP array of all items in this WireArray.</span></p>
-					<p>$a-&gt;getKeys() <span class="descr">Returns a regular PHP array of all keys used in this WireArray.</span></p>
-					<p>$a-&gt;getValues() <span class="descr">Returns a regular PHP array of all values used in this WireArray.</span></p>
+					<p>$a-&gt;get(&quot;selector&quot;) <span class="descr">Return the first item that matches the given selector, or null if not found.</span></p>
+					<p class="advanced">$a-&gt;getArray() <span class="descr">Returns a regular PHP array of all items in this WireArray.</span></p>
+					<p class="advanced">$a-&gt;getKeys() <span class="descr">Returns a regular PHP array of all keys used in this WireArray.</span></p>
+					<p class="advanced">$a-&gt;getValues() <span class="descr">Returns a regular PHP array of all values used in this WireArray.</span></p>
 					<p>$a-&gt;getRandom() <span class="descr">Returns a single random item from this WireArray.</span></p>
 					<p>$a-&gt;getRandom($n) <span class="descr">Returns $n random items from this WireArray (contained in a new WireArray).</span></p>
 					<p>$a-&gt;slice($n) <span class="descr">Returns a new WireArray containing a slice of items from the $n'th item to the end.</span></p>
@@ -474,7 +503,7 @@ $.fn.liveUpdate = function(list) {
 					<p>$template-&gt;name <span class="descr">Get or set the template's name.</span></p>
 					<p>$template-&gt;filename <span class="descr">Get or set a template's filename, including path (this is auto-generated from the name, though you may modify it at runtime if it suits your need).</span></p>
 					<p>$template-&gt;label <span class="descr">Optional short text label to describe Template.</span></p>
-<p class="advanced">$template-&gt;fieldgroup <span class="descr">Get or set a template's Fieldgroup. Can also be used to iterate a template's fields.</span></p>
+					<p class="advanced">$template-&gt;fieldgroup <span class="descr">Get or set a template's Fieldgroup. Can also be used to iterate a template's fields.</span></p>
 					<p class="advanced">$template-&gt;fields <span class="descr">Syntactical alias for $template-&gt;fieldgroup. Use whatever makes more sense for your code readability.</span></p>
 					<p class="removed">$template-&gt;cache_time <span class="descr">Get or set the number of seconds this template's output should be cached (default is 0). In newer API versions you can also use cacheTime (camelCase for better consistency).</span> </p>
 					<p class="removed">$template-&gt;childrenTemplatesID <span class="descr">Get or set the template database ID that children of pages using this template default to. 0 is the default and indicates no selection. Set to -1 to disallow pages using this template from having children.</span> </p>
@@ -495,43 +524,44 @@ $.fn.liveUpdate = function(list) {
 			
 			</div>
 			
-				<div class="section" id="fields">
-					<h2>$fields</h2>
-					<div class="cat">
-						<h3>Fields Methods</h3>
-						<p>$fields-&gt;find(&quot;selector&quot;) <span class="descr">Find all fields matching the given selector</span></p>
-						<p>$fields-&gt;get(&quot;name&quot;) <span class="descr">Get the field specified by the given field name</span></p>
-						<p>$fields-&gt;get(123) <span class="descr">Get the field specified by the given field ID (integer)</span></p>
-						<p>$fields-&gt;get(&quot;selector&quot;) <span class="descr">Get the first matching field specified by the given selector</span></p>
-						<p class="advanced">$fields-&gt;save($field) <span class="descr">Save the given Field object</span></p>
-						<p class="advanced">$fields-&gt;delete($field) <span class="descr">Delete the given Field object</span></p>
-					</div>
-					<h2>Field object</h2>
-					$field = any Field
-					<div class="cat">
-					
-					
-						<h3>Field Properties</h3>
-						
-						<p>(string) $field <span class="descr">Casting a Field as a string returns the field's name</span></p>
-						<p>$field-&gt;id <span class="descr">Numeric ID of this field</span></p>
-						<p>$field-&gt;name <span class="descr">Name of this field (name string)</span></p>
-						<p>$field-&gt;label <span class="descr">Text label for this field, appears as the &lt;label> element in the editor</span></p>
-						<p class="advanced">$field-&gt;type <span class="descr">The type of field, refers to a Fieldtype plugin module</span></p>
-						<p class="advanced">$field-&gt;flags <span class="descr">Bitwise flags of the field: if($field-&gt;flags &amp; Field::flagAutojoin) // field has the &quot;autojoin&quot; flag set if($field-&gt;flags &amp; Field::flagGlobal) // field has the &quot;global&quot; flag set.</span></p>
-					</div>
-					<div class="cat">
-						<h3>Field Methods</h3>
-						<p>$field-&gt;get($key) <span class="descr">Get a field property (the properties above, or a custom property) Same as $field-&gt;$key</span></p>
-						<p>$field-&gt;set($key, $value) <span class="descr">Set a field property. Can be any one of the above or something else for a custom setting. Same as $field-&gt;$key = $value</span></p>
-						<p class="advanced">$field-&gt;save() <span class="descr">Save this field. Same as $fields-&gt;save($field)</span></p>
-						<p class="advanced">$field-&gt;numFieldgroups() <span class="descr">Returns the number of fieldgroups that use this field</span></p>
-						<p class="advanced">$field-&gt;getFieldgroups() <span class="descr">Returns an array of fieldgroups that use this field</span></p>
-						<p class="advanced">$field-&gt;getTable() <span class="descr">Returns the name of the database table created by this field</span></p>
-						<p class="advanced">$field-&gt;getInputfield($page) <span class="descr">Returns an Inputfield object associated with this field for use on $page</span></p>
-					</div>
+			<div class="section" id="fields">
+			
+				<h2>$fields</h2>
+				<div class="cat">
+					<h3>Fields Methods</h3>
+					<p>$fields-&gt;find(&quot;selector&quot;) <span class="descr">Find all fields matching the given selector</span></p>
+					<p>$fields-&gt;get(&quot;name&quot;) <span class="descr">Get the field specified by the given field name</span></p>
+					<p>$fields-&gt;get(123) <span class="descr">Get the field specified by the given field ID (integer)</span></p>
+					<p>$fields-&gt;get(&quot;selector&quot;) <span class="descr">Get the first matching field specified by the given selector</span></p>
+					<p class="advanced">$fields-&gt;save($field) <span class="descr">Save the given Field object</span></p>
+					<p class="advanced">$fields-&gt;delete($field) <span class="descr">Delete the given Field object</span></p>
 				</div>
-				<div class="section" id="users">
+				
+				<h2>Field object</h2>
+				$field = any Field
+				<div class="cat">
+	
+					<h3>Field Properties</h3>
+					
+					<p>(string) $field <span class="descr">Casting a Field as a string returns the field's name</span></p>
+					<p>$field-&gt;id <span class="descr">Numeric ID of this field</span></p>
+					<p>$field-&gt;name <span class="descr">Name of this field (name string)</span></p>
+					<p>$field-&gt;label <span class="descr">Text label for this field, appears as the &lt;label> element in the editor</span></p>
+					<p class="advanced">$field-&gt;type <span class="descr">The type of field, refers to a Fieldtype plugin module</span></p>
+					<p class="advanced">$field-&gt;flags <span class="descr">Bitwise flags of the field: if($field-&gt;flags &amp; Field::flagAutojoin) // field has the &quot;autojoin&quot; flag set if($field-&gt;flags &amp; Field::flagGlobal) // field has the &quot;global&quot; flag set.</span></p>
+				</div>
+				<div class="cat">
+					<h3>Field Methods</h3>
+					<p>$field-&gt;get($key) <span class="descr">Get a field property (the properties above, or a custom property) Same as $field-&gt;$key</span></p>
+					<p>$field-&gt;set($key, $value) <span class="descr">Set a field property. Can be any one of the above or something else for a custom setting. Same as $field-&gt;$key = $value</span></p>
+					<p class="advanced">$field-&gt;save() <span class="descr">Save this field. Same as $fields-&gt;save($field)</span></p>
+					<p class="advanced">$field-&gt;numFieldgroups() <span class="descr">Returns the number of fieldgroups that use this field</span></p>
+					<p class="advanced">$field-&gt;getFieldgroups() <span class="descr">Returns an array of fieldgroups that use this field</span></p>
+					<p class="advanced">$field-&gt;getTable() <span class="descr">Returns the name of the database table created by this field</span></p>
+					<p class="advanced">$field-&gt;getInputfield($page) <span class="descr">Returns an Inputfield object associated with this field for use on $page</span></p>
+				</div>
+			</div>
+			<div class="section" id="users">
 				<h2>$users</h2>
 				
 				<div class="cat">
@@ -643,23 +673,23 @@ $.fn.liveUpdate = function(list) {
 					<h3>Built-In Page Selector Properties</h3>
 					<p>any_field=any_value <span class="descr">Match any of your own fields using any operator and any value.</span></p>
 					<p>limit=n <span class="descr">Limit the results to n Number</span></p>
-					<p>start=n <span class="descr">Set start offset</span></p>
-					<p>end=n	<span class="descr">Set end offset (may be used instead of limit=n)</span></p>
+					<p class="advanced">start=n <span class="descr">Set start offset</span></p>
+					<p class="advanced">end=n	<span class="descr">Set end offset (may be used instead of limit=n)</span></p>
 					<p>sort=field <span class="descr">Sort by a field. This may any field. Use &quot;-&quot; prefix to reverse sorting. sort=-field</span></p>
-					<p>include=all <span class="descr">Include all hidden and unpublished pages and pages that user doesn't have access to view.</span></p>
-					<p>include=hidden <span class="descr">Include hidden pages in queries.</span></p>
-					<p>check_access=0 <span class="descr">Include pages that user doesn't have access to view.</span></p>
-					<p>children.count=n <span class="descr">Pages with a certain count of children may also be used with greater than / less than operators.</span></p>
+					<p class="advanced">include=all <span class="descr">Include all hidden and unpublished pages and pages that user doesn't have access to view.</span></p>
+					<p class="advanced">include=hidden <span class="descr">Include hidden pages in queries.</span></p>
+					<p class="advanced">check_access=0 <span class="descr">Include pages that user doesn't have access to view.</span></p>
+					<p class="advanced">children.count=n <span class="descr">Pages with a certain count of children may also be used with greater than / less than operators.</span></p>
 					<p>parent=id <span class="descr">Page parent using ID</span></p>
 					<p>parent=$page <span class="descr">Page parent using an page object</span></p>
 					<p>parent=/path/to/page/ <span class="descr">Page parent using path</span></p>
 					<p>path=/path/to/page/ <span class="descr">Get Page with the path specified</span></p>
 					<p>template=name <span class="descr">Limit to a certain template. Use &quot;|&quot;  to have multiple OR's. template=name|name</span></p>
 					<p>template=$template <span class="descr">You can also use a template object to compare</span></p>
-					<p>created=timestamp <span class="descr">Usually used with &lt; &gt; to compare timestamps</span></p>
-					<p>modified=timestamp <span class="descr">Usually used with &lt; &gt; to compare timestamps</span></p>
-					<p>created_users_id=int <span class="descr">Pages created with specified user id.</span></p>
-					<p>modified_users_id=int <span class="descr">Pages modified with specified user id.</span></p>
+					<p class="advanced">created=timestamp <span class="descr">Usually used with &lt; &gt; to compare timestamps</span></p>
+					<p class="advanced">modified=timestamp <span class="descr">Usually used with &lt; &gt; to compare timestamps</span></p>
+					<p class="advanced">created_users_id=int <span class="descr">Pages created with specified user id.</span></p>
+					<p class="advanced">modified_users_id=int <span class="descr">Pages modified with specified user id.</span></p>
 					<div class="cat">
 						<h3>Selector Operators</h3>
 						<p>= <span class="descr">Equal to <br>

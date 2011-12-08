@@ -39,11 +39,11 @@ a:hover{
 	text-shadow:1px 1px 0px rgba(255,255,255,1);
 	position:relative;
 	
-	border-radius:10px;
-	-webkit-border-radius:10px;
-	-moz-border-radius:10px;
-	-ms-border-radius:10px;
-	-o-border-radius:10px;
+	border-radius:5px;
+	-webkit-border-radius:5px;
+	-moz-border-radius:5px;
+	-ms-border-radius:5px;
+	-o-border-radius:5px;
 	border-bottom:1px solid #ddd;
 }
 
@@ -84,7 +84,8 @@ a:hover{
 		background-color:#fff;
 		border:1px solid #eee;
 		border-collapse: collapse;
-		padding:1px 10px 20px 10px;
+		padding:0 7px 20px 7px;
+		margin:0;
 	}
 	
 	
@@ -101,24 +102,26 @@ a:hover{
 	
 	.mode{  float:left; padding:8px; }
 
-	.section{}
-	.cat{}
+	.section{ 
+		overflow:hidden;
+	}
+	.cat{  }
 	.section a { display:block; }
 	
 	p{
-		margin:0 0 0 0;
+		margin:2px 0 0 0;
 		padding:4px 4px 3px 10px;
 		
 		color:#333;
 		position:relative;
-		border:1px solid #fff;
+		
 		border-radius:5px;
 		-webkit-border-radius:5px;
 		-moz-border-radius:5px;
 		-ms-border-radius:5px;
 		-o-border-radius:5px;
 		text-shadow:1px 1px 0px rgba(255,255,255,0.5);
-		background:#eceae4 url(simple.gif) 0 0 repeat-y;
+		background:#f0ede6 url(simple.gif) 0 0 repeat-y;
 
 	}
 	p:hover{
@@ -169,13 +172,31 @@ a:hover{
 	form{ margin: 5px 0; float:right; }
 	form input {}
 	
+	a.toggle_advanced{ 
+		float:right;
+		margin:0.5em 0 0 0;
+		padding:1px 5px 1px 5px;
+		border:1px solid #fff;
+		border-radius:5px;
+		-webkit-border-radius:5px;
+		-moz-border-radius:5px;
+		-ms-border-radius:5px;
+		-o-border-radius:5px;
+		text-decoration:none;
+		color:#000;
+		background-color:#eceae4;
+	}
 	
 	/* helpers */
-	p.advanced {  background:#eceae4 url(advanced.gif) 0 0 repeat-y; }
-	div.advanced p{  background:#eceae4 url(advanced.gif) 0 0 repeat-y;}
+	p.advanced {  background:#f0ede6 url(advanced.gif) 0 0 repeat-y; }
+	div.advanced p{  background:#f0ede6 url(advanced.gif) 0 0 repeat-y;}
 	div.advanced { }
 	
 	.removed{ display:none; }
 	
 	.notfiltered{ display:none!important; }
 	.filtered { display:block;}
+	
+	.clearfix:before,.clearfix:after{content:"";display:table;}
+	.clearfix:after{clear:both;}
+	.clearfix{zoom:1;}
