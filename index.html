@@ -20,7 +20,7 @@ $(function() {
 	
 	$('table td div.section:has(".advanced"):not("#index")').each(function() {				 
 		$inline_advanced = $('<a href="#" class="toggle_advanced" title="show advanced">+</a>')
-			.click(function(){ $(this).text( function(){ return $(this).text() == '+' ? '-' : '+'} ).parent(".section").find('.advanced').slideToggle(); return false; });
+			.click(function(){ $(this).text( function(){ return $(this).text() == '+' ? '-' : '+'} ).parent(".section").find('.advanced').slideToggle(100); return false; });
 			
 		$(this).append($inline_advanced);
 	});
