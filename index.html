@@ -260,6 +260,8 @@ $.fn.liveUpdate = function(list) {
 					
 					<a href="#wirearray">PageArray / WireArray</a>
 					
+					<a href="#files">Files</a>
+					
 					<a href="#templates">$templates</a>
 					
 					<a href="#fields">$fields</a>
@@ -406,9 +408,6 @@ $.fn.liveUpdate = function(list) {
 					<p>$a-&gt;get($key) <span class="descr">Returns the value of the item at the given $key, or null if not set.</span></p>
 					<p>$a-&gt;find(&quot;selector&quot;) <span class="descr">Return all items that match the given selector, or a blank WireArray if none found.</span></p>
 					<p>$a-&gt;get(&quot;selector&quot;) <span class="descr">Return the first item that matches the given selector, or null if not found.</span></p>
-					<p class="advanced">$a-&gt;getArray() <span class="descr">Returns a regular PHP array of all items in this WireArray.</span></p>
-					<p class="advanced">$a-&gt;getKeys() <span class="descr">Returns a regular PHP array of all keys used in this WireArray.</span></p>
-					<p class="advanced">$a-&gt;getValues() <span class="descr">Returns a regular PHP array of all values used in this WireArray.</span></p>
 					<p>$a-&gt;getRandom() <span class="descr">Returns a single random item from this WireArray.</span></p>
 					<p>$a-&gt;getRandom($n) <span class="descr">Returns $n random items from this WireArray (contained in a new WireArray).</span></p>
 					<p>$a-&gt;slice($n) <span class="descr">Returns a new WireArray containing a slice of items from the $n'th item to the end.</span></p>
@@ -421,6 +420,10 @@ $.fn.liveUpdate = function(list) {
 					<p>$a-&gt;last() <span class="descr">Returns the last item in the WireArray.</span></p>
 					<p>$a-&gt;getNext($item) <span class="descr">Given an item already in the WireArray, return the item that comes after it in this WireArray or NULL if no match.</span></p>
 					<p>$a-&gt;getPrev($item) <span class="descr">Given an item already in the WireArray, return the item that comes before it in this WireArray or NULL if no match.</span></p>
+					<p class="advanced">$a-&gt;getArray() <span class="descr">Returns a regular PHP array of all items in this WireArray.</span></p>
+					<p class="advanced">$a-&gt;getKeys() <span class="descr">Returns a regular PHP array of all keys used in this WireArray.</span></p>
+					<p class="advanced">$a-&gt;getValues() <span class="descr">Returns a regular PHP array of all values used in this WireArray.</span></p>
+
 				</div>
 				<div class="cat">
 					<h3>Sorting and Filtering</h3>
@@ -483,6 +486,51 @@ $.fn.liveUpdate = function(list) {
 			</td>
 			
 			<td>
+			<div class="section" id="files">
+				<h2>Files</h2>
+				<div class="cat">
+					<h3>Page Files Multiple (WireArray)</h3>
+					<p>$files-&gt;path <span class="descr">Returns the full server disk path where files are stored</span></p>
+					<p>$files-&gt;url <span class="descr">Returns the URL where files are stored</span></p>
+					<p>$files-&gt;page <span class="descr">Returns the $page that contains this set of files</span></p>
+					<p>$files-&gt;delete($file) <span class="descr">Removes the file and deletes from disk when page is saved (alias of remove)</span></p>
+					<p class="advanced">$files-&gt;deleteAll() <span class="descr">Removes all items and deletes them from disk when page is saved @advanced</span></p>
+				</div>
+				<div class="cat">
+					<h3>$file Properties</h3>
+					<p>$file-&gt;url <span class="descr">URL to the file on the server</span></p>
+					<p>$file-&gt;filename <span class="descr">full disk path to the file on the server</span></p>
+					<p>$file-&gt;name <span class="descr">Returns the filename without the path (basename)</span></p>
+					<p>$file-&gt;description <span class="descr">value of the file's description field (text). Note you can set this property directly</span></p>
+					<p>$file-&gt;ext <span class="descr">file's extension (i.e. last 3 or so characters)</span></p>
+					<p>$file-&gt;filesize <span class="descr">file size, number of bytes</span></p>
+					<p>$file-&gt;filesizeStr <span class="descr">file size as a formatted string</span></p>
+					<p>(string) $file <span class="descr">returns the file's name (no path)</span></p>
+					<p class="advanced">$file-&gt;pagefiles <span class="descr">the $files array that contains this file </span></p>
+					<p class="advanced">$file-&gt;page <span class="descr">the $page that contains this file</span></p>
+				</div>
+				<div class="cat">
+					<h3>$file Methods</h3>
+					<p>$file-&gt;rename($name) <span class="descr">Rename this file to the given name (no path). Returns true on success, false on failure.</span></p>
+					<p class="advanced">$file-&gt;getNext() <span class="descr">Returns the next file in a multi-file field, or NULL if at the end</span><br></p>
+					<p class="advanced">$file-&gt;getPrev() <span class="descr">Returns the previous file in a multi-file field, or NULL if at the beginning</span></p>
+				</div>
+				<div class="cat">
+					<h3><strong>$image Properties</strong> (in addition to those in $file)</h3>
+					<p>$image-&gt;width <span class="descr">Width of image, in pixels</span></p>
+					<p>$image-&gt;height <span class="descr">Height of image, in pixels</span></p>
+					<p class="advanced">$image-&gt;original <span class="descr">Reference to original $image, if this is a resized version.</span></p>
+				</div>
+				<div class="cat">
+					<h3>$image Methods</h3>
+					<p>$image-&gt;size($width, $height) <span class="descr">Return a new $image with the given dimensions (proportional, center crop)</span></p>
+					<p>$image-&gt;width($width) <span class="descr">Return a new $image with the given width (proportional height, center crop)</span></p>
+					<p>$image-&gt;height($height) <span class="descr">Return a new $image with the given height (proportional width, center crop)</span></p>
+					<p class="advanced">$image-&gt;getVariations() <span class="descr">Returns a WireArray (Pageimages) of all size variations of this image</span></p>
+					<p class="advanced">$image-&gt;removeVariations() <span class="descr">Deletes all size variations of this image (be careful)</span></p>
+				</div>
+			</div>
+			
 			
 			<div class="section" id="templates">
 				<h2>$templates</h2>
@@ -505,8 +553,8 @@ $.fn.liveUpdate = function(list) {
 					<p>$template-&gt;label <span class="descr">Optional short text label to describe Template.</span></p>
 					<p class="advanced">$template-&gt;fieldgroup <span class="descr">Get or set a template's Fieldgroup. Can also be used to iterate a template's fields.</span></p>
 					<p class="advanced">$template-&gt;fields <span class="descr">Syntactical alias for $template-&gt;fieldgroup. Use whatever makes more sense for your code readability.</span></p>
-					<p class="removed">$template-&gt;cache_time <span class="descr">Get or set the number of seconds this template's output should be cached (default is 0). In newer API versions you can also use cacheTime (camelCase for better consistency).</span> </p>
-					<p class="removed">$template-&gt;childrenTemplatesID <span class="descr">Get or set the template database ID that children of pages using this template default to. 0 is the default and indicates no selection. Set to -1 to disallow pages using this template from having children.</span> </p>
+					<p class="removed">$template-&gt;cache_time <span class="descr">Get or set the number of seconds this template's output should be cached (default is 0). In newer API versions you can also use cacheTime (camelCase for better consistency).</span> </p>
+					<p class="removed">$template-&gt;childrenTemplatesID <span class="descr">Get or set the template database ID that children of pages using this template default to. 0 is the default and indicates no selection. Set to -1 to disallow pages using this template from having children.</span> </p>
 					<p class="removed">$template-&gt;allowPageNum <span class="descr">Get or set whether pages using this template can have URL-based page numbers. Set to 1 for yes or 0 for no. Default is 0.</span></p>
 					<p class="removed">$template-&gt;urlSegments <span class="descr">Get or set whether pages using this template can make use of URL segments. Set to 1 for yes or 0 for no. Default is 0.</span></p>
 					<p class="removed">$template-&gt;slashUrls <span class="descr">Get or set whether pages using this template should have URLs that end with a slash. Set to 1 for yes or 0 for no. Default is 1.</span></p>
@@ -540,9 +588,7 @@ $.fn.liveUpdate = function(list) {
 				<h2>Field object</h2>
 				$field = any Field
 				<div class="cat">
-	
 					<h3>Field Properties</h3>
-					
 					<p>(string) $field <span class="descr">Casting a Field as a string returns the field's name</span></p>
 					<p>$field-&gt;id <span class="descr">Numeric ID of this field</span></p>
 					<p>$field-&gt;name <span class="descr">Name of this field (name string)</span></p>
@@ -581,7 +627,7 @@ $.fn.liveUpdate = function(list) {
 				<div class="cat">
 					<h3>User Properties</h3>
 					<p>$user-&gt;id <span class="descr">Numeric ID of this user</span></p>
-					<p>$user-&gt;name <span class="descr">Get or set the user's login name. </span></p>
+					<p>$user-&gt;name <span class="descr">Get or set the user's login name. </span></p>
 					<p>$user-&gt;email <span class="descr">Get or set email this user.</span></p>
 					<p>$user-&gt;pass <span class="descr">The user's hashed password. Note that this returns a hashed version of the password, so it is not typically useful to get this property. However, it is useful to set this property if you want to change the password. When you change a password, it is assumed to be the non-hashed/non-encrypted version. ProcessWire will hash it automatically when the user is saved.</span></p>
 					<p>$user-&gt;roles <span class="descr">Get roles this user has. Returns PageArray.</span></p>
@@ -673,19 +719,20 @@ $.fn.liveUpdate = function(list) {
 					<h3>Built-In Page Selector Properties</h3>
 					<p>any_field=any_value <span class="descr">Match any of your own fields using any operator and any value.</span></p>
 					<p>limit=n <span class="descr">Limit the results to n Number</span></p>
-					<p class="advanced">start=n <span class="descr">Set start offset</span></p>
-					<p class="advanced">end=n	<span class="descr">Set end offset (may be used instead of limit=n)</span></p>
 					<p>sort=field <span class="descr">Sort by a field. This may any field. Use &quot;-&quot; prefix to reverse sorting. sort=-field</span></p>
-					<p class="advanced">include=all <span class="descr">Include all hidden and unpublished pages and pages that user doesn't have access to view.</span></p>
-					<p class="advanced">include=hidden <span class="descr">Include hidden pages in queries.</span></p>
-					<p class="advanced">check_access=0 <span class="descr">Include pages that user doesn't have access to view.</span></p>
-					<p class="advanced">children.count=n <span class="descr">Pages with a certain count of children may also be used with greater than / less than operators.</span></p>
 					<p>parent=id <span class="descr">Page parent using ID</span></p>
 					<p>parent=$page <span class="descr">Page parent using an page object</span></p>
 					<p>parent=/path/to/page/ <span class="descr">Page parent using path</span></p>
 					<p>path=/path/to/page/ <span class="descr">Get Page with the path specified</span></p>
 					<p>template=name <span class="descr">Limit to a certain template. Use &quot;|&quot;  to have multiple OR's. template=name|name</span></p>
 					<p>template=$template <span class="descr">You can also use a template object to compare</span></p>
+					<p class="advanced">start=n <span class="descr">Set start offset</span></p>
+					<p class="advanced">end=n	<span class="descr">Set end offset (may be used instead of limit=n)</span></p>
+					<p class="advanced">include=all <span class="descr">Include all hidden and unpublished pages and pages that user doesn't have access to view.</span></p>
+					<p class="advanced">include=hidden <span class="descr">Include hidden pages in queries.</span></p>
+					<p class="advanced">check_access=0 <span class="descr">Include pages that user doesn't have access to view.</span></p>
+					<p class="advanced">children.count=n <span class="descr">Pages with a certain count of children may also be used with greater than / less than operators.</span></p>
+
 					<p class="advanced">created=timestamp <span class="descr">Usually used with &lt; &gt; to compare timestamps</span></p>
 					<p class="advanced">modified=timestamp <span class="descr">Usually used with &lt; &gt; to compare timestamps</span></p>
 					<p class="advanced">created_users_id=int <span class="descr">Pages created with specified user id.</span></p>
@@ -730,14 +777,14 @@ $.fn.liveUpdate = function(list) {
 					<p>$input-&gt;get[&quot;name&quot;] <span class="descr">Access as array index</span></p>
 					<p>$input-&gt;get(&quot;name&quot;) <span class="descr">Access as function</span></p>
 	
-					<p>$input-&gt;post <span class="descr">Provides access to POST variables</span></p>
-					<p>$input-&gt;post-&gt;name <span class="descr">Access as object property</span></p>
-					<p>$input-&gt;post[&quot;name&quot;] <span class="descr">Access as array index</span></p>
-					<p>$input-&gt;post(&quot;name&quot;) <span class="descr">Access as function</span></p>
-					<p>$input-&gt;cookie <span class="descr">Provides access to your COOKIE variables</span></p>
-					<p>$input-&gt;cookie-&gt;name <span class="descr">Access as object property</span></p>
-					<p>$input-&gt;cookie[&quot;name&quot;] <span class="descr">Access as array index</span></p>
-					<p>$input-&gt;cookie(&quot;name&quot;) <span class="descr">Access as function</span></p>
+					<p>$input-&gt;post <span class="descr">Provides access to POST variables</span></p>
+					<p>$input-&gt;post-&gt;name <span class="descr">Access as object property</span></p>
+					<p>$input-&gt;post[&quot;name&quot;] <span class="descr">Access as array index</span></p>
+					<p>$input-&gt;post(&quot;name&quot;) <span class="descr">Access as function</span></p>
+					<p>$input-&gt;cookie <span class="descr">Provides access to your COOKIE variables</span></p>
+					<p>$input-&gt;cookie-&gt;name <span class="descr">Access as object property</span></p>
+					<p>$input-&gt;cookie[&quot;name&quot;] <span class="descr">Access as array index</span></p>
+					<p>$input-&gt;cookie(&quot;name&quot;) <span class="descr">Access as function</span></p>
 					<p class="advanced">$input-&gt;whitelist($key, $value) <span class="descr">Set a whitelist value</span></p>
 					<p class="advanced">$input-&gt;whitelist($key) <span class="descr">Get a whitelist value</span></p>
 					<p class="advanced">$input-&gt;urlSegment($n) <span class="descr">Retrieve the $n'th URL segment (1–3)</span></p>
@@ -911,7 +958,7 @@ $.fn.liveUpdate = function(list) {
 				
 				<div class="cat">
 					<h3>Global Namespace Wire</h3>
-					<p>wire('pages')-&gt;get("/about/contact/") <span class="descr">wire() function  provides access to all of ProcessWire's API variables, like $page, $pages, $templates and others... i.e. wire('pages')-&gt;find('selector'); </span></p>
+					<p>wire('pages')-&gt;get("/about/contact/") <span class="descr">wire() function  provides access to all of ProcessWire's API variables, like $page, $pages, $templates and others... i.e. wire('pages')-&gt;find('selector'); </span></p>
 				</div>
 			</div>
 			
