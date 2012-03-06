@@ -787,8 +787,8 @@ $.fn.liveUpdate = function(list) {
 					<p>$input-&gt;cookie(&quot;name&quot;) <span class="descr">Access as function</span></p>
 					<p class="advanced">$input-&gt;whitelist($key, $value) <span class="descr">Set a whitelist value</span></p>
 					<p class="advanced">$input-&gt;whitelist($key) <span class="descr">Get a whitelist value</span></p>
-					<p class="advanced">$input-&gt;urlSegment($n) <span class="descr">Retrieve the $n'th URL segment (integer). The maximum segments allowed can be adjusted in your sites config.php. <br/><br/> Alternative syntax:<br>$input-&gt;urlSegment1<br/>$input-&gt;urlSegment2<br/>$input-&gt;urlSegment3<br/>...</span></p>
-					<p class="advanced">$input-&gt;urlSegment1 (2,3,..) <span class="descr">Retrieve the $n'th URL segment (integer). Alternative syntax. The maximum segments allowed can be adjusted in your sites config.php.</span></p>
+					<p class="advanced">$input-&gt;urlSegment($n) <span class="descr">Retrieve the $n'th URL segment (integer). <br/>urlSegment(1) = /page/<b>aaa</b>/ <br/>urlSegment(2) = /page/aaa/<b>bbb</b>/ <br/>urlSegment(3) = /page/aaa/bbb/<b>ccc</b>/ <br/>...<br/>The maximum segments allowed can be adjusted in your sites config.php. <br/><br/> Alternative syntax:<br>$input-&gt;urlSegment1<br/>$input-&gt;urlSegment2<br/>$input-&gt;urlSegment3<br/>...</span></p>
+					<p class="advanced">$input-&gt;urlSegment1 (2,3,..) <span class="descr">Retrieve the $n'th URL segment. Alternative syntax. The maximum segments allowed can be adjusted in your sites config.php.</span></p>
 					<p class="advanced">$input-&gt;pageNum <span class="descr">Returns the current page number from the URL (1–999)</span></p>
 				</div>
 			</div>
