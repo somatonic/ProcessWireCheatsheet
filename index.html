@@ -800,7 +800,7 @@ $.fn.liveUpdate = function(list) {
 					<p>$sanitizer-&gt;fieldName($value) <span class="descr">Sanitizes a value for a Field name. Same as the name() filter, except that it doesn't allow dashes.</span></p>
 					<p>$sanitizer-&gt;name($value) <span class="descr">Sanitizes a value for a ProcessWire name, meaning all characters except for these ASCII characters: &quot;a-zA-Z0-9_.&quot; (not including the quotes) are removed. It also truncates the length to 128 characters.</span></p>
 					<p>$sanitizer-&gt;pageName($value) <span class="descr">Sanitizes a value for a URL friendly Page name. Same as the name() filter, except that it converts uppercase to lowercase, and it attempts UTF-8 to ASCII conversion.</span></p>
-					<p>$sanitizer-&gt;pageName($value, true) <span class="descr">Sanitizes a value for a URL friendly Page name and cleans out leading or trailing dashes, and converts double dashes to single dashes. Use this if you are passing in a headline to convert to a page name (for example).</span></p>
+					<p>$sanitizer-&gt;pageName($value, true) <span class="descr">Sanitizes a value for a URL friendly Page name and cleans out leading or trailing dashes, and converts double dashes to single dashes. Use this if you are passing in a headline to convert to a page name (for example). <br/><br/>If second parameter is "Sanitizer::translate" it will use the language char conversion defined in InputfieldPageName module settings.</span></p>
 					<p>$sanitizer-&gt;selectorField($value) <span class="descr">Sanitizes a field name as used in a selector value. This function is only necessary if you are dealing with user submitted field names. This is rarely the case in the author's experience, but provided here for consistency with selectorValue()</span></p>
 					<p>$sanitizer-&gt;selectorValue($value) <span class="descr">Sanitizes a string that needs to appear in a selector value. Replaces disallowed characters with spaces. If value is not already quoted, it will add quotes if it determines they are necessary (like if it contains commas). It limits the length to 100 characters (multibyte safe).</span></p>
 					<p>$sanitizer-&gt;text($value) <span class="descr">Sanitize a single line of input text. Removes tags, removes newline characters, and truncates length to 1024 characters. This is multibyte safe if your PHP has multibyte support.</span></p>
@@ -809,6 +809,35 @@ $.fn.liveUpdate = function(list) {
 					<p>$sanitizer-&gt;textarea($value, $options) <span class="descr">Same as textarea() except that you may modify the options documented later in this page, noting that multiLine is already true, and maxLength is already 16384.</span></p>
 					<p>$sanitizer-&gt;url($value) <span class="descr">Filters a URL value. Returns a valid URL or blank if it can't be made valid. If URL contains a domain and is valid but missing a protocol (like http://) it will add it. It won't add a protocol to local/relative URLs.</span></p>
 					<p>$sanitizer-&gt;username($value) <span class="descr">Sanitizes a value for a User name, meaning all characters except for these ASCII characters &quot;a-zA-Z0-9-_.@&quot; (not including the quotes) are removed. It also truncates the length to 50 characters.</span></p>
+					<p>$options<span class="descr">$options = array(
+    						<br>
+    						// set to true to allow multiple lines
+    						<br>
+    						'multiLine' => false,<br>
+    						<br>
+    						// maximum allowed characters for multibyte strings
+    						<br>
+    						'maxLength' => 255,
+    <br>
+    <br>
+    // maximum number of bytes allowed in the string (multibyte safe)
+    <br>
+    'maxBytes' => 1024,
+    <br>
+    <br>
+    // markup tags that are allowed. Example: "&lt;br/&gt;&lt;strong&gt;"
+    <br>
+    'allowableTags' => '',
+    <br>
+    <br>
+    // character set of $value provided
+    <br>
+    'inCharset' => 'UTF-8',
+    <br>
+    <br>
+    // character set to convert to (if different from inCharset) <br>
+    'outCharset' => 'UTF-8'<br/>
+); </span></p>
 				</div>
 			</div>
 			
@@ -971,7 +1000,7 @@ $.fn.liveUpdate = function(list) {
 	<tfoot>
 		<tr>
 			<td colspan="4" align="right" class="footer">
-			PW2.+ Cheatsheet 1.0 @ 2011 by Philipp "Soma" Urlich  / <a href="http://twitter.com/somartist">@somartist</a> | <a href="http://www.processwire.com"> ProcessWire</a> 2.1 © 2011 by Ryan Cramer </td>
+			PW2.+ Cheatsheet 1.0 @ 2012 by Philipp "Soma" Urlich  / <a href="http://twitter.com/somartist">@somartist</a> | <a href="http://www.processwire.com"> ProcessWire</a> 2.1 © 2011 by Ryan Cramer </td>
 		</tr>
 	</tfoot>
 </table>
