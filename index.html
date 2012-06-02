@@ -21,6 +21,8 @@ $(function() {
 		if( getParam('filter') ){
 			//alert(getParam('filter'));
 			$('#filter').val(getParam('filter')).trigger('keyup');
+			// google analytics event tracking
+			_gaq.push(['_trackEvent', 'CheatSheet Search', 'GET filter', getParam('filter')]);
 		}
 
 		$('table td div.section:has(".advanced"):not("#index")').each(function() {               
@@ -208,7 +210,7 @@ $.fn.liveUpdate = function(list) {
 		this
 			.keyup(filter).keyup()
 			.parents('form').submit(function() {
-				return false;
+				//return false;
 			});
 		}
 	 
