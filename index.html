@@ -17,13 +17,6 @@
 var advanced = false;
 
 $(function() {
-	
-	if( getParam('filter') ){
-		//alert(getParam('filter'));
-		$('#filter').val(getParam('filter')).trigger('keyup');
-		// google analytics event tracking
-		_gaq.push(['_trackEvent', 'CheatSheet Search', 'GET filter', getParam('filter')]);
-	}
 
 	$('table td div.section:has(".advanced"):not("#index")').each(function() {               
 		$inline_advanced = $('<a href="#" class="toggle_advanced" title="show advanced">+</a>')
@@ -31,16 +24,6 @@ $(function() {
 			
 		$(this).append($inline_advanced);
 	});
-
-	if($.cookie("mode")){
-		if($.cookie("mode") == 'advanced'){
-			$('input[name="mode"]').attr({checked:'checked'});
-			advanced = true;
-			resetSheet();
-			$('.toggle_advanced').hide();
-		}
-	}
-
 	
 	$('table td p').has('.descr').addClass('hasdescr');
 	$('table .descr').hide();
@@ -98,15 +81,14 @@ $(function() {
 	
 	// index filter navigation
 	
-	$('#index a').bind('click',function(){
+	$('#index a').bind('click',function(e){
+		e.preventDefault();
 		$(this).siblings('a').removeClass('active');
 		$(this).toggleClass('active');
 		var id = $(this).attr('href');
 		$('.section:not("#index")').hide();
 		
 		$(id).show();
-
-		return false;
 	});
 
 	
@@ -146,7 +128,46 @@ $(function() {
 
 	});
 	
+
 });
+
+
+
+$(window).load(function(){
+
+
+	var hash = window.location.hash;
+	if (hash){
+		$('#index a[href="'+hash+'"]').trigger('click');
+	}
+	
+	if($.cookie("mode")){
+		if($.cookie("mode") == 'advanced'){
+			$('input[name="mode"]').attr({checked:'checked'});
+			advanced = true;
+			resetSheet();
+			$('.toggle_advanced').hide();
+		}
+	}
+
+	else if( getParam('advanced') && advanced == false ){
+		$('input[name="mode"]').attr({checked:'checked'});
+		advanced = true;
+		resetSheet();
+		$('.toggle_advanced').hide();
+	}
+
+
+	if( getParam('filter') ){
+		$('#filter').val(getParam('filter')).trigger('keyup');
+		// google analytics event tracking
+		_gaq.push(['_trackEvent', 'CheatSheet Search', 'GET filter', getParam('filter')]);
+	}
+
+
+});
+
+
 
 function resetSheet() {
 	$('.descr').hide();
