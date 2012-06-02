@@ -135,11 +135,6 @@ $(function() {
 
 $(window).load(function(){
 
-
-	var hash = window.location.hash;
-	if (hash){
-		$('#index a[href="'+hash+'"]').trigger('click');
-	}
 	
 	if($.cookie("mode")){
 		if($.cookie("mode") == 'advanced'){
@@ -150,13 +145,17 @@ $(window).load(function(){
 		}
 	}
 
-	else if( getParam('advanced') && advanced == false ){
+	if( getParam('advanced') && advanced == false ){
 		$('input[name="mode"]').attr({checked:'checked'});
 		advanced = true;
 		resetSheet();
 		$('.toggle_advanced').hide();
 	}
 
+	var hash = window.location.hash;
+	if (hash){
+		$('#index a[href="'+hash+'"]').trigger('click');
+	}
 
 	if( getParam('filter') ){
 		$('#filter').val(getParam('filter')).trigger('keyup');
