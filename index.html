@@ -375,6 +375,7 @@ $.fn.liveUpdate = function(list) {
 						<p>$page-&gt;get(&quot;field1|f2|f3&quot;) <span class="descr">Get the first matching non-empty field by specified by a string of pipe &quot;|&quot; separated field names</span></p>
 						<p>$page-&gt;getUnformatted(&quot;field&quot;) <span class="descr">Get the unformatted value of the given field name. May also be used with &quot;|&quot; separated field names (mentioned above). </span></p>
 						<p>$page-&gt;setOutputFormatting(true|false) <span class="descr">By default, output will be formatted according filters you may have defined with the field.  If you are modifying the values of a page's custom fields, you will need to call $page-&gt;setOutputFormatting(false) before doing so. This turns off output formatting, which ensures that saved values don't already have runtime formatters applied to them. ProcessWire will throw an error if you attempt to save formatted fields.</span></p>
+						<p>$page-&gt;of(true|false) <span class="descr">This is the short notation of setOutputFormatting(). Since PW 2.2.2</span></p>
 						<p>$page-&gt;children($selector) <span class="descr">All the children (subpages) of this page,  filtered by a selector.* Returns a PageArray. </span></p>
 						<p>$page-&gt;child($selector) <span class="descr">The first matching child (subpage) that matches the given selector. Returns a Page, or a NullPage if no match. </span></p>
 						<p>$page-&gt;siblings($selector) <span class="descr">All the sibling pages of this page, filtered by a selector.† Returns a PageArray.</span></p>
