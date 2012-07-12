@@ -10,7 +10,7 @@ var advanced = false;
 var $container = $('#isotope');
 var columns = 3;
 var animated = true;
-var speed = 200;
+var speed = 120;
 
 var resizeColumns = function() {
 	$('#isotope .section').css({ 'width': ($container.width() / columns) - 12 });

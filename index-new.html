@@ -1,0 +1,835 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="UTF-8">
+<title>ProcessWire2+ Cheatsheet 1.1</title>
+
+<link rel="stylesheet" type="text/css" href="css/styles.css">
+
+</head>
+<body>
+<div class="header">
+	<a href="http://www.processwire.com/"><img src="css/logo.png" width="188" height="28"></a>
+	<span class="right">ProcessWire2+ Cheatsheet 1.1 / <a href="https://github.com/somatonic/ProcessWireCheatsheet" target="_blank">@github</a></span>
+</div>
+
+<div class="toolbar clearfix">
+	<span class="cols">
+		<label>cols</label>
+		<a href="#" data-cols="1">1</a>
+		<a href="#" data-cols="2">2</a>
+		<a href="#" data-cols="3" class="active">3</a>
+		<a href="#" data-cols="4">4</a>
+	</span>
+	<span class="mode">
+		<label><input type="checkbox" name="mode" id="advanced"/>advanced</label>
+
+	</span>
+
+	<form id="filterform">
+		<input size="25" placeholder="search" name="filter" type="search" id="filter"/>
+	</form>
+</div>
+
+<div class="main clearfix">
+
+
+	<div class="navigation-holder">
+
+		<div class="section navigation" id="index">
+
+			<h2>Sections</h2>
+
+			<a href="#pages" rel=".pages">$pages</a>
+
+			<a href="#page" rel=".page">$page</a>
+
+			<a href="#wirearray" rel=".wirearray">PageArray / WireArray</a>
+
+			<a href="#files" rel=".files">Files</a>
+
+			<a href="#templates" rel=".templates">$templates</a>
+
+			<a href="#fields" rel=".fields">$fields</a>
+
+			<a href="#users" rel=".users">$users</a>
+
+			<a href="#user" rel=".user">$user</a>
+
+			<a href="#roles" rel=".roles">$roles</a>
+
+			<a href="#permissions" rel=".permissions">$permissions</a>
+
+			<a href="#selectors" rel=".selectors">Selectors</a>
+
+			<a href="#input" rel=".input">$input</a>
+
+			<a href="#sanitizer" rel=".sanitizer">$sanitizer</a>
+
+			<a href="#session" rel=".session">$session</a>
+
+
+
+			<a href="#config" rel=".config">$config</a>
+
+			<a href="#systemconfig" rel=".systemconfig" class="advanced">System Configuration</a>
+
+			<a href="#bootstrap" rel=".bootstrap" class="advanced">Bootstrap / System</a>
+		</div>
+		&nbsp;
+	</div>
+
+
+
+	<div id="isotope" class="clearfix">
+
+		<div class="section pages" id="pages">
+			<h2>$pages</h2>
+			<div class="cat">
+				<h3>Built-in Methods Reference</h3>
+				<p><span class="api">$pages->find("selector") </span><span class="descr">Find and return all pages matching the given selector string. Returns a PageArray.</span></p>
+				<p><span class="api">$pages->get("selector") </span><span class="descr">Get the page matching the given selector string. Returns a Page, or a NullPage if not found.</span></p>
+				<p><span class="api">$pages->get(123) </span><span class="descr">Get the page matching the given numeric ID. Returns a Page, or a NullPage if not found.</span></p>
+				<p><span class="api">$pages->get("/path/to/page/") </span><span class="descr">Get the page matching the given path or URL. Returns a Page, or a NullPage if not found.</span></p>
+				<p class="advanced"><span class="api">$pages->save($page) </span><span class="descr">Save any changes made to the given $page. Same as: $page->save()</span></p>
+				<p class="advanced"><span class="api">$pages->saveField($page, 'field') </span><span class="descr">Save just the named field from $page. (v2.1+) Same as: $page->save('field')</span></p>
+				<p class="advanced"><span class="api">$pages->trash($page) </span><span class="descr">Move the given page to the Trash.</span></p>
+				<p class="advanced"><span class="api">$pages->delete($page) </span><span class="descr">Permanently delete the given page and any attached media. Throws error when $page has children.</span></p>
+				<p class="advanced"><span class="api">$pages->delete($page, true) </span><span class="descr">Recursively delete $page and all it's children and attached media, permanently.</span></p>
+				<p class="advanced"><span class="api">$pages->clone($page) </span><span class="descr">Creates a brand new cloned copy of the given page (and any children) and returns it.  (v2.1+)</span></p>
+				<p class="advanced"><span class="api">$pages->clone($page, $parent) </span><span class="descr">Like the above, but with a new $parent page specified. (v2.1+)</span></p>
+				<p class="advanced"><span class="api">$pages->clone($page, $parent, false) </span><span class="descr">Like the above, but only the given page will be cloned (and not any children). (v2.1+)</span></p>
+			</div>
+		</div>
+
+		<div class="section page" id="page">
+			<h2>$page</h2>
+
+			<div class="cat">
+				<h3>Built-in Fields Reference</h3>
+				<p><span class="api">$page->id </span><span class="descr">The numbered ID of the current page</span></p>
+				<p><span class="api">$page->name </span><span class="descr">The name assigned to the page, as it appears in the URL</span></p>
+				<p><span class="api">$page->title </span><span class="descr">The page's title (headline) text</span></p>
+				<p><span class="api">$page->path </span><span class="descr">The page's URL path from the homepage (i.e. /about/staff/ryan/)</span></p>
+				<p><span class="api">$page->url </span><span class="descr">The page's URL path from the server's document root (may be the same as the $page->path)</span></p>
+				<p><span class="api">$page->httpUrl </span><span class="descr">Same as $page->url, except includes protocol (http or https) and hostname.</span></p>
+				<p><span class="api">$page->parent </span><span class="descr">The parent Page object or a NullPage if there is no parent.</span></p>
+				<p><span class="api">$page->parent_id </span><span class="descr">The numbered ID of the parent page or 0 if none.</span></p>
+				<p><span class="api">$page->parents </span><span class="descr">All the parent pages down to the root (homepage). Returns a PageArray.</span></p>
+				<p><span class="api">$page->rootParent </span><span class="descr">The parent page closest to the homepage (typically used for identifying a section)</span></p>
+				<p><span class="api">$page->template </span><span class="descr">The Template object this page is using</span></p>
+				<p><span class="api">$page->fields </span><span class="descr">All the Fields assigned to this page (via it's template, same as $page->template->fields). Returns a FieldsArray. </span></p>
+				<p><span class="api">$page->numChildren </span><span class="descr">The number of children (subpages) this page has. </span></p>
+				<p><span class="api">$page->children </span><span class="descr">All the children (subpages) of this page.* Returns a PageArray. See also $page->children($selector). </span></p>
+				<p><span class="api">$page->child </span><span class="descr">The first child of this page. Returns a Page. See also $page->child($selector).</span></p>
+				<p><span class="api">$page->siblings </span><span class="descr">All the sibling pages of this page.† Returns a PageArray. See also $page->siblings($selector). </span></p>
+				<p class="advanced"><span class="api">$page->next </span><span class="descr">This page's next sibling page, or NullPage if it is the last sibling.† See also $page->next($pageArray). </span></p>
+				<p class="advanced"><span class="api">$page->prev </span><span class="descr">This page's previous sibling page, or NullPage if it is the first sibling.† See also $page->prev($pageArray). </span></p>
+				<p class="advanced"><span class="api">$page->created </span><span class="descr">Unix timestamp of when the page was created</span></p>
+				<p class="advanced"><span class="api">$page->modified </span><span class="descr">Unix timestamp of when the page was last modified</span></p>
+				<p class="advanced"><span class="api">$page->createdUser </span><span class="descr">The user that created this page. Returns a User or a NullUser.</span></p>
+				<p class="advanced"><span class="api">$page->modifiedUser </span><span class="descr">The user that last modified this page. Returns a User or a NullUser.</span></p>
+			</div>
+			<div class="cat">
+				<h3>Built-in Methods Reference</h3>
+				<p><span class="api">$page->find($selector) </span><span class="descr">Find pages matching the selector anywhere below this page (children, grandchildren, etc.). Returns a PageArray.</span></p>
+				<p><span class="api">$page->get("field") </span><span class="descr">Get the value for the specified field or null if the field isn't part of this page. Same as $page->$field</span></p>
+				<p><span class="api">$page->get("field1|f2|f3") </span><span class="descr">Get the first matching non-empty field by specified by a string of pipe "|" separated field names</span></p>
+				<p><span class="api">$page->getUnformatted("field") </span><span class="descr">Get the unformatted value of the given field name. May also be used with "|" separated field names (mentioned above). </span></p>
+				<p><span class="api">$page->setOutputFormatting(true|false) </span><span class="descr">By default, output will be formatted according filters you may have defined with the field.  If you are modifying the values of a page's custom fields, you will need to call $page->setOutputFormatting(false) before doing so. This turns off output formatting, which ensures that saved values don't already have runtime formatters applied to them. ProcessWire will throw an error if you attempt to save formatted fields.</span></p>
+				<p><span class="api">$page->of(true|false) </span><span class="descr">This is the short notation of setOutputFormatting(). Since PW 2.2.2</span></p>
+				<p><span class="api">$page->children($selector) </span><span class="descr">All the children (subpages) of this page,  filtered by a selector.* Returns a PageArray. </span></p>
+				<p><span class="api">$page->child($selector) </span><span class="descr">The first matching child (subpage) that matches the given selector. Returns a Page, or a NullPage if no match. </span></p>
+				<p><span class="api">$page->siblings($selector) </span><span class="descr">All the sibling pages of this page, filtered by a selector.† Returns a PageArray.</span></p>
+				<p class="advanced"><span class="api">$page->next($pageArray) </span><span class="descr">Given a PageArray which includes the current page (among others), return the next page after the current.† Returns a NullPage if it is the last page in the provided PageArray. If called without a PageArray, it assumes the current page's siblings (same as $page->next).</span></p>
+				<p class="advanced"><span class="api">$page->prev($pageArray) </span><span class="descr">Given a PageArray which includes the current page (among others), return the previous page before the current.† Returns a NullPage if it is the first page in the provided PageArray. If called without a PageArray, it assumes the current page's siblings (same as $page->prev).</span></p>
+				<p class="advanced"><span class="api">$page->save() </span><span class="descr">Save this Page</span></p>
+				<p class="advanced"><span class="api">$page->save($field) </span><span class="descr">Save just the field given by the provided field name (string) or object (Field)</span></p>
+				<p class="advanced"><span class="api">$page->delete() </span><span class="descr">Delete this page</span></p>
+				<p class="advanced"><span class="api">$page->is($name) </span><span class="descr">Returns true if this page matches the given template name, page status, or selector. </span></p>
+				<p class="advanced"><span class="api">$page->isChanged() </span><span class="descr">Has the $page changed since it was loaded? Returns true or false.</span></p>
+				<p class="advanced"><span class="api">$page->isChanged("field") </span><span class="descr">Has the given field on $page changed since it was loaded? Returns true or false.</span></p>
+				<p class="advanced"><span class="api">$page->isNew() </span><span class="descr">Is this Page new? (i.e. doesn't yet exist in DB)</span></p>
+				<p class="advanced"><span class="api">$page->isHidden() </span><span class="descr">Returns true if page has status hidden.</span></p>
+				<p class="advanced"><span class="api">$page->isTrash() </span><span class="descr">Returns true if page is in trash.</span></p>
+				<p class="advanced"><span class="api">$page->matches("selector") </span><span class="descr">Returns true if this page matches the given selector string. </span></p>
+				<p class="advanced"><span class="api">$page->render() </span><span class="descr">Returns rendered page markup. echo $page->render();</span></p>
+				<p class="advanced"><span class="api">$page->set("field", $value) </span><span class="descr">Set the given custom field name to have the provided value. Same as $page->$field = $value;</span></p>
+
+				<p class="advanced"><span class="api">$page->editable() </span><span class="descr">Is the page is editable by the current user? Returns true or false.</span></p>
+				<p class="advanced"><span class="api">$page->editable('field') </span><span class="descr">Is the given field name is editable on the page by the current user? Returns true or false.</span></p>
+				<p class="advanced"><span class="api">$page->viewable() </span><span class="descr">Is the page viewable by the current user? Returns true or false. Note that this is only useful on pages other than the current page being viewed, as ProcessWire won't let the user load a page (by URL) that they don't have access to view.</span></p>
+				<p class="advanced"><span class="api">$page->addable() </span><span class="descr">Is the current user allowed to create pages below this page? Returns true or false.</span></p>
+				<p class="advanced"><span class="api">$page->addable($addPage) </span><span class="descr">Is the current user allowed to add the given page ($addPage) as a child of $page? Returns true or false.</span></p>
+				<p class="advanced"><span class="api">$page->moveable() </span><span class="descr">Is the page allowed to be moved by the current user? Returns true or false.</span></p>
+				<p class="advanced"><span class="api">$page->moveable($parent) </span><span class="descr">Is the current user allowed to move $page to $parent? Returns true or false.</span></p>
+				<p class="advanced"><span class="api">$page->sortable() </span><span class="descr">Is the page sortable (within the same parent) by the current user? Returns true or false.</span></p>
+				<p class="advanced"><span class="api">$page->deleteable() </span><span class="descr">Is the page deleteable by the current user? Returns true or false.</span></p>
+				<p class="advanced"><span class="api">$page->addStatus(Page::statusHidden) </span><span class="descr">Add a status to this page.</span></p>
+				<p class="advanced"><span class="api">$page->removeStatus(Page::statusHidden) </span><span class="descr">Removes a status from this page.</span></p>
+			</div>
+			<div class="cat advanced">
+				<h3>Page Status</h3>
+				<p><span class="api">Page::statusOn (1)</span><span class="descr"> base status for all pages</span></p>
+				<p><span class="api">Page::statusLocked (4) </span><span class="descr">page locked for changes. Not enforced by the core, but checked by Process modules.</span></p>
+				<p><span class="api">Page::statusSystemID (8)</span><span class="descr"> page is for the system and may not be deleted or have it's id changed (everything else, okay)</span></p>
+				<p><span class="api">Page::statusSystem (16) </span><span class="descr">page is for the system and may not be deleted or have it's id, name, template or parent changed</span></p>
+				<p><span class="api">Page::statusHidden (1024)</span><span class="descr"> page is excluded selector methods like $pages->find() and $page->children() unless status is specified, like "status&1"</span></p>
+				<p><span class="api">Page::statusUnpublished (2048)</span><span class="descr"> page is not published and is not renderable.</span></p>
+				<p><span class="api">Page::statusTrash (8192)</span><span class="descr"> page is in the trash</span></p>
+			</div>
+		</div>
+
+		<div class="section wirearray" id="wirearray">
+			<h2>PageArray / WireArray</h2>
+			<div class="cat">
+				<h3>PageArray only</h3>
+				<p><span class="api">$a->getTotal() </span><span class="descr">Get the total number of pages that were found from a $pages->find("selectors, limit=n") operation that led to this PageArray. The number returned may be greater than the number of pages actually in this PageArray instance, and is used for calculating pagination. Whereas $p->count() will always return the number of pages actually in this PageArray instance.</span></p>
+				<p><span class="api">$a->getLimit() </span><span class="descr">Get the number (n) from a "limit=n" portion of a selector that resulted in this PageArray. In pagination, this value represents the max items to display per page. If there was no limit applied, this will return 0.</span></p>
+				<p><span class="api">$a->getStart() </span><span class="descr">Get the number of the starting result that led to this PageArray in pagination. Returns 0 if in the first page of results. </span></p>
+				<p class="advanced"><span class="api">$a->getSelectors() </span><span class="descr">Return the Selectors that led to this PageArray, or null if not set/applicable. Returns an instance of Selectors (WireArray) containing one or more Selector objects.</span></p>
+			</div>
+			<div class="cat">
+				<h3>Getting Items</h3>
+				<p><span class="api">$a[$key] </span><span class="descr">Returns the value of the item at the given $key, or null if not set.</span></p>
+				<p><span class="api">$a->$key </span><span class="descr">Return the item indexed by $key or null if not found.</span></p>
+				<p><span class="api">$a->get($key) </span><span class="descr">Returns the value of the item at the given $key, or null if not set.</span></p>
+				<p><span class="api">$a->find("selector") </span><span class="descr">Return all items that match the given selector, or a blank WireArray if none found.</span></p>
+				<p><span class="api">$a->get("selector") </span><span class="descr">Return the first item that matches the given selector, or null if not found.</span></p>
+				<p><span class="api">$a->getRandom() </span><span class="descr">Returns a single random item from this WireArray.</span></p>
+				<p><span class="api">$a->getRandom($n) </span><span class="descr">Returns $n random items from this WireArray (contained in a new WireArray).</span></p>
+				<p><span class="api">$a->slice($n) </span><span class="descr">Returns a new WireArray containing a slice of items from the $n'th item to the end.</span></p>
+				<p><span class="api">$a->slice($n, $limit) </span><span class="descr">Returns a new WireArray containing a slice of items starting from the $n'th item and including up to $limit number of items.</span></p>
+				<p><span class="api">$a->shift() </span><span class="descr">Remove (shift) the first $item from the WireArray and return it.</span></p>
+				<p><span class="api">$a->pop() </span><span class="descr">Pop the last item off of the WireArray and return it.</span></p>
+				<p><span class="api">$a->index($n) </span><span class="descr">Returns a new WireArray containing the item at the given zero-based index.</span></p>
+				<p><span class="api">$a->eq($n) </span><span class="descr">Returns the single item at the given zero-based index, or NULL if it doesn't exist.</span></p>
+				<p><span class="api">$a->first() </span><span class="descr">Returns the first item in the WireArray.</span></p>
+				<p><span class="api">$a->last() </span><span class="descr">Returns the last item in the WireArray.</span></p>
+				<p><span class="api">$a->getNext($item) </span><span class="descr">Given an item already in the WireArray, return the item that comes after it in this WireArray or NULL if no match.</span></p>
+				<p><span class="api">$a->getPrev($item) </span><span class="descr">Given an item already in the WireArray, return the item that comes before it in this WireArray or NULL if no match.</span></p>
+				<p class="advanced"><span class="api">$a->getArray() </span><span class="descr">Returns a regular PHP array of all items in this WireArray.</span></p>
+				<p class="advanced"><span class="api">$a->getKeys() </span><span class="descr">Returns a regular PHP array of all keys used in this WireArray.</span></p>
+				<p class="advanced"><span class="api">$a->getValues() </span><span class="descr">Returns a regular PHP array of all values used in this WireArray.</span></p>
+
+			</div>
+			<div class="cat">
+				<h3>Sorting and Filtering</h3>
+				<p><span class="api">$a->shuffle() </span><span class="descr">Randomize the order of all the items in the WireArray.</span></p>
+				<p><span class="api">$a->sort("property") </span><span class="descr">Sorts the WireArray by the given item property (string). You may also specify the property as "property.subproperty", where property resolves to a Wire derived object, and subproperty resolves to a property within that object. Prepend a minus sign "-" to the property name reverse the sort.</span></p>
+				<p><span class="api">$a->filter("selector") </span><span class="descr">Reduce the WireArray so that it only contains items that match the given selector.</span></p>
+				<p><span class="api">$a->not("selector") </span><span class="descr">Reduce the WireArray so that it only contains items that don't match the given selector.</span></p>
+				<p><span class="api">$a->reverse() </span><span class="descr">Return a new WireArray containing the items in reverse order.</span></p>
+			</div>
+			<div class="cat advanced">
+				<h3>Setting and modifying items</h3>
+				<p><span class="api">$a[] = $item </span><span class="descr">Add the given $item.</span></p>
+				<p><span class="api">$a->add($item) </span><span class="descr">Add the given $item. Supports import of page arrays (since 2.2)</span></p>
+				<p><span class="api">$a[$key] = $item </span><span class="descr">Add the given $item, associating it with index $key.</span></p>
+				<p><span class="api">$a->set($key, $item) </span><span class="descr">Add the given $item, associating it with index $key.</span></p>
+				<p><span class="api">$a->$key = $item </span><span class="descr">Add the given $item, associating it with index $key.</span></p>
+				<p><span class="api">$a->import($items) </span><span class="descr">Given an array or WireArray of items, add them all. </span></p>
+				<p><span class="api">$a->prepend($item) </span><span class="descr">Prepend the given item to the beginning of the WireArray.</span></p>
+				<p><span class="api">$a->append($item) </span><span class="descr">Append the given item to the end of the WireArray.</span></p>
+				<p><span class="api">$a->insertBefore($item, $existingItem)    </span><span class="descr">Insert an item (int|string|array|object) before an existing item (int|string|array|object)</span></p>
+				<p><span class="api">$a->insertAfter($item, $existingItem) </span><span class="descr">Insert an item (int|string|array|object) after an existing item (int|string|array|object)</span></p>
+				<p><span class="api">$a->unshift($item) </span><span class="descr">Prepend the given item to the beginning of the WireArray (same as prepend)</span></p>
+				<p><span class="api">$a->shift() </span><span class="descr">Remove (shift) the first $item from the WireArray and return it.</span></p>
+				<p><span class="api">$a->push($item) </span><span class="descr">Push the given item onto the end of the WireArray.</span></p>
+				<p><span class="api">$a->pop() </span><span class="descr">Pop the last item off of the WireArray and return it.</span></p>
+				<p><span class="api">unset($array[$key]) </span><span class="descr">Removes the item with the given $key from the WireArray.</span></p>
+				<p><span class="api">$a->remove($key) </span><span class="descr">Removes the item with the given $key from the WireArray.</span></p>
+				<p><span class="api">$a->remove($item) </span><span class="descr">Removes the given $item from the WireArray.</span></p>
+			</div>
+			<div class="cat advanced">
+				<h3>Checking for items</h3>
+				<p><span class="api">$a->count() </span><span class="descr">Returns the number of items in this WireArray.</span></p>
+				<p><span class="api">count($a) </span><span class="descr">Returns the number of items in this WireArray.</span></p>
+				<p><span class="api">$a->has($key) </span><span class="descr">Is the given key part of this WireArray?</span></p>
+				<p><span class="api">$a->has("selector") </span><span class="descr">Does the given selector match any items in this WireArray?</span></p>
+				<p><span class="api">$a->has($object) </span><span class="descr">Is $object in the WireArray? $object must be an valid type of the WireArray.</span></p>
+				<p><span class="api">isset($a[$key]) </span><span class="descr">Returns true if the given $key is set with an item.</span></p>
+				<p><span class="api">$a->isValidItem($item) </span><span class="descr">Is the given item a valid type for this WireArray?</span></p>
+				<p><span class="api">$a->isValidKey($key) </span><span class="descr">Is the given $key valid to use for this WireArray?</span></p>
+				<p><span class="api">$a->getItemKey($item) </span><span class="descr">Get the key used by $item or NULL if not available.</span></p>
+			</div>
+			<div class="cat advanced">
+				<h3>Change Tracking</h3>
+				<p><span class="api">$a->setTrackChanges() </span><span class="descr">Turn on change tracking</span></p>
+				<p><span class="api">$a->setTrackChanges(false) </span><span class="descr">Turn off change tracking</span></p>
+				<p><span class="api">$a->resetTrackChanges() </span><span class="descr">Reset any changes that have been tracked and start tracking again.</span></p>
+				<p><span class="api">$a->resetTrackChanges(false) </span><span class="descr">Reset any changes that have been tracked and stop tracking.</span></p>
+				<p><span class="api">$a->isChanged() </span><span class="descr">Has this object changed since tracking was turned on?</span></p>
+				<p><span class="api">$a->getChanges() </span><span class="descr">Return an array of item keys that have changed while change tracking was on.</span></p>
+				<p><span class="api">$a->getItemsAdded() </span><span class="descr">Return an array of items that have been added since change tracking was turned on.</span></p>
+				<p><span class="api">$a->getItemsRemoved() </span><span class="descr">Return an array of items that have been removed since change tracking was turned on.</span></p>
+			</div>
+			<div class="cat advanced">
+				<h3>Miscellaneous</h3>
+				<p><span class="api">$a->makeBlankItem() </span><span class="descr">Make a new blank item suitable for storage in this WireArray.</span></p>
+				<p><span class="api">$a->makeNew() </span><span class="descr">Make a new blank WireArray of the same type as $a.</span></p>
+			</div>
+		</div>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+		<div class="section files" id="files">
+			<h2>Files</h2>
+			<div class="cat">
+				<h3>Page Files Multiple (WireArray)</h3>
+				<p><span class="api">$files->path </span><span class="descr">Returns the full server disk path where files are stored</span></p>
+				<p><span class="api">$files->url </span><span class="descr">Returns the URL where files are stored</span></p>
+				<p><span class="api">$files->page </span><span class="descr">Returns the $page that contains this set of files</span></p>
+				<p><span class="api">$files->delete($file) </span><span class="descr">Removes the file and deletes from disk when page is saved (alias of remove)</span></p>
+				<p class="advanced"><span class="api">$files->deleteAll() </span><span class="descr">Removes all items and deletes them from disk when page is saved @advanced</span></p>
+			</div>
+			<div class="cat">
+				<h3>$file Properties</h3>
+				<p><span class="api">$file->url </span><span class="descr">URL to the file on the server</span></p>
+				<p><span class="api">$file->filename </span><span class="descr">full disk path to the file on the server</span></p>
+				<p><span class="api">$file->name </span><span class="descr">Returns the filename without the path (basename)</span></p>
+				<p><span class="api">$file->description </span><span class="descr">value of the file's description field (text). Note you can set this property directly</span></p>
+				<p><span class="api">$file->ext </span><span class="descr">file's extension (i.e. last 3 or so characters)</span></p>
+				<p><span class="api">$file->filesize </span><span class="descr">file size, number of bytes</span></p>
+				<p><span class="api">$file->filesizeStr </span><span class="descr">file size as a formatted string</span></p>
+				<p><span class="api">(string) $file </span><span class="descr">returns the file's name (no path)</span></p>
+				<p class="advanced"><span class="api">$file->pagefiles </span><span class="descr">the $files array that contains this file </span></p>
+				<p class="advanced"><span class="api">$file->page </span><span class="descr">the $page that contains this file</span></p>
+			</div>
+			<div class="cat">
+				<h3>$file Methods</h3>
+				<p><span class="api">$file->rename($name) </span><span class="descr">Rename this file to the given name (no path). Returns true on success, false on failure.</span></p>
+				<p class="advanced"><span class="api">$file->getNext() </span><span class="descr">Returns the next file in a multi-file field, or NULL if at the end</span><br></p>
+				<p class="advanced"><span class="api">$file->getPrev() </span><span class="descr">Returns the previous file in a multi-file field, or NULL if at the beginning</span></p>
+			</div>
+			<div class="cat">
+				<h3><strong>$image Properties</strong> (in addition to those in $file)</h3>
+				<p><span class="api">$image->width </span><span class="descr">Width of image, in pixels</span></p>
+				<p><span class="api">$image->height </span><span class="descr">Height of image, in pixels</span></p>
+				<p class="advanced"><span class="api">$image->original </span><span class="descr">Reference to original $image, if this is a resized version.</span></p>
+			</div>
+			<div class="cat">
+				<h3>$image Methods</h3>
+				<p><span class="api">$image->size($width, $height) </span><span class="descr">Return a new $image with the given dimensions (proportional, center crop)</span></p>
+				<p><span class="api">$image->width($width) </span><span class="descr">Return a new $image with the given width (proportional height, center crop)</span></p>
+				<p><span class="api">$image->height($height) </span><span class="descr">Return a new $image with the given height (proportional width, center crop)</span></p>
+				<p class="advanced"><span class="api">$image->getVariations() </span><span class="descr">Returns a WireArray (Pageimages) of all size variations of this image</span></p>
+				<p class="advanced"><span class="api">$image->removeVariations() </span><span class="descr">Deletes all size variations of this image (be careful)</span></p>
+			</div>
+		</div>
+
+
+		<div class="section templates" id="templates">
+			<h2>$templates</h2>
+			<div class="cat">
+				<h3>Methods</h3>
+				<p><span class="api">$templates->find("selector") </span><span class="descr">Return the templates matching the the given selector query.</span></p>
+				<p><span class="api">$templates->get("name") </span><span class="descr">Return the template with the given name</span></p>
+				<p class="advanced"><span class="api">$templates->save($template) </span><span class="descr">Save the given template instance.</span></p>
+				<p class="advanced"><span class="api">$templates->delete($template) </span><span class="descr">Delete the given template instance. Note that this will throw a fatal error if the template is in use by any pages.</span></p>
+
+			</div>
+
+			<h2>Template object</h2>
+			<span>$template = any template</span>
+			<div class="cat">
+				<h3>Template Properties</h3>
+				<p><span class="api">$template->id </span><span class="descr">Get or set the template's numbered database ID.</span></p>
+				<p><span class="api">$template->name </span><span class="descr">Get or set the template's name.</span></p>
+				<p><span class="api">$template->filename </span><span class="descr">Get or set a template's filename, including path (this is auto-generated from the name, though you may modify it at runtime if it suits your need).</span></p>
+				<p><span class="api">$template->label </span><span class="descr">Optional short text label to describe Template.</span></p>
+				<p class="advanced"><span class="api">$template->fieldgroup </span><span class="descr">Get or set a template's Fieldgroup. Can also be used to iterate a template's fields.</span></p>
+				<p class="advanced"><span class="api">$template->fields </span><span class="descr">Syntactical alias for $template->fieldgroup. Use whatever makes more sense for your code readability.</span></p>
+				<p class="removed"><span class="api">$template->cache_time </span><span class="descr">Get or set the number of seconds this template's output should be cached (default is 0). In newer API versions you can also use cacheTime (camelCase for better consistency).</span> </p>
+				<p class="removed"><span class="api">$template->childrenTemplatesID </span><span class="descr">Get or set the template database ID that children of pages using this template default to. 0 is the default and indicates no selection. Set to -1 to disallow pages using this template from having children.</span> </p>
+				<p class="removed"><span class="api">$template->allowPageNum </span><span class="descr">Get or set whether pages using this template can have URL-based page numbers. Set to 1 for yes or 0 for no. Default is 0.</span></p>
+				<p class="removed"><span class="api">$template->urlSegments </span><span class="descr">Get or set whether pages using this template can make use of URL segments. Set to 1 for yes or 0 for no. Default is 0.</span></p>
+				<p class="removed"><span class="api">$template->slashUrls </span><span class="descr">Get or set whether pages using this template should have URLs that end with a slash. Set to 1 for yes or 0 for no. Default is 1.</span></p>
+				<p class="removed"><span class="api">$template->redirectLogin </span><span class="descr">Get or set what should happen when a user attempts access to a page using this template, and they don't have access to. Set to 0 to show the 404 page, or 1 to redirect to the login page. Default is 0.</span></p>
+				<p class="removed"><span class="api">$template->protocol </span><span class="descr">Get or set what protocol is required to access pages using this template. If the user attempts access from the wrong protocol, it will be redirected to the right protocol. Set to 0 to allow either HTTP or HTTPS. Set to 1 to allow HTTPS only. Set to -1 to allow HTTP only. Default is 0.</span></p>
+			</div>
+			<div class="cat">
+				<h3>Template Methods</h3>
+				<p><span class="api">$template->get($property) </span><span class="descr">Get the value of a template's property (same as $template->$property)</span></p>
+				<p><span class="api">$template->set($property, $value) </span><span class="descr">Set the value of a template's property (same as $template->$property = $value).</span></p>
+				<p class="advanced"><span class="api">$template->getNumPages() </span><span class="descr">Return the number of pages using this template.</span></p>
+				<p class="advanced"><span class="api">$template->hasField(string|int|Field) </span><span class="descr">Does this template have the given field?</span></p>
+				<p class="advanced"><span class="api">$template->save() </span><span class="descr">Save this template to the database.</span></p>
+			</div>
+
+		</div>
+
+		<div class="section fields" id="fields">
+
+			<h2>$fields</h2>
+			<div class="cat">
+				<h3>Fields Methods</h3>
+				<p><span class="api">$fields->find("selector") </span><span class="descr">Find all fields matching the given selector</span></p>
+				<p><span class="api">$fields->get("name") </span><span class="descr">Get the field specified by the given field name</span></p>
+				<p><span class="api">$fields->get(123) </span><span class="descr">Get the field specified by the given field ID (integer)</span></p>
+				<p><span class="api">$fields->get("selector") </span><span class="descr">Get the first matching field specified by the given selector</span></p>
+				<p class="advanced"><span class="api">$fields->save($field) </span><span class="descr">Save the given Field object</span></p>
+				<p class="advanced"><span class="api">$fields->delete($field) </span><span class="descr">Delete the given Field object</span></p>
+			</div>
+
+			<h2>Field object</h2>
+			$field = any Field
+			<div class="cat">
+				<h3>Field Properties</h3>
+				<p><span class="api">(string) $field </span><span class="descr">Casting a Field as a string returns the field's name</span></p>
+				<p><span class="api">$field->id </span><span class="descr">Numeric ID of this field</span></p>
+				<p><span class="api">$field->name </span><span class="descr">Name of this field (name string)</span></p>
+				<p><span class="api">$field->label </span><span class="descr">Text label for this field, appears as the <label> element in the editor</span></p>
+				<p class="advanced"><span class="api">$field->type </span><span class="descr">The type of field, refers to a Fieldtype plugin module</span></p>
+				<p class="advanced"><span class="api">$field->flags </span><span class="descr">Bitwise flags of the field: if($field->flags & Field::flagAutojoin) // field has the "autojoin" flag set if($field->flags & Field::flagGlobal) // field has the "global" flag set.</span></p>
+			</div>
+			<div class="cat">
+				<h3>Field Methods</h3>
+				<p><span class="api">$field->get($key) </span><span class="descr">Get a field property (the properties above, or a custom property) Same as $field->$key</span></p>
+				<p><span class="api">$field->set($key, $value) </span><span class="descr">Set a field property. Can be any one of the above or something else for a custom setting. Same as $field->$key = $value</span></p>
+				<p class="advanced"><span class="api">$field->save() </span><span class="descr">Save this field. Same as $fields->save($field)</span></p>
+				<p class="advanced"><span class="api">$field->numFieldgroups() </span><span class="descr">Returns the number of fieldgroups that use this field</span></p>
+				<p class="advanced"><span class="api">$field->getFieldgroups() </span><span class="descr">Returns an array of fieldgroups that use this field</span></p>
+				<p class="advanced"><span class="api">$field->getTable() </span><span class="descr">Returns the name of the database table created by this field</span></p>
+				<p class="advanced"><span class="api">$field->getInputfield($page) </span><span class="descr">Returns an Inputfield object associated with this field for use on $page</span></p>
+			</div>
+		</div>
+		<div class="section users" id="users">
+			<h2>$users</h2>
+
+			<div class="cat">
+				<h3>Users Methods</h3>
+				<p><span class="api">$users->find("selector") </span><span class="descr">Find user(s) matching given selector.</span></p>
+				<p><span class="api">$users->get(name|id|selector) </span><span class="descr">Get user by given name, numeric ID or a selector string.</span></p>
+				<p class="advanced"><span class="api">$users->add("name") </span><span class="descr">Add new User with the given name and return it.</span></p>
+				<p class="advanced"><span class="api">$users->save($user) </span><span class="descr">Save given user. $user must be valid user object.</span></p>
+				<p class="advanced"><span class="api">$users->delete($user) </span><span class="descr">Delete given user. $user must be valid user object.</span></p>
+			</div>
+		</div>
+
+		<div class="section user" id="user">
+			<h2>$user </h2>
+			<span>$user = current or any User</span>
+
+			<div class="cat">
+				<h3>User Properties</h3>
+				<p><span class="api">$user->id </span><span class="descr">Numeric ID of this user</span></p>
+				<p><span class="api">$user->name </span><span class="descr">Get or set the user's login name. </span></p>
+				<p><span class="api">$user->email </span><span class="descr">Get or set email this user.</span></p>
+				<p><span class="api">$user->pass </span><span class="descr">The user's hashed password. Note that this returns a hashed version of the password, so it is not typically useful to get this property. However, it is useful to set this property if you want to change the password. When you change a password, it is assumed to be the non-hashed/non-encrypted version. ProcessWire will hash it automatically when the user is saved.</span></p>
+				<p><span class="api">$user->roles </span><span class="descr">Get roles this user has. Returns PageArray.</span></p>
+			</div>
+
+			<div class="cat">
+				<h3>User Methods</h3>
+				<p><span class="api">$user->isGuest() </span><span class="descr">Is this the Guest user? Returns true or false.</span></p>
+				<p><span class="api">$user->isSuperuser() </span><span class="descr">Is this the Superuser? Returns true or false.</span></p>
+				<p><span class="api">$user->isLoggedin() </span><span class="descr">Is this user logged in? Returns true or false.</span></p>
+				<p class="advanced"><span class="api">$user->get($property) </span><span class="descr">Get a property value from the user. Same as $user->[property].</span></p>
+				<p class="advanced"><span class="api">$user->set($property, $value) </span><span class="descr">Set a property value. Same as $user->[property] = $value;</span></p>
+				<p class="advanced"><span class="api">$user->save() </span><span class="descr">Save user to the database.</span></p>
+				<p class="advanced"><span class="api">$user->hasRole($role) </span><span class="descr">Does the user have the given role? Returns true or false.</span></p>
+				<p class="advanced"><span class="api">$user->addRole($role) </span><span class="descr">Add the given Role to this user.</span></p>
+				<p class="advanced"><span class="api">$user->removeRole($role) </span><span class="descr">Remove a given Role from this user.</span></p>
+				<p class="advanced"><span class="api">$user->hasPermission($permission) </span><span class="descr">Does the user have the given permission? Returns true or false.</span></p>
+				<p class="advanced"><span class="api">$user->hasPermission($permission, $page) </span><span class="descr">Does the user have the given permission name on $page? Returns true or false.</span></p>
+			</div>
+		</div>
+		<div class="section roles" id="roles">
+			<h2>$roles</h2>
+
+			<div class="cat">
+				<h3>Roles Methods</h3>
+				<p><span class="api">$roles->find("selector") </span><span class="descr">Find roles with given selector</span></p>
+				<p><span class="api">$roles->get(name|id) </span><span class="descr">Get role with given name or id</span></p>
+				<p class="advanced"><span class="api">$roles->add("name") </span><span class="descr">Add new Role with the given name and return it.</span></p>
+				<p class="advanced"><span class="api">$roles->save($role) </span><span class="descr">Save given role. $roles must be an instance of Role.</span></p>
+				<p class="advanced"><span class="api">$roles->delete($role) </span><span class="descr">Delete given role. $roles must be an instance of Role.</span></p>
+			</div>
+
+			<h2>Role object </h2>
+				$role = any Role
+			<div class="cat">
+				<h3>Role Properties</h3>
+				<p><span class="api">$role->id </span><span class="descr">Get Numeric ID of this role.</span></p>
+				<p><span class="api">$role->name </span><span class="descr">Get or set name (string) of this role.</span></p>
+				<p><span class="api">$role->permissions </span><span class="descr">PageArray of permissions assigned to Role.</span></p>
+			</div>
+			<div class="cat">
+				<h3> Role Methods</h3>
+				<p><span class="api">$role->get($key) </span><span class="descr">Get property value by key</span></p>
+				<p class="advanced"><span class="api">$role->save() </span><span class="descr">Saves the role</span></p>
+				<p class="advanced"><span class="api">$role->hasPermission(name|id|Permission) </span><span class="descr">Does this role have the given permission?</span></p>
+				<p class="advanced"><span class="api">$role->addPermission(name|id|Permission) </span><span class="descr">Add the given permission. This is the same as $role->permissions->add($permission) except this one will accept name, ID or Permission.</span></p>
+				<p class="advanced"><span class="api">$role->removePermission(name|id|Permission) </span><span class="descr">Remove the given permission. This is the same as $role->permissions->remove($permission) except this one will accept name, ID or Permission.</span></p>
+			</div>
+		</div>
+
+		<div class="section permissions" id="permissions">
+			<h2>$permission</h2>
+			<div class="cat">
+				<h3>Permissions Methods</h3>
+				<p><span class="api">$permissions->find("selector") </span><span class="descr">Get permission(s) by matching given selector string.</span></p>
+				<p><span class="api">$permissions->get(name|id) </span><span class="descr">Get permission matching given name or id.</span></p>
+				<p class="advanced"><span class="api">$permissions->add("name") </span><span class="descr">Add new permission with the given name and return it.</span></p>
+				<p class="advanced"><span class="api">$permissions->save($permission) </span><span class="descr">Save given permission. $permission must be an instance of Permission.</span></p>
+				<p class="advanced"><span class="api">$permissions->delete($permission) </span><span class="descr">Delete given permission. $permission must be an instance of Permission.</span></p>
+			</div>
+
+			<h2>Permission object</h2>
+			$permission = any Permission
+			<div class="cat">
+				<h3>Permission Properties</h3>
+				<p><span class="api">$permission->id </span><span class="descr">Numeric ID of this permission.</span></p>
+				<p><span class="api">$permission->name </span><span class="descr">Get or set the permission name.</span></p>
+				<p><span class="api">$permission->title </span><span class="descr">Get or set the title of the permisson.</span></p>
+			</div>
+			<div class="cat">
+				<h3>Permission Methods</h3>
+				<p><span class="api">$permission->get($key) </span><span class="descr">Get a property value by key.</span></p>
+				<p class="advanced"><span class="api">$permission->save() </span><span class="descr">Save the permission.</span></p>
+				<p class="advanced"><span class="api">$permission->delete() </span><span class="descr">Delete the permission.</span></p>
+			</div>
+		</div>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+		<div class="section selectors" id="selectors">
+
+			<h2>Selectors</h2>
+
+			<div class="cat">
+				<h3>Built-In Page Selector Properties</h3>
+				<p><span class="api">any_field=any_value </span><span class="descr">Match any of your own fields using any operator and any value.</span></p>
+				<p><span class="api">limit=n </span><span class="descr">Limit the results to n Number</span></p>
+				<p><span class="api">sort=field </span><span class="descr">Sort by a field. This may any field. Use "-" prefix to reverse sorting. sort=-field</span></p>
+				<p><span class="api">parent=id </span><span class="descr">Page parent using ID</span></p>
+				<p><span class="api">parent=$page </span><span class="descr">Page parent using an page object</span></p>
+				<p><span class="api">parent=/path/to/page/ </span><span class="descr">Page parent using path</span></p>
+				<p><span class="api">path=/path/to/page/ </span><span class="descr">Get Page with the path specified</span></p>
+				<p><span class="api">template=name </span><span class="descr">Limit to a certain template. Use "|"  to have multiple OR's. template=name|name</span></p>
+				<p><span class="api">template=$template </span><span class="descr">You can also use a template object to compare</span></p>
+				<p class="advanced"><span class="api">start=n </span><span class="descr">Set start offset</span></p>
+				<p class="advanced"><span class="api">end=n   </span><span class="descr">Set end offset (may be used instead of limit=n)</span></p>
+				<p class="advanced"><span class="api">include=all </span><span class="descr">Include all hidden and unpublished pages and pages that user doesn't have access to view.</span></p>
+				<p class="advanced"><span class="api">include=hidden </span><span class="descr">Include hidden pages in queries.</span></p>
+				<p class="advanced"><span class="api">check_access=0 </span><span class="descr">Include pages that user doesn't have access to view.</span></p>
+				<p class="advanced"><span class="api">children.count=n </span><span class="descr">Pages with a certain count of children may also be used with greater than / less than operators.</span></p>
+
+				<p class="advanced"><span class="api">created=timestamp </span><span class="descr">Usually used with < > to compare timestamps</span></p>
+				<p class="advanced"><span class="api">modified=timestamp </span><span class="descr">Usually used with < > to compare timestamps</span></p>
+				<p class="advanced"><span class="api">created_users_id=int </span><span class="descr">Pages created with specified user id.</span></p>
+				<p class="advanced"><span class="api">modified_users_id=int </span><span class="descr">Pages modified with specified user id.</span></p>
+				<div class="cat">
+					<h3>Selector Operators</h3>
+					<p><span class="api">= </span><span class="descr">Equal to <br>
+						any_field=any_value<br>
+					</span></p>
+					<p><span class="api">!= </span><span class="descr">Not equal to <br>
+						any_field!=any_value<br>
+					</span></p>
+					<p><span class="api">< </span><span class="descr">Less than <br>
+						any_field<any_value<br>
+					</span></p>
+					<p><span class="api">> </span><span class="descr">Greater than <br>
+						any_field>any_value </span></p>
+					<p><span class="api"><= </span><span class="descr">Less than or equal to<br>
+						any_field<=any_value </span></p>
+					<p><span class="api">>= </span><span class="descr">Greater than or equal to<br>
+						any_field>=any_value </span></p>
+					<p><span class="api">*= </span><span class="descr">Contains the exact word or phrase <br>
+						any_field*=any_value </span></p>
+					<p><span class="api">~= </span><span class="descr">Contains all the words <br>
+						any_field~=any_value </span></p>
+					<p><span class="api">%= </span><span class="descr">Contains the exact word or phrase (using slower SQL LIKE) [v2.1] <br>
+						any_field%=any_value </span></p>
+					<p><span class="api">^= </span><span class="descr">Contains the exact word or phrase at the beginning of the field [v2.1] <br>
+						any_field^=any_value </span></p>
+					<p><span class="api">$= </span><span class="descr">Contains the exact word or phrase at the end of the field [v2.1]<br>
+						any_field$=any_value </span></p>
+				</div>
+			</div>
+		</div>
+
+		<div class="section input" id="input">
+			<h2>$input</h2>
+			<div class="cat">
+				<h3>Properties and Methods</h3>
+				<p><span class="api">$input->get </span><span class="descr">Provides access to GET variables</span></p>
+				<p><span class="api">$input->get->name </span><span class="descr">Access as object property</span></p>
+				<p><span class="api">$input->get["name"] </span><span class="descr">Access as array index</span></p>
+				<p><span class="api">$input->get("name") </span><span class="descr">Access as function</span></p>
+
+				<p><span class="api">$input->post </span><span class="descr">Provides access to POST variables</span></p>
+				<p><span class="api">$input->post->name </span><span class="descr">Access as object property</span></p>
+				<p><span class="api">$input->post["name"] </span><span class="descr">Access as array index</span></p>
+				<p><span class="api">$input->post("name") </span><span class="descr">Access as function</span></p>
+				<p><span class="api">$input->cookie </span><span class="descr">Provides access to your COOKIE variables</span></p>
+				<p><span class="api">$input->cookie->name </span><span class="descr">Access as object property</span></p>
+				<p><span class="api">$input->cookie["name"] </span><span class="descr">Access as array index</span></p>
+				<p><span class="api">$input->cookie("name") </span><span class="descr">Access as function</span></p>
+				<p class="advanced"><span class="api">$input->whitelist($key, $value) </span><span class="descr">Set a whitelist value</span></p>
+				<p class="advanced"><span class="api">$input->whitelist($key) </span><span class="descr">Get a whitelist value</span></p>
+				<p class="advanced"><span class="api">$input->urlSegments </span><span class="descr">Retrieve all URL segments (array). This requires url segments are enabled on the template of the requested page. You can turn it on or off under the url tab when editing a template.</p>
+				<p class="advanced"><span class="api">$input->urlSegment($n) </span><span class="descr">Retrieve the $n'th URL segment (integer). <br/>urlSegment(1) = /page/<b>aaa</b>/ <br/>urlSegment(2) = /page/aaa/<b>bbb</b>/ <br/>urlSegment(3) = /page/aaa/bbb/<b>ccc</b>/ <br/>...<br/>The maximum segments allowed can be adjusted in your sites config.php. <br/><br/> Alternative syntax:<br>$input->urlSegment1<br/>$input->urlSegment2<br/>$input->urlSegment3<br/>...</span></p>
+				<p class="advanced"><span class="api">$input->urlSegment1 (2,3,..) </span><span class="descr">Retrieve the $n'th URL segment. Alternative syntax. The maximum segments allowed can be adjusted in your sites config.php.</span></p>
+				<p class="advanced"><span class="api">$input->pageNum </span><span class="descr">Returns the current page number from the URL (1–999)</span></p>
+			</div>
+		</div>
+		<div class="section sanitizer" id="sanitizer">
+			<h2>$sanitizer</h2>
+			<div class="cat">
+				<h3>Properties and Methods</h3>
+				<p><span class="api">$sanitizer->email($value) </span><span class="descr">Sanitizes a value for an email address, then filters it. If not valid after sanitization, this function returns a blank string.</span></p>
+				<p><span class="api">$sanitizer->fieldName($value) </span><span class="descr">Sanitizes a value for a Field name. Same as the name() filter, except that it doesn't allow dashes.</span></p>
+				<p><span class="api">$sanitizer->name($value) </span><span class="descr">Sanitizes a value for a ProcessWire name, meaning all characters except for these ASCII characters: "a-zA-Z0-9_." (not including the quotes) are removed. It also truncates the length to 128 characters.</span></p>
+				<p><span class="api">$sanitizer->pageName($value) </span><span class="descr">Sanitizes a value for a URL friendly Page name. Same as the name() filter, except that it converts uppercase to lowercase, and it attempts UTF-8 to ASCII conversion.</span></p>
+				<p><span class="api">$sanitizer->pageName($value, true) </span><span class="descr">Sanitizes a value for a URL friendly Page name and cleans out leading or trailing dashes, and converts double dashes to single dashes. Use this if you are passing in a headline to convert to a page name (for example). <br/><br/>If second parameter is "Sanitizer::translate" it will use the language char conversion defined in InputfieldPageName module settings.</span></p>
+				<p><span class="api">$sanitizer->selectorField($value) </span><span class="descr">Sanitizes a field name as used in a selector value. This function is only necessary if you are dealing with user submitted field names. This is rarely the case in the author's experience, but provided here for consistency with selectorValue()</span></p>
+				<p><span class="api">$sanitizer->selectorValue($value) </span><span class="descr">Sanitizes a string that needs to appear in a selector value. Replaces disallowed characters with spaces. If value is not already quoted, it will add quotes if it determines they are necessary (like if it contains commas). It limits the length to 100 characters (multibyte safe).</span></p>
+				<p><span class="api">$sanitizer->text($value) </span><span class="descr">Sanitize a single line of input text. Removes tags, removes newline characters, and truncates length to 1024 characters. This is multibyte safe if your PHP has multibyte support.</span></p>
+				<p><span class="api">$sanitizer->text($value, $options) </span><span class="descr">Same as the above, except you may provide an $options array to change the behavior. You may specify one or more options in the $options array.  See the reference of $options later in this page.</span></p>
+				<p><span class="api">$sanitizer->textarea($value) </span><span class="descr">Same as the text() function above, except that multiple lines are allowed and maxLength is 16k.</span></p>
+				<p><span class="api">$sanitizer->textarea($value, $options) </span><span class="descr">Same as textarea() except that you may modify the options documented later in this page, noting that multiLine is already true, and maxLength is already 16384.</span></p>
+				<p><span class="api">$sanitizer->url($value) </span><span class="descr">Filters a URL value. Returns a valid URL or blank if it can't be made valid. If URL contains a domain and is valid but missing a protocol (like http://) it will add it. It won't add a protocol to local/relative URLs.</span></p>
+				<p><span class="api">$sanitizer->username($value) </span><span class="descr">Sanitizes a value for a User name, meaning all characters except for these ASCII characters "a-zA-Z0-9-_.@" (not including the quotes) are removed. It also truncates the length to 50 characters.</span></p>
+				<p><span class="api">$options</span><span class="descr">$options = array(
+						<br>
+						// set to true to allow multiple lines
+						<br>
+						'multiLine' => false,<br>
+						<br>
+						// maximum allowed characters for multibyte strings
+						<br>
+						'maxLength' => 255,
+						<br>
+						<br>
+						// maximum number of bytes allowed in the string (multibyte safe)
+						<br>
+						'maxBytes' => 1024,
+						<br>
+						<br>
+						// markup tags that are allowed. Example: "&lt;br/&gt;&lt;strong&gt;"
+						<br>
+						'allowableTags' => '',
+						<br>
+						<br>
+						// character set of $value provided
+						<br>
+						'inCharset' => 'UTF-8',
+						<br>
+						<br>
+						// character set to convert to (if different from inCharset) <br>
+						'outCharset' => 'UTF-8'<br/>
+					); </span>
+				</p>
+			</div>
+		</div>
+
+		<div class="section session" id="session">
+
+			<h2>$session</h2>
+
+			<div class="cat">
+				<h3>Properties and Methods</h3>
+				<p><span class="api">$session->set($name, $value) </span><span class="descr">Set the session variable $name to have the value $value</span></p>
+				<p><span class="api">$session->get($name) </span><span class="descr">Get the session variable identified by the string $name</span></p>
+				<p><span class="api">$session->$name = $value </span><span class="descr">Alternate syntax for $session->set($name, $value)</span></p>
+				<p><span class="api">$value = $session->$name </span><span class="descr">Alternate syntax for $session->get($name)</span></p>
+				<p><span class="api">$session->getAll() </span><span class="descr">Return all set session variables in an array</span></p>
+				<p class="advanced"><span class="api">$session->remove($name) </span><span class="descr">Remove/unset the session variable identified by the string $name</span></p>
+				<p class="advanced"><span class="api">$session->login($name, $pass) </span><span class="descr">Login the user identified by $name and authenticated by $pass. Returns the user object on successful login or null on failure. </span></p>
+				<p class="advanced"><span class="api">$session->logout() </span><span class="descr">Logout the current user session</span></p>
+				<p class="advanced"><span class="api">$session->redirect($url) </span><span class="descr">Send an HTTP 301 (permanent) redirect to the specified URL</span></p>
+				<p class="advanced"><span class="api">$session->redirect($url, false) </span><span class="descr">Send an HTTP 302 (temporary) redirect to the specified URL</span></p>
+			</div>
+		</div>
+
+		<div class="section config" id="config">
+
+			<h2>$config</h2>
+
+			<div class="cat">
+				<h3>Runtime Configuration</h3>
+				<p><span class="api">$config->ajax </span><span class="descr">If the current request is an ajax (asynchronous javascript) request, this is set to true.</span></p>
+				<p><span class="api">$config->httpHost </span><span class="descr">Current HTTP host name.</span></p>
+				<p><span class="api">$config->https </span><span class="descr">If the current request is an HTTPS request, this is set to true.</span></p>
+				<p class="advanced"><span class="api">$config->version </span><span class="descr">Current ProcessWire version string (i.e. "2.1.0")</span></p>
+				<p class="advanced"><span class="api">$config->styles </span><span class="descr">Array used by ProcessWire admin to keep track of what stylesheet files it's template should load. It will be blank otherwise. Feel free to use it for the same purpose in your own sites.</span></p>
+				<p class="advanced"><span class="api">$config->scripts </span><span class="descr">Array used by ProcessWire admin to keep track of what javascript files it's template should load. It will be blank otherwise. Feel free to use it for the same purpose in your own sites.</span></p>
+			</div>
+			<div class="cat">
+				<h3>Urls</h3>
+				<p><span class="api">$config->urls->root </span><span class="descr">URL to your site root (homepage) in ProcessWire.</span></p>
+				<p><span class="api">$config->urls->templates </span><span class="descr">URL to your site templates directory.</span></p>
+				<p class="advanced"><span class="api">$config->urls->admin </span><span class="descr">URL to your admin control panel. </span></p>
+				<p class="advanced"><span class="api">$config->urls->adminTemplates </span><span class="descr">URL to ProcessWire's admin templates directory.</span></p>
+				<p class="advanced"><span class="api">$config->urls->modules </span><span class="descr">URL to ProcessWire's core modules directory.</span></p>
+				<p class="advanced"><span class="api">$config->urls->siteModules </span><span class="descr">URL to your site modules directory.</span></p>
+				<p class="advanced"><span class="api">$config->urls->core </span><span class="descr">URL to ProcessWire's core directory.</span></p>
+				<p class="advanced"><span class="api">$config->urls->assets </span><span class="descr">URL to ProcessWire's assets directory where site-specific files, caches and logs are kept.</span></p>
+				<p class="advanced"><span class="api">$config->urls->files </span><span class="descr">URL to ProcessWire's files directory, where page-specific files are kept in page ID numbered directories.</span></p>
+			</div>
+			<div class="cat">
+				<h3>Paths</h3>
+				<p><span class="api">$config->paths->root </span><span class="descr">Path to your site root directory in ProcessWire.</span></p>
+				<p><span class="api">$config->paths->templates </span><span class="descr">Path to your site templates directory.</span></p>
+				<p class="advanced"><span class="api">$config->paths->admin </span><span class="descr">Path to your admin control panel. </span></p>
+				<p class="advanced"><span class="api">$config->paths->adminTemplates </span><span class="descr">Path to ProcessWire's admin templates directory.</span></p>
+				<p class="advanced"><span class="api">$config->paths->modules </span><span class="descr">Path to your core modules directory.</span></p>
+				<p class="advanced"><span class="api">$config->paths->siteModules </span><span class="descr">Path to your site-specific modules directory.</span></p>
+				<p class="advanced"><span class="api">$config->paths->core </span><span class="descr">Path to ProcessWire's core directory.</span></p>
+				<p class="advanced"><span class="api">$config->paths->assets </span><span class="descr">Path to ProcessWire's assets directory where site-specific files, caches and logs are kept.</span></p>
+				<p class="advanced"><span class="api">$config->paths->files </span><span class="descr">Path to ProcessWire's files directory, where page-specific files are kept in page ID numbered directories.</span></p>
+				<p class="advanced"><span class="api">$config->paths->cache </span><span class="descr">Path to ProcessWire's cache directory.</span></p>
+				<p class="advanced"><span class="api">$config->paths->logs </span><span class="descr">Path to ProcessWire's logs directory.</span></p>
+				<p class="advanced"><span class="api">$config->paths->sessions </span><span class="descr">Path to ProcessWire's session storage directory.les directory, where page-specific files are kept in page ID numbered directories.</span></p>
+			</div>
+		</div>
+		<div class="section advanced systemconfig" id="systemconfig">
+			<h2>System Configuration</h2>
+
+			<div class="cat">
+				<h3>Date and Time</h3>
+				<p><span class="api">$config->dateFormat </span><span class="descr">Default system date format as used by ProcessWire admin. Preferably in a format that is string sortable. This should be a PHP date() string. Default value is 'Y-m-d H:i:s'.</span></p>
+				<p><span class="api">$config->timezone </span><span class="descr">Current timezone. Must be one of the PHP timezone options. Default value is 'America/New_York'.Wire's session storage directory.les directory, where page-specific files are kept in page ID numbered directori</span></p>
+			</div>
+
+			<div class="cat">
+				<h3>Session</h3>
+				<p><span class="api">$config->sessionName </span><span class="descr">Session name as used in session cookie. Default is 'wire'.</span></p>
+				<p><span class="api">$config->sessionExpireSeconds </span><span class="descr">How many seconds of inactivity before session expires. Default is 86400.</span></p>
+				<p><span class="api">$config->sessionChallenge </span><span class="descr">Should login sessions have a challenge key? (for extra security, recommended). Default is true.</span></p>
+				<p><span class="api">$config->sessionFingerprint </span><span class="descr">Should login sessions be tied to IP and user agent? More secure, but will conflict with dynamic IPs. Default is true.</span></p>
+			</div>
+			<div class="cat">
+				<h3>File creation and identification</h3>
+				<p><span class="api">$config->chmodDir </span><span class="descr">Octal string permissions assigned to directories created by ProcessWire. Default is "0777".</span></p>
+				<p><span class="api">$config->chmodFile </span><span class="descr">Octal string permissions assigned to files created by ProcessWire. Default is "0666".</span></p>
+				<p><span class="api">$config->templateExtension </span><span class="descr">Expected extension for template files. Default is "php".</span></p>
+				<p><span class="api">$config->uploadUnzipCommand </span><span class="descr">Shell command to unzip archives, used by WireUpload class. If unzip doesn't work, you may need to precede 'unzip' with a path. Default is: unzip -j -qq -n /src/ -x __MACOSX .* -d /dst/</span></p>
+				<p><span class="api">$config->uploadBadExtensions </span><span class="descr">File extensions that are always disallowed from uploads. Default is: php php3 phtml exe cfm shtml asp pl cgi sh vbs jsp </span></p>
+			</div>
+			<div class="cat">
+				<h3>Mode</h3>
+				<p><span class="api">$config->debug </span><span class="descr">Debug mode causes additional info to appear for use during dev and debugging. Set this to true temporarily if you get a blank screen or untelligible error. Do not leave this set at true with a live site. Default is false.</span></p>
+				<p><span class="api">$config->advanced </span><span class="descr">Turns on additional options in ProcessWire for use during ProcessWire core and/or module development. Default is false. </span></p>
+				<p><span class="api">$config->demo </span><span class="descr">Demo Mode - Disables save functions in Process admin modules. Default is false.</span></p>
+			</div>
+			<div class="cat">
+				<h3>MySQL Database</h3>
+				<p><span class="api">$config->dbHost </span><span class="descr">Database hostname</span></p>
+				<p><span class="api">$config->dbName </span><span class="descr">Database name</span></p>
+				<p><span class="api">$config->dbUser </span><span class="descr">Database user</span></p>
+				<p><span class="api">$config->dbPass </span><span class="descr">Password for database user</span></p>
+				<p><span class="api">$config->dbPort </span><span class="descr">Database port. Default is 3306.</span></p>
+				<p><span class="api">$config->dbCharset </span><span class="descr">Database character set. Default is 'utf8'.</span></p>
+				<p><span class="api">$config->dbSocket </span><span class="descr">Optional DB socket config for sites that need it (for most you should exclude this).tions in Process admin modules. Default is false.</span></p>
+			</div>
+			<div class="cat">
+				<h3>Authentication</h3>
+				<p><span class="api">$config->userAuthHashType </span><span class="descr">Hash method to use for passwords. typically 'md5' or 'sha1'. Can be any available with your PHP's hash() installation. For instance, you may prefer to use something like sha256 if supported by your PHP installation. Default is 'sha1'.</span></p>
+				<p><span class="api">$config->userAuthSalt </span><span class="descr">Generated automatically at installation time. A random salt string that is used in generating password hashes. A unique account-specific hash is also used.</span></p>
+			</div>
+			<div class="cat">
+				<h3>Pagination</h3>
+				<p><span class="api">$config->pageNumUrlPrefix </span><span class="descr">Prefix to use in page URLs for page numbers, i.e. a prefix of 'page' would use 'page1', 'page2', etc. Default is 'page'.</span></p>
+			</div>
+			<div class="cat">
+				<h3>Email</h3>
+				<p><span class="api">$config->adminEmail </span><span class="descr">Optional e-mail address to send fatal error notifications to.</span></p>
+			</div>
+			<div class="cat">
+				<h3>System IDs</h3>
+				<p><span class="api">$config->adminRootPageID </span><span class="descr">Page ID of the admin control panel home.</span></p>
+				<p><span class="api">$config->trashPageID </span><span class="descr">Page ID of the trash page.</span></p>
+				<p><span class="api">$config->loginPageID </span><span class="descr">Page ID of the admin login page.</span></p>
+				<p><span class="api">$config->http404PageID </span><span class="descr">Page ID of the 404 page.</span></p>
+				<p><span class="api">$config->usersPageID </span><span class="descr">Page ID of the users parent page.</span></p>
+				<p><span class="api">$config->rolesPageID </span><span class="descr">Page ID of the roles parent page.</span></p>
+				<p><span class="api">$config->permissionsPageID </span><span class="descr">Page ID of the permissions parent page.</span></p>
+				<p><span class="api">$config->guestUserPageID </span><span class="descr">Page ID of the guest user account.</span></p>
+				<p><span class="api">$config->superUserPageID </span><span class="descr">Page ID of the superuser account.</span></p>
+				<p><span class="api">$config->guestUserRolePageID </span><span class="descr">Page ID of the guest role.</span></p>
+				<p><span class="api">$config->superUserRolePageID </span><span class="descr">Page ID of the superuser role.</span></p>
+				<p><span class="api">$config->userTemplateID </span><span class="descr">Template ID of the system 'user' template.</span></p>
+				<p><span class="api">$config->roleTemplateID </span><span class="descr">Template ID of the system 'role' template.</span></p>
+				<p><span class="api">$config->permissionTemplateID </span><span class="descr">Template ID of the system 'permission' template.</span></p>
+			</div>
+		</div>
+
+
+
+		<div class="section advanced bootstrap" id="bootstrap">
+
+			<h2>Bootstrap / System</h2>
+
+			<div class="cat">
+				<h3>Global Namespace Wire</h3>
+				<p><span class="api">wire('pages')->get("/about/contact/") </span><span class="descr">wire() function  provides access to all of ProcessWire's API variables, like $page, $pages, $templates and others... i.e. wire('pages')->find('selector'); </span></p>
+			</div>
+		</div>
+
+	</div>
+
+</div><!-- end main -->
+
+<div class="footer">
+	PW2.+ Cheatsheet 1.1 @ 2012 by Philipp "Soma" Urlich  / <a href="http://twitter.com/somartist">@somartist</a> | <a href="http://www.processwire.com"> ProcessWire</a> © 2011 by Ryan Cramer
+</div>
+
+<script src="js/quicksilver.js"></script>
+
+<!-- Grab Google CDN's jQuery, with a protocol relative URL; fall back to local if offline -->
+<script src="//ajax.googleapis.com/ajax/libs/jquery/1.7.2/jquery.min.js"></script>
+<script>window.jQuery || document.write('<script src="js/jquery.js"><\/script>')</script>
+<script src="js/jquery.cookie.js"></script>
+<script src="js/isotope.min.js"></script>
+<script src="js/main.js"></script>
+
+<script type="text/javascript">
+	var _gaq = _gaq || [];
+	_gaq.push(['_setAccount', 'UA-19325148-1']);
+	_gaq.push(['_trackPageview']);
+	(function() {
+		var ga = document.createElement('script'); ga.type = 'text/javascript'; ga.async = true;
+		ga.src = ('https:' == document.location.protocol ? 'https://ssl' : 'http://www') + '.google-analytics.com/ga.js';
+		var s = document.getElementsByTagName('script')[0]; s.parentNode.insertBefore(ga, s);
+	})();
+</script>
+
+</body>
+</html>
