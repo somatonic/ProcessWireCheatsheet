@@ -3,14 +3,14 @@
 <head>
 <meta charset="UTF-8">
 <title>ProcessWire2+ Cheatsheet 1.1</title>
-
-<link rel="stylesheet" type="text/css" href="css/styles.css">
+<meta name="viewport" content="width:device-width">
+<link rel="stylesheet" type="text/css" media="screen" href="css/styles.css">
 
 </head>
 <body>
 <div class="header">
 	<a href="http://www.processwire.com/"><img src="css/logo.png" width="188" height="28"></a>
-	<span class="right">ProcessWire2+ Cheatsheet 1.1 / <a href="https://github.com/somatonic/ProcessWireCheatsheet" target="_blank">@github</a></span>
+	<span class="infos right">ProcessWire2+ Cheatsheet 1.1 / <a href="https://github.com/somatonic/ProcessWireCheatsheet" target="_blank">@github</a></span>
 </div>
 
 <div class="toolbar clearfix">
@@ -21,10 +21,16 @@
 		<a href="#" data-cols="3" class="active">3</a>
 		<a href="#" data-cols="4">4</a>
 	</span>
+
 	<span class="mode">
-		<label><input type="checkbox" name="mode" id="advanced"/>advanced</label>
+		<label class="toggle" for="isotopeanim"><input type="checkbox" checked="checked" name="isotopeanim" id="isotopeanim"/>animated</label>
+	</span>
+
+	<span class="mode">
+		<label class="toggle" for="advanced"><input type="checkbox" name="mode" id="advanced"/>advanced</label>
 
 	</span>
+
 
 	<form id="filterform">
 		<input size="25" placeholder="search" name="filter" type="search" id="filter"/>
@@ -642,7 +648,7 @@
 						'maxBytes' => 1024,
 						<br>
 						<br>
-						// markup tags that are allowed. Example: "<br/><strong>"
+						// markup tags that are allowed. Example: "&lt;br/&gt;&lt;strong&gt;"
 						<br>
 						'allowableTags' => '',
 						<br>
