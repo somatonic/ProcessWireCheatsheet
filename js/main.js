@@ -186,7 +186,7 @@ $(function() {
 
 
 	// fire event function on window scroll
-	var navtop = $('.navigation').offset().top;
+	var navtop = $('.navigation').offset().top - 1;
 	var navwidth = $('.navigation').width();
 
 	$(window).scroll(function(){
@@ -196,11 +196,11 @@ $(function() {
 		posy = $('.navigation').offset().top;
 		wtop = $(window).scrollTop();
 
-		//console.log(posy);
-		if(wtop >= posy){
-			$('.navigation').css({ position: 'fixed', top:0, width: navwidth});
+		//console.log(posy +' : ' + wtop +' : ' + navtop);
+		if(posy <= wtop){
+			$('.navigation').css({ position: 'fixed', top: 0, width: navwidth });
 		}
-		if(posy < navtop){
+		if(posy <= navtop){
 			//console.log("inline\n");
 			$('.navigation').css({ position: 'inherit' });
 		}
