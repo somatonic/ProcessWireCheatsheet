@@ -334,7 +334,15 @@
 			</div>
 			<div class="cat">
 				<h3>$image Methods</h3>
-				<p><span class="api">$image->size($width, $height) </span><span class="descr">Return a new $image with the given dimensions (proportional, center crop)</span></p>
+				<p><span class="api">$image->size($width, $height, $options) </span>
+					<span class="descr">Return a new $image with the given dimensions. By default it will get upscaled and center cropped with a quality of 90%. To resize and keep proportions you can 0 for height or width value. As third argument you can pass an array to overwrite the default settings:
+						$defaultOptions = array(
+							'upscaling' => true,
+							'cropping' => true,
+							'quality' => 90
+						);
+					</span>
+				</p>
 				<p><span class="api">$image->width($width) </span><span class="descr">Return a new $image with the given width (proportional height, center crop)</span></p>
 				<p><span class="api">$image->height($height) </span><span class="descr">Return a new $image with the given height (proportional width, center crop)</span></p>
 				<p class="advanced"><span class="api">$image->getVariations() </span><span class="descr">Returns a WireArray (Pageimages) of all size variations of this image</span></p>
