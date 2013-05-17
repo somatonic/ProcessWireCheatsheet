@@ -1,4 +1,3 @@
-
 /**
  * ProcessWire2.+ Cheatsheet 1.1
  * @author Philipp 'Soma Urlich
@@ -86,7 +85,7 @@ $(function() {
 
 	$('.section:not("#index") h3').attr({title:'click to toggle descriptions'});
 	$('.section:not("#index") h3').bind('click', function(){
-		parent = $(this).parent('.cat');
+		var parent = $(this).parent('.cat');
 		if( parent.find('.descr:visible').length > 0 ) {
 			parent.find('.descr').slideUp( animated ? speed : 0, function(){ $container.isotope('reLayout'); });
 		}
