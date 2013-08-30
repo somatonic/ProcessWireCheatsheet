@@ -192,8 +192,11 @@
 			<div class="cat">
 				<h3>PageArray only</h3>
 				<p><span class="api">$a->getTotal() </span><span class="descr">Get the total number of pages that were found from a $pages->find("selectors, limit=n") operation that led to this PageArray. The number returned may be greater than the number of pages actually in this PageArray instance, and is used for calculating pagination. Whereas $p->count() will always return the number of pages actually in this PageArray instance.</span></p>
+				<p><span class="api">$a->setTotal($total) </span><span class="descr">Manually set the total number of pages in this PageArray. Used for calculating pagination. </span></p>
 				<p><span class="api">$a->getLimit() </span><span class="descr">Get the number (n) from a "limit=n" portion of a selector that resulted in this PageArray. In pagination, this value represents the max items to display per page. If there was no limit applied, this will return 0.</span></p>
+				<p><span class="api">$a->setLimit($numLimit) </span><span class="descr">Set the imposed limit on this PageArray. Used for pagination.</span></p>
 				<p><span class="api">$a->getStart() </span><span class="descr">Get the number of the starting result that led to this PageArray in pagination. Returns 0 if in the first page of results. </span></p>
+				<p><span class="api">$a->setStart($numStart) </span><span class="descr">Set the 'start' limitor that resulted in this PageArray. </span></p>
 				<p class="advanced"><span class="api">$a->getSelectors() </span><span class="descr">Return the Selectors that led to this PageArray, or null if not set/applicable. Returns an instance of Selectors (WireArray) containing one or more Selector objects.</span></p>
 			</div>
 			<div class="cat">
